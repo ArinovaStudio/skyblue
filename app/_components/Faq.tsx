@@ -94,7 +94,7 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
         {/* Image */}
         <motion.div
           layout
-          initial={{bottom:0,scale:2}}
+          initial={{ bottom: 0, scale: 2 }}
           animate={{
             scale: expand ? 1.5 : 1,
             width: expand ? "100%" : "45%",
@@ -105,7 +105,9 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
           }}
           style={{ transformOrigin: "center center" }}
           transition={{ duration: 0.4 }}
-          className={`${!expand && "md:max-h-[450px]"} w-full w-[45%] flex-1 overflow-hidden flex justify-center items-center ${
+          className={`${
+            !expand && "md:max-h-[450px]"
+          } w-full w-[45%] flex-1 overflow-hidden flex justify-center items-center ${
             expand ? "absolute right-0 inset-0 z-50 w-full" : "relative"
           }`}
         >
@@ -140,3 +142,5 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
 }
 
 export default Faq;
+
+

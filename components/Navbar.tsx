@@ -71,7 +71,7 @@ function Navbar({section}: {section: number}) {
                 Contact us
               </p>
               <Button className="p-2">
-                <LucideArrowRight size={18} className="-rotate-45" />
+                <LucideArrowRight size={18} className={`-rotate-45`} />
               </Button>
             </div>
           </PillComponent>

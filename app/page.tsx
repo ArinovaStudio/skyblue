@@ -53,7 +53,7 @@ export default function Home() {
     <>
       <Navbar section={section} />
       <div ref={ref} className="min-h-[1000vh] relative">
-        <div className="sticky top-0 h-screen overflow-auto">
+        <div className="sticky top-0 h-screen">
           <AnimatePresence>
             <motion.div
               key={section}
@@ -65,7 +65,7 @@ export default function Home() {
             >
               {sections[section]}
             </motion.div>
-
+          
             {section !== 7 && (
               <motion.img
                 initial={{ opacity: 0 }}
