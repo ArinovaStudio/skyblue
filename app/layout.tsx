@@ -9,6 +9,11 @@ import Button from "@/elements/Button";
 import { Plane } from "lucide-react";
 import CTAButton from "@/components/CTAButton";
 import SmoothScroll from "@/components/SmoothScroll";
+import ThemeProvider from "@/components/ThemeProvider";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: "SkyBlue - Avation",
@@ -21,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)} suppressHydrationWarning>
       <body
         className={`${dmSans.className} ${streach.variable} ${roxter.variable} ${syne.variable} antialiased relative`}
       >

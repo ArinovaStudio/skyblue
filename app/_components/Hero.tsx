@@ -1,20 +1,13 @@
 "use client";
-import Image from "next/image";
 
 import cloud from "@/assets/cloud.png";
-import LiquidGlass from "@/elements/LiquidGlass";
-import Button from "@/elements/Button";
-import { Plane } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import { STYLED_SITE_NAME } from "@/lib/constants";
 import {
   motion,
   useAnimation,
   useInView,
-  useScroll,
-  useSpring,
-  useTransform,
+  useTransform
 } from "framer-motion";
-import { STYLED_SITE_NAME } from "@/lib/constants";
 import { useEffect, useRef, useState } from "react";
 
 function Hero({scrollProgress}: {scrollProgress: any}) {

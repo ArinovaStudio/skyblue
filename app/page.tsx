@@ -52,8 +52,8 @@ export default function Home() {
   return (
     <>
       <Navbar section={section} />
-      <div ref={ref} className="min-h-[1000vh] relative">
-        <div className="sticky top-0 h-screen">
+      <div ref={ref} className="min-h-[1200vh] relative">
+        <div className={`overflow-auto sticky top-0 min-h-screen`}>
           <AnimatePresence>
             <motion.div
               key={section}

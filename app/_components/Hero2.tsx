@@ -43,36 +43,36 @@ function Hero2({ scrollProgress }: { scrollProgress: any }) {
         viewport={{ once: false }}
         className="w-full h-full -z-[5] absolute object-cover"
       />
-      <div className="absolute grid grid-cols-3 justify-between items-center text-background px-5 w-full h-full">
+      <div className="absolute flex md:grid md:grid-cols-3 justify-between items-center text-background px-5 w-full h-full">
         <motion.div
           viewport={{ once: false, amount: "some" }}
-          initial={{ opacity: 1, x: -500 }}
+          initial={{ opacity: 1, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className={`flex flex-col justify-start uppercase overflow-hidden items-start gap-2 ${roxter.className}`}
+          className={`flex flex-col max-md:absolute max-md:top-[20%] justify-start uppercase overflow-hidden items-start gap-2 ${roxter.className}`}
         >
-          <span className={`text-8xl`}>book</span>
-          <span className={`text-5xl`}>private jet</span>
+          <span className={`text-3xl md:text-8xl`}>book</span>
+          <span className={`text-xl md:text-5xl`}>private jet</span>
         </motion.div>
         <motion.div
           viewport={{ once: false, amount: "some" }}
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className={`overflow-hidden text-center text-3xl ${roxter.className}`}
+          className={`overflow-hidden max-md:absolute left-23 text-center text-3xl ${roxter.className}`}
         >
           {SITE_NAME}
         </motion.div>
-        <div className="flex flex-col justify-between overflow-hidden items-end gap-5">
+        <div className="flex max-md:max-h-[500px] flex-col justify-between overflow-hidden items-end gap-5">
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 2 }}
             viewport={{ once: false, amount: "some" }}
-            className="uppercase font-streach flex flex-col items-start pr-5"
+            className="uppercase max-md:pt-6 font-streach flex flex-col items-start md:pr-5"
           >
-            <span className="text-5xl">10+</span>{" "}
-            <span className="text-3xl">jeets</span>
+            <span className="text-3xl md:text-5xl">10+</span>{" "}
+            <span className="text-xl md:text-3xl">jeets</span>
           </motion.span>
           <div className="h-100 w-10">
             <span
@@ -84,11 +84,11 @@ function Hero2({ scrollProgress }: { scrollProgress: any }) {
             </span>
           </div>
           <motion.span
-            initial={{ x: 420 }}
+            initial={{ x: 20 }}
             whileInView={{ x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: false, amount: "some" }}
-            className={`${syne.className} max-w-md text-right font-thin! text-lg pr-5`}
+            className={`${syne.className} max-md:bottom-12 max-md:left-0 max-md:text-center w-full max-w-md text-right font-thin! text-lg pr-5`}
           >
             SkyAero enables seamless private jet bookings —connecting you to
             luxury aircraft, global destinations, and uncompromising comfort.

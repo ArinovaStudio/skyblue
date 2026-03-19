@@ -49,9 +49,9 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
   });
 
   return (
-    <div className="flex flex-col items-center py-10 md:py-16 px-3 md:px-6 gap-6">
+    <div className="flex flex-col items-center py-16 md:pt-20 px-3 md:px-6 gap-6">
       {/* Top Section */}
-      <div className="max-w-[1300px] h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+      <div className="max-w-[1300px] md:h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* FAQ */}
         <div className="w-full lg:w-[55%]">
           <h1 className="uppercase font-roxter text-2xl md:text-4xl text-gray-300">
@@ -81,7 +81,7 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
                   className={`text-xs md:text-sm mt-2 transition-all duration-300 ${
                     isOpen === i
                       ? "opacity-100 translate-y-0"
-                      : "opacity-0 -translate-y-4"
+                      : "opacity-0 max-md:hidden -translate-y-4"
                   }`}
                 >
                   {item.answer}
@@ -106,7 +106,7 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
           style={{ transformOrigin: "center center" }}
           transition={{ duration: 0.4 }}
           className={`${
-            !expand && "md:max-h-[450px]"
+            !expand && "max-md:hidden md:max-h-[450px]"
           } w-full w-[45%] flex-1 overflow-hidden flex justify-center items-center ${
             expand ? "absolute right-0 inset-0 z-50 w-full" : "relative"
           }`}
@@ -126,9 +126,9 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
         our clients
       </h1>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4 w-full max-w-[1300px]">
+      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4 w-full max-w-[1300px]">
         {clients.map((item, i) => (
-          <div key={item.id + i} className="w-full h-20 md:h-24 bg-red-400">
+          <div key={item.id + i} className="w-full h-15 sm:h-20 md:h-24 bg-red-400">
             <img
               src={item.logo}
               alt={item.name}
