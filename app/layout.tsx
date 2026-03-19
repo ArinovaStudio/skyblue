@@ -3,7 +3,12 @@ import "./globals.css";
 import { dmSans, roxter, streach, syne } from "@/utils/fonts";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import { motion } from "framer-motion";
+import LiquidGlass from "@/elements/LiquidGlass";
+import Button from "@/elements/Button";
+import { Plane } from "lucide-react";
+import CTAButton from "@/components/CTAButton";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "SkyBlue - Avation",
@@ -20,9 +25,10 @@ export default function RootLayout({
       <body
         className={`${dmSans.className} ${streach.variable} ${roxter.variable} ${syne.variable} antialiased relative`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <SmoothScroll>
+          <CTAButton />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -37,7 +37,7 @@ export default function LiquidGlass({ children, className = "" }: Readonly<Liqui
         "
       />
 
-      <div className="relative z-10">
+      <div className="relative z-10 space-x-5">
         {children}
       </div>
     </div>

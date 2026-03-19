@@ -1,105 +1,131 @@
-import LiquidGlass from '@/elements/LiquidGlass';
-import Link from 'next/link'
-import React from 'react'
+"use client";
+import LiquidGlass from "@/elements/LiquidGlass";
+import Link from "next/link";
+import React, { useState } from "react";
 import logo from "@/assets/logo.png";
-import Image from 'next/image';
-import Button from '@/elements/Button';
-import { LucideArrowRight } from 'lucide-react';
+import Image from "next/image";
+import Button from "@/elements/Button";
+import { LucideArrowRight, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-
-interface PillProps {
-    children: React.ReactNode;
-    Action?: () => void;
-    Visit?: string;
-    className?: string;
+function PillComponent({ children, Visit, className }: any) {
+  return (
+    <LiquidGlass className={`${className} px-6 py-2`}>
+      {Visit ? <Link href={Visit}>{children}</Link> : children}
+    </LiquidGlass>
+  );
 }
 
-function PillComponent({ children, Action, Visit, className }: Readonly<PillProps>) {
-    return (
-        <LiquidGlass className={`${className} px-8 py-3`}>
-        {Visit ? (
-            <Link href={Visit}>
-                {children}
-            </Link>
-        ) : (
-        <button onClick={Action}>
-            {children}
-        </button>)}
-        </LiquidGlass>
-    )
-}
+function Navbar({section}: {section: number}) {
+  const [open, setOpen] = useState(false);
 
-function Navbar() {
   const options = [
-    {
-        name: "Trip support",
-        link: "#"
-    },
-        {
-        name: "Brokerage",
-        link: "#"
-    },
-        {
-        name: "Maintainance",
-        link: "#"
-    },
-        {
-        name: "crew leasing",
-        link: "#"
-    },
-  ]
+    { name: "Trip support", link: "#" },
+    { name: "Brokerage", link: "#" },
+    { name: "Maintainance", link: "#" },
+    { name: "crew leasing", link: "#" },
+  ];
 
   return (
-    <div className='flex w-screen justify-between items-center absolute top-6 px-10 z-9999'>
-        <PillComponent Visit='/'>
-            <Image
-                src={logo.src}
-                alt='SkyBlue Logo'
-                width={100}
-                height={100}
-            />
+    <>
+      {/* Navbar */}
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6,delay:1 }}
+        className="fixed top-6 left-0 w-full px-4 md:px-10 z-[9999] flex justify-between items-center"
+      >
+        {/* Logo */}
+        <PillComponent Visit="/">
+          <Image src={logo.src} alt="SkyBlue Logo" className={`${section===7 && "invert!"}`} width={90} height={90} />
         </PillComponent>
-        <LiquidGlass className="flex justify-center items-center px-10 py-4 gap-12">
-        {
-            options.map((opt) => (
-                    <Link
-      href={opt.link}
-      key={opt.name}
-      className="group font-roxter text-white uppercase mx-6 inline-block perspective-[1000px]"
-    >
-      {opt.name.split("").map((char, i) => (
-        <span
-          key={i}
-          className="
-          inline-block
-          transition-[transform] duration-500 ease-[cubic-bezier(.22,1,.36,1)]
-          group-hover:rotate-x-360
-          "
-          style={{
-            transitionDelay: `${i * 60}ms`,
-          }}
-        >
-          {char === " " ? "\u00A0" : char}
-        </span>
-      ))}
-    </Link>
-            ))
-        }
-        </LiquidGlass>
-        <PillComponent Visit='/' className='pl-4 py-0 pr-3'>
-        <div className="flex items-center justify-center gap-4">
-            <p className='uppercase font-sans font-medium text-white text-xl'>Contact us</p>
-            <Button className='p-2.5'>
-                <LucideArrowRight 
-                size={21}
-                color='#000000'
-                className='-rotate-45'
-                />
-            </Button>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex">
+          <LiquidGlass className="flex items-center px-8 py-3 gap-10">
+            {options.map((opt) => (
+              <Link
+                href={opt.link}
+                key={opt.name}
+                className="group font-roxter text-white uppercase inline-block perspective-[1000px]"
+              >
+                {opt.name.split("").map((char, i) => (
+                  <span
+                    key={i}
+                    className={`inline-block transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:rotate-x-360 ${section===7 ? "text-foreground":"text-background"}`}
+                    style={{ transitionDelay: `${i * 50}ms` }}
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                ))}
+              </Link>
+            ))}
+          </LiquidGlass>
         </div>
-        </PillComponent>
-    </div>
-  )
+
+        {/* Right CTA (desktop) */}
+        <div className="hidden md:block">
+          <PillComponent Visit="/" className="pl-4 pr-3 py-1">
+            <div className="flex items-center gap-3">
+              <p className={`uppercase ${section===7 ? "text-foreground":"text-background"} text-sm md:text-base`}>
+                Contact us
+              </p>
+              <Button className="p-2">
+                <LucideArrowRight size={18} className="-rotate-45" />
+              </Button>
+            </div>
+          </PillComponent>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-white z-[10000]"
+        >
+          {open ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </motion.div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.4 }}
+            className="fixed top-0 left-0 w-full h-screen bg-black/70 backdrop-blur-xl flex flex-col items-center justify-center gap-8 z-[9998]"
+          >
+            {options.map((opt, index) => (
+              <motion.div
+                key={opt.name}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link
+                  href={opt.link}
+                  onClick={() => setOpen(false)}
+                  className="text-white text-2xl uppercase"
+                >
+                  {opt.name}
+                </Link>
+              </motion.div>
+            ))}
+
+            <PillComponent Visit="/">
+              <div className="flex items-center gap-3">
+                <p className="uppercase text-white">Contact us</p>
+                <Button className="p-2">
+                  <LucideArrowRight size={18} className="-rotate-45" />
+                </Button>
+              </div>
+            </PillComponent>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
 
-export default Navbar
+export default Navbar;
