@@ -30,7 +30,6 @@ const features = [
 ];
 export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
   const [section, setSection] = useState(4);
-  const [isDone, setIsDone] = useState(false);
   useMotionValueEvent(scrollProgress, "change", (v: number) => {
     if (v < 0.5) setSection(4);
     else if (v < 0.6) setSection(5);
@@ -57,11 +56,8 @@ export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
             ? { scale: 1.7, y: 400 }
             : { y: 1100, scale: 2.5 }
         }
-        onViewportEnter={() => {
-          setIsDone(true);
-        }}
-        transition={{ duration: 1, delay: isDone ? 0 : 1 }}
-        viewport={{ once: true }}
+        transition={{ duration: 1.7, ease: "easeInOut" }}
+        viewport={{ once: false }}
         className="absolute -top-70 z-100"
       >
         <img
@@ -76,7 +72,7 @@ export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
             initial={{ x: -350 }}
             whileInView={{ x: 0 }}
             transition={{ duration: 1, delay: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className={`text-background ${roxter.className} uppercase text-8xl`}
           >
             fly in
@@ -87,7 +83,7 @@ export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
             initial={{ x: 350 }}
             whileInView={{ x: 0 }}
             transition={{ duration: 1, delay: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className={`uppercase text-7xl text-background ${roxter.className}`}
           >
             LUXURY
@@ -96,7 +92,7 @@ export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
             initial={{ y: 150 }}
             whileInView={{ y: 0 }}
             transition={{ duration: 1, delay: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className={`uppercase text-xl text-background ${syne.className} font-extrabold [font-stretch:normal] [font-variation-settings:'wdth'_100]`}
           >
             luxury that <br /> actually{" "}

@@ -53,29 +53,34 @@ export default function Home() {
     <>
       <Navbar section={section} />
       <div ref={ref} className="min-h-[1200vh] relative">
-        <div className={`overflow-auto sticky top-0 min-h-screen`}>
-          <AnimatePresence>
+        <div className={`overflow-hidden sticky top-0 min-h-screen`}>
+          <AnimatePresence mode="popLayout">
+            {section !== 7 && (
+              <motion.img
+                key={[3, 4, 5, 6].includes(section) ? "sunny" : "sky"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                src={
+                  [3, 4, 5, 6].includes(section) ? SunnyDay.src : background.src
+                }
+                className="w-full h-full absolute inset-0 -z-10 object-cover"
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+              />
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence mode="popLayout">
             <motion.div
               key={section}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
               className="w-full h-full absolute inset-0"
             >
               {sections[section]}
             </motion.div>
-          
-            {section !== 7 && (
-              <motion.img
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                src={
-                  [3, 4, 5, 6].includes(section) ? SunnyDay.src : background.src
-                }
-                className="w-full h-full fixed! -z-10"
-              />
-            )}
           </AnimatePresence>
         </div>
       </div>

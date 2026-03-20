@@ -59,7 +59,7 @@
 } */
 
 body {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 ::-webkit-scrollbar,::-webkit-scrollbar-button,::-webkit-scrollbar-thumb{

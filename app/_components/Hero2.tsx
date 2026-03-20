@@ -21,8 +21,7 @@ import { roxter, syne } from "@/utils/fonts";
 import { div } from "framer-motion/client";
 
 function Hero2({ scrollProgress }: { scrollProgress: any }) {
-  const [onceDone,setOnceDone] = useState(false);
-  const transition = { duration: 1, delay: onceDone ? 0:1 };
+  const transition = { duration: 0.8, ease: "easeOut" };
   const [isExpanded, setIsExpanded] = useState(false);
   useMotionValueEvent(scrollProgress, "change", (v: number) => {
     if (v >= 0.17 && v <= 0.24) {
@@ -37,7 +36,6 @@ function Hero2({ scrollProgress }: { scrollProgress: any }) {
         src={PlaneWindow.src}
         initial={{scale: 5}}
         alt="Plane window"
-        onViewportEnter={()=>{setOnceDone(true)}}
         transition={transition}
         animate={{ scale: isExpanded ? 1 : 5 }}
         viewport={{ once: false }}
