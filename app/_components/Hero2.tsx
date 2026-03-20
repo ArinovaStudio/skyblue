@@ -17,11 +17,11 @@ import {
 import { useRef, useState } from "react";
 import { SITE_NAME } from "@/lib/constants";
 import { roxter, syne } from "@/utils/fonts";
-
+import { easeOut } from "framer-motion";
 import { div } from "framer-motion/client";
 
 function Hero2({ scrollProgress }: { scrollProgress: any }) {
-  const transition = { duration: 0.8, ease: "easeOut" };
+  const transition = { duration: 0.8, ease: easeOut };
   const [isExpanded, setIsExpanded] = useState(false);
   useMotionValueEvent(scrollProgress, "change", (v: number) => {
     if (v >= 0.17 && v <= 0.24) {
