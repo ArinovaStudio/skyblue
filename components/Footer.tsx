@@ -19,7 +19,7 @@ function Footer() {
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           transition={transition}
-          className="font-streach uppercase text-white text-[60px] md:text-[120px] lg:text-[150px] text-center leading-none"
+          className="font-streach uppercase text-white text-3xl md:text-[60px] md:text-[120px] lg:text-[150px] text-center leading-none"
         >
           skybblue
         </motion.h1>
@@ -28,7 +28,7 @@ function Footer() {
           initial={{ scale: 0.4 }}
           whileInView={{ scale: 4 }}
           transition={{ duration: 1, delay: 2 }}
-          className="relative w-full max-w-[700px] h-[160px] top-16"
+          className="relative w-full max-w-[150px] h-[60px] md:max-w-[700px] md:h-[160px] top-16"
         >
           <Image
             src={plane}

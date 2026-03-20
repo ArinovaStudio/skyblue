@@ -1,18 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { dmSans, roxter, streach, syne } from "@/utils/fonts";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
-import LiquidGlass from "@/elements/LiquidGlass";
-import Button from "@/elements/Button";
-import { Plane } from "lucide-react";
 import CTAButton from "@/components/CTAButton";
 import SmoothScroll from "@/components/SmoothScroll";
-import ThemeProvider from "@/components/ThemeProvider";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
-
+import {Toaster} from "react-hot-toast";
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
@@ -31,6 +24,7 @@ export default function RootLayout({
         className={`${dmSans.className} ${streach.variable} ${roxter.variable} ${syne.variable} antialiased relative`}
       >
         <SmoothScroll>
+          <Toaster/>
           <CTAButton />
           {children}
         </SmoothScroll>

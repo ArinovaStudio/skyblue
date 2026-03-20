@@ -1,29 +1,32 @@
 "use client";
+import { fetcher } from "@/lib/constants";
 import { motion, useMotionValueEvent } from "framer-motion";
 import React, { useState } from "react";
-
-const faqData = [
-  {
-    question: "What is SkyBlue?",
-    answer:
-      "SkyBlue is a revolutionary platform that offers an unparalleled flying experience.",
-  },
-  {
-    question: "How can I book a flight with SkyBlue?",
-    answer:
-      "Booking a flight with SkyBlue is easy! Simply visit our website, select your desired destination and dates, and follow the prompts to complete your booking.",
-  },
-  {
-    question: "What makes SkyBlue different from other airlines?",
-    answer:
-      "SkyBlue stands out for its commitment to sustainability, exceptional customer service, and innovative technology that enhances the flying experience.",
-  },
-  {
-    question: "Can I change or cancel my booking?",
-    answer:
-      "Yes, you can change or cancel your booking. Please refer to our cancellation policy for more details and any applicable fees.",
-  },
-];
+import useSWR from "swr";
+import { FAQCard, FAQCardSkeleton } from "./FaqCard";
+import ErrorLoading from "@/components/ErrorLoading";
+// const faqData = [
+//   {
+//     question: "What is SkyBlue?",
+//     answer:
+//       "SkyBlue is a revolutionary platform that offers an unparalleled flying experience.",
+//   },
+//   {
+//     question: "How can I book a flight with SkyBlue?",
+//     answer:
+//       "Booking a flight with SkyBlue is easy! Simply visit our website, select your desired destination and dates, and follow the prompts to complete your booking.",
+//   },
+//   {
+//     question: "What makes SkyBlue different from other airlines?",
+//     answer:
+//       "SkyBlue stands out for its commitment to sustainability, exceptional customer service, and innovative technology that enhances the flying experience.",
+//   },
+//   {
+//     question: "Can I change or cancel my booking?",
+//     answer:
+//       "Yes, you can change or cancel your booking. Please refer to our cancellation policy for more details and any applicable fees.",
+//   },
+// ];
 
 const clients = [
   { id: 1, name: "Adani", logo: "https://picsum.photos/1080/1080" },
@@ -34,12 +37,27 @@ const clients = [
   { id: 6, name: "Adani", logo: "https://picsum.photos/1080/1080" },
   { id: 7, name: "Adani", logo: "https://picsum.photos/1080/1080" },
 ];
+export function transformFaqs(tasks: any[]) {
+  return tasks.map((task) => {
+    const obj: any = {
+      id: task.gid,
+    };
 
+    task.custom_fields.forEach((field: any) => {
+      if (field.type === "text") {
+        obj[field.name] = field.text_value;
+      }
+    });
+
+    return obj;
+  });
+}
 function Faq({ scrollProgress }: { scrollProgress: any }) {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const [expand, setExpand] = useState(false);
   const [slide, setSlide] = useState(false);
-
+  const {data,isLoading,error} = useSWR("/api/faqs",fetcher);
+  const faqs = data?.data ? transformFaqs(data.data) : [];
   useMotionValueEvent(scrollProgress, "change", (v: number) => {
     if (v > 0.8) setExpand(true);
     else setExpand(false);
@@ -49,9 +67,9 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
   });
 
   return (
-    <div className="flex flex-col items-center py-16 md:pt-20 px-3 md:px-6 gap-6">
+    <div className="flex flex-col items-center py-18 md:pt-20 px-3 md:px-6 gap-6">
       {/* Top Section */}
-      <div className="max-w-[1300px] md:h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+      <div className="max-w-[1300px] overflow-auto md:h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* FAQ */}
         <div className="w-full lg:w-[55%]">
           <h1 className="uppercase font-roxter text-2xl md:text-4xl text-gray-300">
@@ -61,33 +79,17 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
             A BETTER WAY TO FLY
           </p>
 
-          <div className="flex flex-col gap-4 mt-6">
-            {faqData.map((item, i) => (
-              <div
-                key={i}
-                className={`w-full py-3 border-b border-gray-200 cursor-pointer transition-all duration-500 ${
-                  isOpen === i ? "max-h-72" : "max-h-20"
-                } overflow-hidden`}
-                onClick={() => setIsOpen(isOpen === i ? null : i)}
-              >
-                <div className="flex justify-between items-center gap-3">
-                  <h2 className="font-syne font-bold text-base md:text-lg text-gray-900">
-                    {item.question}
-                  </h2>
-                  <span className="text-xl md:text-2xl font-bold">+</span>
-                </div>
-
-                <p
-                  className={`text-xs md:text-sm mt-2 transition-all duration-300 ${
-                    isOpen === i
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 max-md:hidden -translate-y-4"
-                  }`}
-                >
-                  {item.answer}
-                </p>
-              </div>
-            ))}
+          <div className="flex flex-col  gap-4 mt-6">
+            {/* {faqData.map((item, i) => (
+              <FAQCard item={item} i={i} isOpen={isOpen} setIsOpen={setIsOpen}/>
+            ))} */}
+            <ErrorLoading error={error} emptyMessage="No Faqs found" loadingCard={FAQCardSkeleton} loading={isLoading} dataLength={faqs.length} loadingCount={4} loadingRows={4} loadingCols={1}>
+              {
+                faqs.map((faq,i)=>{
+                  return <FAQCard key={i} isOpen={isOpen} setIsOpen={setIsOpen} i={i} item={faq}/>
+                })
+              }
+            </ErrorLoading>
           </div>
         </div>
 
@@ -128,7 +130,10 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
 
       <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4 w-full max-w-[1300px]">
         {clients.map((item, i) => (
-          <div key={item.id + i} className="w-full h-15 sm:h-20 md:h-24 bg-red-400">
+          <div
+            key={item.id + i}
+            className="w-full h-15 sm:h-20 md:h-24 bg-red-400"
+          >
             <img
               src={item.logo}
               alt={item.name}
@@ -142,5 +147,4 @@ function Faq({ scrollProgress }: { scrollProgress: any }) {
 }
 
 export default Faq;
-
 

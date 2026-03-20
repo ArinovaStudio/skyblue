@@ -33,11 +33,11 @@ function Navbar({section}: {section: number}) {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6,delay:1 }}
-        className="fixed top-6 left-0 w-full px-4 md:px-10 z-[9999] flex justify-between items-center"
+        className="fixed top-6 left-0 w-full px-4 md:px-10 z-[999] flex justify-between items-center"
       >
         {/* Logo */}
         <PillComponent Visit="/">
-          <Image src={logo.src} alt="SkyBlue Logo" className={`${section===7 && "invert!"}`} width={90} height={90} />
+          <Image src={logo.src} alt="SkyBlue Logo" className={`${section===5 && "invert!"}`} width={90} height={90} />
         </PillComponent>
 
         {/* Desktop Menu */}
@@ -52,7 +52,7 @@ function Navbar({section}: {section: number}) {
                 {opt.name.split("").map((char, i) => (
                   <span
                     key={i}
-                    className={`inline-block transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:rotate-x-360 ${section===7 ? "text-foreground":"text-background"}`}
+                    className={`inline-block transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:rotate-x-360 ${section===5 ? "text-foreground":"text-background"}`}
                     style={{ transitionDelay: `${i * 50}ms` }}
                   >
                     {char === " " ? "\u00A0" : char}
@@ -67,7 +67,7 @@ function Navbar({section}: {section: number}) {
         <div className="hidden md:block">
           <PillComponent Visit="/" className="pl-4 pr-3 py-1">
             <div className="flex items-center gap-3">
-              <p className={`uppercase ${section===7 ? "text-foreground":"text-background"} text-sm md:text-base`}>
+              <p className={`uppercase ${section===5 ? "text-foreground":"text-background"} text-sm md:text-base`}>
                 Contact us
               </p>
               <Button className="p-2">
@@ -80,7 +80,7 @@ function Navbar({section}: {section: number}) {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-white z-[10000]"
+          className={`md:hidden ${section===5 ?"text-black":"text-white"} z-[10000]`}
         >
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
