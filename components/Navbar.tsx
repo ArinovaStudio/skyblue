@@ -1,4 +1,5 @@
 "use client";
+
 import LiquidGlass from "@/elements/LiquidGlass";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -16,14 +17,14 @@ function PillComponent({ children, Visit, className }: any) {
   );
 }
 
-function Navbar({section}: {section: number}) {
+function Navbar({ section }: { section: number }) {
   const [open, setOpen] = useState(false);
 
   const options = [
     { name: "Trip support", link: "#" },
     { name: "Brokerage", link: "#" },
-    { name: "Maintainance", link: "#" },
-    { name: "crew leasing", link: "#" },
+    { name: "Maintenance", link: "#" },
+    { name: "Crew leasing", link: "#" },
   ];
 
   return (
@@ -32,12 +33,18 @@ function Navbar({section}: {section: number}) {
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6,delay:1 }}
-        className="fixed top-6 left-0 w-full px-4 md:px-10 z-[999] flex justify-between items-center"
+        transition={{ duration: 0.6, delay: 1 }}
+        className="fixed top-6 left-0 w-full px-4 md:px-10 z-50 flex justify-between items-center"
       >
         {/* Logo */}
         <PillComponent Visit="/">
-          <Image src={logo.src} alt="SkyBlue Logo" className={`${section===5 && "invert!"}`} width={90} height={90} />
+          <Image
+            src={logo}
+            alt="SkyBlue Logo"
+            width={90}
+            height={90}
+            className={section === 5 ? "!invert" : ""}
+          />
         </PillComponent>
 
         {/* Desktop Menu */}
@@ -47,12 +54,14 @@ function Navbar({section}: {section: number}) {
               <Link
                 href={opt.link}
                 key={opt.name}
-                className="group font-roxter text-white uppercase inline-block perspective-[1000px]"
+                className="group font-roxter uppercase inline-block perspective-[1000px]"
               >
                 {opt.name.split("").map((char, i) => (
                   <span
                     key={i}
-                    className={`inline-block transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:rotate-x-360 ${section===5 ? "text-foreground":"text-background"}`}
+                    className={`inline-block transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:rotate-x-360 ${
+                      section === 5 ? "text-foreground" : "text-background"
+                    }`}
                     style={{ transitionDelay: `${i * 50}ms` }}
                   >
                     {char === " " ? "\u00A0" : char}
@@ -63,24 +72,36 @@ function Navbar({section}: {section: number}) {
           </LiquidGlass>
         </div>
 
-        {/* Right CTA (desktop) */}
+        {/* CTA */}
         <div className="hidden md:block">
           <PillComponent Visit="/" className="pl-4 pr-3 py-1">
             <div className="flex items-center gap-3">
-              <p className={`uppercase ${section===5 ? "text-foreground":"text-background"} text-sm md:text-base`}>
+              <p
+                className={`uppercase ${
+                  section === 5 ? "text-foreground" : "text-background"
+                }`}
+              >
                 Contact us
               </p>
-              <Button className={`p-2 ${section===5 ? "bg-foreground! text-background!" : "bg-background"}`}>
-                <LucideArrowRight size={18} className={`-rotate-45`} />
+              <Button
+                className={`p-2 ${
+                  section === 5
+                    ? "!bg-foreground !text-background"
+                    : "bg-background"
+                }`}
+              >
+                <LucideArrowRight size={18} className="-rotate-45" />
               </Button>
             </div>
           </PillComponent>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Button */}
         <button
           onClick={() => setOpen(!open)}
-          className={`md:hidden ${section===5 ?"text-black":"text-white"} z-[10000]`}
+          className={`md:hidden z-50 ${
+            section === 5 ? "text-black" : "text-white"
+          }`}
         >
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -94,7 +115,7 @@ function Navbar({section}: {section: number}) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.4 }}
-            className="fixed top-0 left-0 w-full h-screen bg-black/70 backdrop-blur-xl flex flex-col items-center justify-center gap-8 z-[9998]"
+            className="fixed top-0 left-0 w-full h-screen bg-black/70 backdrop-blur-xl flex flex-col items-center justify-center gap-8 z-40"
           >
             {options.map((opt, index) => (
               <motion.div
