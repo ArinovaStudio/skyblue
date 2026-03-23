@@ -70,7 +70,7 @@ function Navbar({section}: {section: number}) {
               <p className={`uppercase ${section===5 ? "text-foreground":"text-background"} text-sm md:text-base`}>
                 Contact us
               </p>
-              <Button className="p-2">
+              <Button className={`p-2 ${section===5 ? "bg-foreground! text-background!" : "bg-background"}`}>
                 <LucideArrowRight size={18} className={`-rotate-45`} />
               </Button>
             </div>

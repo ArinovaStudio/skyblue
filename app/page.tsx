@@ -153,7 +153,7 @@ export default function Home() {
               : "overflow-hidden"
           }`}
         >
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="sync">
             {section !== 5 && (
               <motion.img
                 key={[3, 4].includes(section) ? "sunny" : "sky"}
@@ -162,7 +162,7 @@ export default function Home() {
                 exit={{ opacity: 0 }}
                 src={[3, 4].includes(section) ? SunnyDay.src : background.src}
                 className="w-full h-full absolute inset-0 -z-10 object-cover"
-                transition={{ duration: 0.8, ease: "easeInOut" }}
+                transition={{ duration: 1, ease: "easeInOut" }}
               />
             )}
           </AnimatePresence>
@@ -176,11 +176,11 @@ export default function Home() {
               transition={{ duration: 0.8, ease: "easeInOut" }}
               className="w-full h-full absolute inset-0"
             >
-              {section === 1 && <Hero scrollProgress={scrollYProgress} />}
-              {section === 2 && <Hero2 scrollProgress={scrollYProgress} />}
+              {section === 1 && <Hero />}
+              {section === 2 && <Hero2 />}
               {section === 3 && <Features />}
-              {section === 4 && <Branding1 scrollProgress={scrollYProgress} />}
-              {section === 5 && <Faq scrollProgress={scrollYProgress} />}
+              {section === 4 && <Branding1 scrollProgress={scrollYProgress}/>}
+              {section === 5 && <Faq />}
               {section === 6 && <Footer />}
             </motion.div>
           </AnimatePresence>
@@ -189,11 +189,10 @@ export default function Home() {
         {/* 🔥 Real Sections (dynamic height) */}
         <section
           ref={(el) => (sectionRefs.current[0] = el) as any}
-          className="min-h-[130vh]"
+          className="min-h-[110vh]"
         />
         <section
           ref={(el) => (sectionRefs.current[1] = el) as any}
-          className="min-h-[150vh]"
         />
         <section
           ref={(el) => (sectionRefs.current[2] = el) as any}

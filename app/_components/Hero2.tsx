@@ -11,35 +11,67 @@ import {
   useInView,
   useMotionValue,
   useMotionValueEvent,
+  useScroll,
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useRef, useState } from "react";
-import { SITE_NAME } from "@/lib/constants";
+import { useEffect, useRef, useState } from "react";
+import { fetcher, SITE_NAME } from "@/lib/constants";
 import { roxter, syne } from "@/utils/fonts";
 import { easeInOut } from "framer-motion";
+import useSWR from "swr";
+import ErrorLoading from "@/components/ErrorLoading";
+import { FeatureCard, FeatureCardSkeleton } from "./FeatureCard";
+import useMobile from "@/hooks/useMobile";
+export function transformFeatures(tasks: any[]) {
+  return tasks.map((task) => {
+    const obj: any = {
+      id: task.gid,
+      title: "",
+      description: "",
+    };
 
-function Hero2({ scrollProgress }: { scrollProgress: any }) {
+    task.custom_fields.forEach((field: any) => {
+      if (field.name === "title") {
+        obj.title = field.text_value || "";
+      }
+
+      if (field.name === "feature_description") {
+        obj.description = field.text_value || "";
+      }
+    });
+
+    return obj;
+  });
+}
+function Hero2() {
   const transition = { duration: 0.8, ease: easeInOut };
-  const [isExpanded, setIsExpanded] = useState(false);
-  useMotionValueEvent(scrollProgress, "change", (v: number) => {
-    if (v >= 0.17 && v <= 0.24) {
-      setIsExpanded(true);
-    } else {
-      setIsExpanded(false);
+  const { data, isLoading, error } = useSWR("/api/features", fetcher);
+  const isMobile = useMobile();
+  const features = data?.data ? transformFeatures(data.data) : [];
+  const {scrollY} = useScroll();
+  const [isScrolled,setIsScrolled] = useState(false);
+  useMotionValueEvent(scrollY,"change",(v)=>{
+    if(v>2000){
+      setIsScrolled(true);
+    }else{
+      setIsScrolled(false);
     }
   });
   return (
-    <div className="h-full relative flex items-center justify-center overflow-hidden">
+    <div 
+    className="min-h-screen relative flex items-center justify-center" data-lenis-prevent data-lenis-prevent-wheel>
       <motion.img
         src={PlaneWindow.src}
-        initial={{scale: 5}}
+        initial={{ scale: 5 }}
         alt="Plane window"
+        whileInView={{scale: isScrolled ? 3: 1,...isScrolled ? {x: "-100%"}:{}}}
         transition={transition}
-        animate={{ scale: isExpanded ? 1 : 5 }}
+        exit={{scale: 5}}
         viewport={{ once: false }}
-        className="w-full h-full -z-[5] absolute object-cover"
+        className={`w-full h-full -z-[5] absolute top-0 ${isScrolled ? "object-fit":"object-cover"} md:object-cover`}
       />
+      {! isScrolled && 
       <div className="absolute flex md:grid md:grid-cols-3 justify-between items-center text-background px-2 md:px-5 w-full h-full">
         <motion.div
           viewport={{ once: false, amount: "some" }}
@@ -75,9 +107,8 @@ function Hero2({ scrollProgress }: { scrollProgress: any }) {
             <span
               className={`uppercase flex items-center whitespace-nowrap text-background/90 gap-5 rotate-90`}
             >
-              <div className="min-w-30 border-1 border-background/40" />{" "}
-              Scroll down{" "}
-              <div className="min-w-30 border-1 border-background/40" />
+              <div className="min-w-30 border-1 border-background/40" /> Scroll
+              down <div className="min-w-30 border-1 border-background/40" />
             </span>
           </div>
           <motion.span
@@ -92,6 +123,23 @@ function Hero2({ scrollProgress }: { scrollProgress: any }) {
           </motion.span>
         </div>
       </div>
+        }
+      {isScrolled && <ErrorLoading
+        loading={isLoading}
+        error={error}
+        loadingCard={FeatureCardSkeleton}
+        loadingCount={4}
+        loadingCols={2}
+        loadingRows={2}
+        className="w-full overflow-scroll"
+        loaderClassName="mx-auto max-w-[1200px] place-items-center w-full mt-12 min-h-[400px]"
+      >
+        <div className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto overflow-scroll max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-full items-center" data-lenis-prevent data-lenis-prevent-wheel>
+          {features.map((feature: any, index: number) => {
+            return <FeatureCard key={index} index={index} feature={feature} />;
+          })}
+        </div>
+      </ErrorLoading>}
     </div>
   );
 }

@@ -1,21 +1,25 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import background from "@/assets/sunny-day.png";
 import Image from "next/image";
 import { roxter, syne } from "@/utils/fonts";
-import { motion, useInView, useMotionValueEvent } from "framer-motion";
+import { motion, useMotionValueEvent } from "framer-motion";
 import airoplane from "@/assets/airoplane.png";
 import { SITE_NAME, STYLED_SITE_NAME } from "@/lib/constants";
 
 export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
   const [section, setSection] = useState(4);
+  const containerRef = useRef<HTMLDivElement>(null);
   useMotionValueEvent(scrollProgress, "change", (v: number) => {
-    if (v < 0.60) setSection(4);
+    if (v < 0.6) setSection(4);
     else if (v < 0.65) setSection(5);
     else setSection(6);
   });
   return (
-    <div className="h-screen flex items-center py-10 justify-center w-full relative overflow-hidden">
+    <div
+      ref={containerRef}
+      className="h-screen flex items-center py-10 justify-center w-full relative overflow-hidden"
+    >
       <h1
         className={`font-streach absolute uppercase text-white text-3xl md:text-5xl ${roxter.className}`}
       >
@@ -33,7 +37,7 @@ export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
             ? { y: 0 }
             : section === 5
             ? { scale: 1.7, y: 400 }
-            : { y: 1100, scale: 2.5 }
+            : { scale: 2.5, y: 800 }
         }
         transition={{ duration: 1.7, ease: "easeInOut" }}
         viewport={{ once: false }}
@@ -50,7 +54,7 @@ export default function Branding1({ scrollProgress }: { scrollProgress: any }) {
           <motion.span
             initial={{ x: -150 }}
             whileInView={{ x: 0 }}
-            transition={{ duration: 1,delay: 1 }}
+            transition={{ duration: 1, delay: 1 }}
             viewport={{ once: false }}
             className={`text-background ${roxter.className} uppercase text-5xl md:text-8xl`}
           >

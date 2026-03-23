@@ -13,8 +13,8 @@ export default function SmoothScroll({
       lerp: 0.1, // Smoothness intensity
       duration: 1.3,
       easing: (t: number) => 1 - Math.pow(1 - t, 4), // Quartic easeOut
-      wheelMultiplier: 1.1,
-      touchMultiplier: 2,
+      wheelMultiplier: 1,
+      touchMultiplier: 1,
       smoothWheel: true,
     });
 

@@ -31,30 +31,8 @@ import useSWR from "swr";
 //       "We provide comprehensive and personalized Flight Planning and Trip Support Services, such as Fuel Provisioning, Permits, Ground Handling, Catering, Hotel, Transport etc. Our dedicated and experienced 24x7 Ops Team ensures you have a smooth trip that is tailored to your particular needs.",
 //   },
 // ];
-export function transformFeatures(tasks: any[]) {
-  return tasks.map((task) => {
-    const obj: any = {
-      id: task.gid,
-      title: "",
-      description: "",
-    };
 
-    task.custom_fields.forEach((field: any) => {
-      if (field.name === "title") {
-        obj.title = field.text_value || "";
-      }
-
-      if (field.name === "feature_description") {
-        obj.description = field.text_value || "";
-      }
-    });
-
-    return obj;
-  });
-}
 export default function Features() {
-  const { data, isLoading, error } = useSWR("/api/features", fetcher);
-  const features = data?.data ? transformFeatures(data.data) : [];
   return (
     <div className="h-screen flex items-center justify-center w-full relative overflow-hidden px-4 md:px-6 py-6">
       {/* Background */}
@@ -82,8 +60,9 @@ export default function Features() {
       <motion.div
         initial={{ scale: 0, x: -40 }}
         whileInView={{ x: 0, scale: 1 }}
-        transition={{ duration: 1, delay: 1 }}
+        transition={{ duration: 1}}
         viewport={{ once: true }}
+        exit={{scale: 3, y: 100}}
         className="absolute"
       >
         <img
@@ -92,25 +71,6 @@ export default function Features() {
           className="h-20 w-20 sm:h-32 sm:w-32 md:h-40 md:w-40 rotate-180 rotate-y-180!"
         />
       </motion.div>
-
-      {/* Grid */}
-      <ErrorLoading
-        loading={isLoading}
-        error={error}
-        loadingCard={FeatureCardSkeleton}
-        loadingCount={4}
-        loadingCols={2}
-        loadingRows={2}
-        className="w-full overflow-scroll"
-        loaderClassName="mx-auto max-w-[1200px] place-items-center w-full min-h-[400px]"
-      >
-        <div className="mx-auto max-w-[1200px] max-md:py-16 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-full items-center">
-          {features.map((feature: any, index: number) => {
-            return <FeatureCard key={index} index={index} feature={feature} />;
-          })}
-        </div>
-      </ErrorLoading>
     </div>
   );
 }
-

@@ -34,11 +34,11 @@ export function FeatureCard({
 }) {
   return (
     <motion.div
-      className="flex flex-col z-100 justify-center items-center md:items-start space-y-3 md:space-y-5 w-full"
-      initial={{ opacity: 0, x: index % 2 ? 200 : -200 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      className="flex flex-col z-100 justify-center tracking-wide! items-center md:items-start space-y-3 md:space-y-5 w-full"
+      initial={{ x: -200 }}
+      whileInView={{ x: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 1, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay: 1, ease: "easeInOut" }}
       whileHover={{ scale: 1.03 }}
     >
       <motion.div
@@ -62,7 +62,7 @@ export function FeatureCard({
 
       <motion.div
         className={`text-background line-clamp-5 max-md:text-center text-xs sm:text-base md:text-lg font-thin ${syne.className}`}
-        initial={{ opacity: 0, x: index % 2 ? 10 : -10 }}
+        initial={{ opacity: 0, x: -10 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ delay: 1 }}
         viewport={{ once: true }}

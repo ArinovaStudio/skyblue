@@ -52,22 +52,22 @@ export function transformFaqs(tasks: any[]) {
     return obj;
   });
 }
-function Faq({ scrollProgress }: { scrollProgress: any }) {
+function Faq() {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const [expand, setExpand] = useState(false);
   const [slide, setSlide] = useState(false);
   const {data,isLoading,error} = useSWR("/api/faqs",fetcher);
   const faqs = data?.data ? transformFaqs(data.data) : [];
-  useMotionValueEvent(scrollProgress, "change", (v: number) => {
-    if (v > 0.8) setExpand(true);
-    else setExpand(false);
+  // useMotionValueEvent(scrollProgress, "change", (v: number) => {
+  //   if (v > 0.8) setExpand(true);
+  //   else setExpand(false);
 
-    if (v > 0.89) setSlide(true);
-    else setSlide(false);
-  });
+  //   if (v > 0.89) setSlide(true);
+  //   else setSlide(false);
+  // });
 
   return (
-    <div className="flex flex-col items-center py-18 md:pt-20 px-3 md:px-6 gap-6">
+    <div className="flex min-h-screen flex-col items-center py-18 md:pt-20 px-3 md:px-6 gap-6">
       {/* Top Section */}
       <div className="max-w-[1300px] overflow-auto md:h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* FAQ */}

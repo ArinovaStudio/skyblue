@@ -8,14 +8,10 @@ import {
   useInView,
   useTransform
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-
-function Hero({scrollProgress}: {scrollProgress: any}) {
-  const ref = useRef(null);
+function Hero() {
   const viewport = { once: false};
-  const textValue = useTransform(scrollProgress,[0,0.14],[1,0.4]);
   return (
-    <div ref={ref} className="relative h-full overflow-hidden">
+    <div className="h-screen overflow-hidden" >
  
        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
          <div className="relative">
@@ -23,18 +19,18 @@ function Hero({scrollProgress}: {scrollProgress: any}) {
              viewport={viewport}
              initial={{ opacity: 0, y: -500 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, ease: "easeOut" }}
-             style={{scale: textValue}}
+             transition={{ duration: 0.5, ease: "easeInOut" }}
+             exit={{scale: 0.3}}
              className="font-streach absolute uppercase text-white text-[2.6rem] md:text-[9rem]"
            >
              {STYLED_SITE_NAME}
            </motion.h1>
            <motion.h1
              viewport={viewport}
-             style={{scale: textValue}}
+             exit={{scale: 0.3}}
              initial={{ opacity: 0, y: -500 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, ease: "easeOut" }}
+             transition={{ duration: 0.5, ease: "easeInOut" }}
              className="font-streach absolute uppercase [-webkit-text-stroke:4px_#ffffff] text-transparent relative text-[2.6rem] md:text-[9rem] z-50 text-center"
            >
              {STYLED_SITE_NAME}
