@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
 import bg from "@/assets/footer-bg.png";
 import plane from "@/assets/plane.png";
 import { LucideFacebook } from "lucide-react";

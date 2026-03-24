@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import background from "@/assets/sunny-day.png";
 import Image from "next/image";
 import { dmSans, roxter, streach, syne } from "@/utils/fonts";
 import { motion, useMotionValueEvent } from "framer-motion";

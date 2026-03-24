@@ -2,20 +2,12 @@
 import Image from "next/image";
 import background from "@/assets/sky-bg.png";
 import PlaneWindow from "@/assets/plane-window.png";
-import LiquidGlass from "@/elements/LiquidGlass";
-import Button from "@/elements/Button";
-import { Plane } from "lucide-react";
 import {
-  delay,
   motion,
-  useInView,
-  useMotionValue,
   useMotionValueEvent,
   useScroll,
-  useSpring,
-  useTransform,
 } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { fetcher, SITE_NAME } from "@/lib/constants";
 import { roxter, syne } from "@/utils/fonts";
 import { easeInOut } from "framer-motion";

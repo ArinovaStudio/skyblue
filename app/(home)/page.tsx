@@ -9,7 +9,11 @@ import {
 } from "framer-motion";
 import background from "@/assets/sky-bg.png";
 import SunnyDay from "@/assets/sunny-day.png";
+import PlaneWindow from "@/assets/plane-window.png";
 import dynamic from "next/dynamic";
+import airoplane from "@/assets/airoplane.png";
+import cloud from "@/assets/cloud.png";
+import plane from "@/assets/plane.png";
 const Navbar = dynamic(() => import("@/components/Navbar"));
 const Hero = dynamic(() => import("@/app/_components/Hero"));
 const Hero2 = dynamic(() => import("../_components/Hero2"));
@@ -20,7 +24,7 @@ const Footer = dynamic(() => import("@/components/Footer"));
 import Loader from "@/components/Loader";
 import { useEffect } from "react";
 
-let images = [background.src, SunnyDay.src];
+let images = [background.src, SunnyDay.src, cloud.src, PlaneWindow.src,airoplane.src,"https://picsum.photos/1080/1080",plane.src];
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -38,7 +42,6 @@ export default function Home() {
             const img = new Image();
             img.src = image;
             img.onload = resolve;
-            return img;
           });
         })
       );
