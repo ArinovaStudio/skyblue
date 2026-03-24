@@ -24,7 +24,7 @@ export default function CTAButton() {
     setOpened(false);
   };
   return (
-    <div className="fixed z-[999] bottom-3 left-1/2 -translate-x-1/2  px-4">
+    <div className="fixed z-[999] bottom-10 left-1/2 -translate-x-1/2  px-4">
       <div
         className={`p-1 shadow-md bg-white ${
           opened ? "rounded-xl " : "rounded-full"

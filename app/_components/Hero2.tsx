@@ -69,7 +69,7 @@ function Hero2() {
         transition={transition}
         exit={{scale: 5}}
         viewport={{ once: false }}
-        className={`w-full h-full -z-[5] absolute top-0 ${isScrolled ? "object-fit":"object-cover"} md:object-cover`}
+        className={`w-full h-full -z-[5] absolute top-0 ${isScrolled ? "object-fit": "object-cover"} `}
       />
       {! isScrolled && 
       <div className="absolute flex md:grid md:grid-cols-3 justify-between items-center text-background px-2 md:px-5 w-full h-full">

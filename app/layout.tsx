@@ -25,7 +25,6 @@ export default function RootLayout({
       >
         <SmoothScroll>
           <Toaster/>
-          <CTAButton />
           {children}
         </SmoothScroll>
       </body>

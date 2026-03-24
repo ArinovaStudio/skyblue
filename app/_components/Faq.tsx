@@ -52,19 +52,19 @@ export function transformFaqs(tasks: any[]) {
     return obj;
   });
 }
-function Faq() {
+function Faq({scrollProgress}: {scrollProgress: any}) {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const [expand, setExpand] = useState(false);
   const [slide, setSlide] = useState(false);
   const {data,isLoading,error} = useSWR("/api/faqs",fetcher);
   const faqs = data?.data ? transformFaqs(data.data) : [];
-  // useMotionValueEvent(scrollProgress, "change", (v: number) => {
-  //   if (v > 0.8) setExpand(true);
-  //   else setExpand(false);
+  useMotionValueEvent(scrollProgress, "change", (v: number) => {
+    if (v > 0.78) setExpand(true);
+    else setExpand(false);
 
-  //   if (v > 0.89) setSlide(true);
-  //   else setSlide(false);
-  // });
+    if (v > 0.83) setSlide(true);
+    else setSlide(false);
+  });
 
   return (
     <div className="flex min-h-screen flex-col items-center py-18 md:pt-20 px-3 md:px-6 gap-6">

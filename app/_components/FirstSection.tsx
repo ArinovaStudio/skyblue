@@ -30,9 +30,9 @@ export default function FirstSection() {
     <div ref={ref} className="h-[280vh] relative">
       <div className="sticky top-0 h-screen overflow-hidden">
         {section === 1 ? (
-          <Hero scrollProgress={scrollYProgress} />
+          <Hero />
         ) : (
-          <Hero2 scrollProgress={scrollYProgress} />
+          <Hero2 />
         )}
       </div>
 
