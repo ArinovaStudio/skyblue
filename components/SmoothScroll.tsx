@@ -39,7 +39,7 @@ export default function SmoothScroll({
       }
     });
 
-    const MAX_DELTA = 80; // 👈 max pixels per scroll
+    const MAX_DELTA = 60; // 👈 max pixels per scroll
 
     // Override wheel behavior
     const onWheel = (e: WheelEvent) => {

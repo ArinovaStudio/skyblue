@@ -76,9 +76,8 @@ export default function Home() {
     setSection(current);
   });
 
-  return (
+  return loaded ? (
     <>
-      {!loaded && <Loader />}
       <Navbar section={section} />
       <div ref={containerRef} className="relative">
         {/* 🔥 Sticky Background */}
@@ -143,13 +142,18 @@ export default function Home() {
         />
         <section
           ref={(el) => (sectionRefs.current[4] = el) as any}
-          className="min-h-[430vh]"
+          className="min-h-[450vh]"
         />
         <section
           ref={(el) => (sectionRefs.current[5] = el) as any}
           className="min-h-[160vh]"
         />
       </div>
+    </>
+  ) : (
+    <>
+    <Loader />
+    <div ref={containerRef}></div>
     </>
   );
 }
