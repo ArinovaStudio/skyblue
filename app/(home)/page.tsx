@@ -77,7 +77,7 @@ export default function Home() {
     loadAssets();
   }, []);
   useMotionValueEvent(scrollY, "change", (y) => {
-    const triggerLine = y + window.innerHeight * 0.4;
+    const triggerLine = y + window.innerHeight * 0.5;
 
     let newIndex = -1;
 
@@ -147,8 +147,11 @@ export default function Home() {
           data-lenis-prevent-wheel
         />
         <section ref={sectionRefs[2] as any} className="min-h-[130vh]" />
-        <section ref={sectionRefs[3] as any} className="min-h-[330vh]" />
-        <section ref={sectionRefs[4] as any} className="min-h-[130vh]" />
+        <section ref={sectionRefs[3] as any} className="min-h-[320vh]" />
+        <section
+          ref={sectionRefs[4] as any}
+          className="min-h-[150vh]"
+        />
         <section ref={sectionRefs[5] as any} className="min-h-[120vh]" />
       </div>
     </>

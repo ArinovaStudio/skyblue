@@ -5,28 +5,6 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { FAQCard, FAQCardSkeleton } from "./FaqCard";
 import ErrorLoading from "@/components/ErrorLoading";
-// const faqData = [
-//   {
-//     question: "What is SkyBlue?",
-//     answer:
-//       "SkyBlue is a revolutionary platform that offers an unparalleled flying experience.",
-//   },
-//   {
-//     question: "How can I book a flight with SkyBlue?",
-//     answer:
-//       "Booking a flight with SkyBlue is easy! Simply visit our website, select your desired destination and dates, and follow the prompts to complete your booking.",
-//   },
-//   {
-//     question: "What makes SkyBlue different from other airlines?",
-//     answer:
-//       "SkyBlue stands out for its commitment to sustainability, exceptional customer service, and innovative technology that enhances the flying experience.",
-//   },
-//   {
-//     question: "Can I change or cancel my booking?",
-//     answer:
-//       "Yes, you can change or cancel your booking. Please refer to our cancellation policy for more details and any applicable fees.",
-//   },
-// ];
 
 const clients = [
   { id: 1, name: "Adani", logo: "https://picsum.photos/1080/1080" },
@@ -52,22 +30,19 @@ export function transformFaqs(tasks: any[]) {
     return obj;
   });
 }
-function Faq({ref}:{ref: any}) {
+function Faq({ ref }: { ref: any }) {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const [expand, setExpand] = useState(false);
   const [slide, setSlide] = useState(false);
-  const {data,isLoading,error} = useSWR("/api/faqs",fetcher);
+  const { data, isLoading, error } = useSWR("/api/faqs", fetcher);
   const faqs = data?.data ? transformFaqs(data.data) : [];
   const {scrollYProgress} = useScroll({
     target: ref,
-    offset: ["start start","end start"]
-  })
+    offset: ["start start","end end"]
+  });
   useMotionValueEvent(scrollYProgress, "change", (v: number) => {
-    if (v > 0.84) setExpand(true);
+    if (v > 0.96) setExpand(true);
     else setExpand(false);
-
-    if (v > 0.88) setSlide(true);
-    else setSlide(false);
   });
 
   return (
@@ -87,12 +62,27 @@ function Faq({ref}:{ref: any}) {
             {/* {faqData.map((item, i) => (
               <FAQCard item={item} i={i} isOpen={isOpen} setIsOpen={setIsOpen}/>
             ))} */}
-            <ErrorLoading error={error} emptyMessage="No Faqs found" loadingCard={FAQCardSkeleton} loading={isLoading} dataLength={faqs.length} loadingCount={4} loadingRows={4} loadingCols={1}>
-              {
-                faqs.map((faq,i)=>{
-                  return <FAQCard key={i} isOpen={isOpen} setIsOpen={setIsOpen} i={i} item={faq}/>
-                })
-              }
+            <ErrorLoading
+              error={error}
+              emptyMessage="No Faqs found"
+              loadingCard={FAQCardSkeleton}
+              loading={isLoading}
+              dataLength={faqs.length}
+              loadingCount={4}
+              loadingRows={4}
+              loadingCols={1}
+            >
+              {faqs.map((faq, i) => {
+                return (
+                  <FAQCard
+                    key={i}
+                    isOpen={isOpen}
+                    setIsOpen={setIsOpen}
+                    i={i}
+                    item={faq}
+                  />
+                );
+              })}
             </ErrorLoading>
           </div>
         </div>
@@ -107,9 +97,9 @@ function Faq({ref}:{ref: any}) {
             ...(expand
               ? { height: "100%", bottom: 0, top: "80px" }
               : { overflow: "hidden" }),
-            ...(slide ? { top: "-70rem" } : {}),
           }}
           style={{ transformOrigin: "center center" }}
+          exit={{y: -400}}
           transition={{ duration: 0.4 }}
           className={`${
             !expand && "max-md:hidden md:max-h-[450px]"
@@ -151,4 +141,3 @@ function Faq({ref}:{ref: any}) {
 }
 
 export default Faq;
-
