@@ -141,18 +141,18 @@ export default function Home() {
         <section ref={sectionRefs[0] as any} className="h-[15vh]" />
         <section
           ref={sectionRefs[1] as any}
-          className="min-h-[180vh] prevent"
+          className="min-h-[200vh] prevent"
           data-lenis-prevent
           data-lenis-prevent-touch
           data-lenis-prevent-wheel
         />
-        <section ref={sectionRefs[2] as any} className="min-h-[130vh]" />
-        <section ref={sectionRefs[3] as any} className="min-h-[320vh]" />
+        <section ref={sectionRefs[2] as any} className="min-h-[200vh]" />
+        <section ref={sectionRefs[3] as any} className="min-h-[350vh]" />
         <section
           ref={sectionRefs[4] as any}
-          className="min-h-[150vh]"
+          className="min-h-[200vh]"
         />
-        <section ref={sectionRefs[5] as any} className="min-h-[120vh]" />
+        <section ref={sectionRefs[5] as any} className="min-h-[200vh]" />
       </div>
     </>
   ) : (

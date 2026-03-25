@@ -1,49 +1,37 @@
 "use client";
-
-import Lenis from "lenis";
 import { useEffect } from "react";
+import Lenis from "lenis";
 
-export default function SmoothScroll({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-    useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
-    const handleScroll = () => {
-      clearTimeout(timeout);
-
-      timeout = setTimeout(() => {
-      }, 1000);
-    };
-
-    window.addEventListener("scroll", handleScroll,{passive: false});
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timeout);
-    };
-  }, []);
-    useEffect(() => {
+export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.08, // smoothness
+      lerp: 0.08,
       duration: 1.2,
       smoothWheel: true,
       wheelMultiplier: 0.8,
       touchMultiplier: 1,
       easing: (t: number) => 1 - Math.pow(1 - t, 4),
-
-      // 🔥 IMPORTANT: prevent logic
-      prevent: (node) => {
-        return !!node.closest("[data-lenis-prevent]");
-      },
+      prevent: (node) => !!node.closest("[data-lenis-prevent]"),
     });
 
-    // expose globally (for dynamic updates)
+    // 🔥 throttle lock
+    let isLocked = false;
+
+    lenis.on("scroll", () => {
+      if (isLocked) return;
+
+      // ✅ your logic (count scroll once)
+      console.log("Counted scroll");
+
+      isLocked = true;
+
+      setTimeout(() => {
+        isLocked = false;
+      }, 5000);
+    });
+
     (window as any).lenis = lenis;
 
-    // RAF loop
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -51,10 +39,10 @@ export default function SmoothScroll({
 
     requestAnimationFrame(raf);
 
-    // cleanup
     return () => {
       lenis.destroy();
     };
   }, []);
+
   return <>{children}</>;
 }

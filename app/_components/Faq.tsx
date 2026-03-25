@@ -41,12 +41,12 @@ function Faq({ ref }: { ref: any }) {
     offset: ["start start","end end"]
   });
   useMotionValueEvent(scrollYProgress, "change", (v: number) => {
-    if (v > 0.99) setExpand(true);
+    if (v >= 1) setExpand(true);
     else setExpand(false);
   });
 
   return (
-    <div className="flex min-h-screen flex-col items-center py-18 md:pt-20 px-3 md:px-6 gap-6">
+    <div className="flex h-screen flex-col items-center py-18 md:pt-20 px-3 md:px-6 gap-6">
       {/* Top Section */}
       <div className="max-w-[1300px] overflow-auto md:h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* FAQ */}
