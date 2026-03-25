@@ -41,7 +41,7 @@ function Faq({ ref }: { ref: any }) {
     offset: ["start start","end end"]
   });
   useMotionValueEvent(scrollYProgress, "change", (v: number) => {
-    if (v > 0.96) setExpand(true);
+    if (v > 0.99) setExpand(true);
     else setExpand(false);
   });
 
