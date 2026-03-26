@@ -61,9 +61,24 @@ export default function Branding1({ref}:{ref: any}) {
   });
   return (
     <div
-      className={`h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden ${section>4 ? "max-md:overflow-auto":""}`}
+      // className={`h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden ${section>4 ? "max-md:overflow-auto":""}`}
+      className={`h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden 
+  ${section > 4 ? "max-md:overflow-auto" : ""}`}
+  style={{
+    backgroundColor: section === 6 ? "#372D22" : "transparent",
+    transition: "background-color 0.6s ease",
+  }}
        data-lenis-prevent data-lenis-prevent-wheel
     >
+
+      <motion.div
+  className="absolute inset-0 z-0"
+  style={{
+    backgroundColor: "#372D22",
+    opacity: section === 5 ? 1 : 0,
+    transition: "opacity 0.6s ease",
+  }}
+/>
       <h1
         className={`font-streach max-md:hidden absolute uppercase text-white text-3xl md:text-5xl ${roxter.className}`}
       >
@@ -80,8 +95,8 @@ export default function Branding1({ref}:{ref: any}) {
           {...section === 4
             ? { y: 0 }
             : section === 5
-              ? { scale: 1.7, y: 400 }
-              : { scale: 2.5, y: 800 },
+              ? { scale: 2, y: 200}
+              : { scale: 3},
             opacity: 1
             }
         }

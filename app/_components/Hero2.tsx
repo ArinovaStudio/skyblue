@@ -133,17 +133,36 @@ function Hero2({ ref }: { ref: any }) {
           className="w-full overflow-scroll"
           loaderClassName="mx-auto max-w-[1200px] place-items-center w-full mt-12 min-h-[400px]"
         >
-          <div
-            className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-full items-center prevent"
+          {/*  */}
+          <div className="w-full h-screen flex items-center " style={{
+    background: `
+      linear-gradient(
+        to right,
+        #857568 0%,
+        #726052 15%,
+        #483829 30%,
+        #392E22 45%,
+        #342B20 60%,
+        #2C2419 75%,
+        #292219 85%,
+        #252017 100%
+      )
+    `,
+  }}>
+            <div
+            className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center prevent"
             data-lenis-prevent
             data-lenis-prevent-touch
             data-lenis-prevent-wheel
           >
             {features.map((feature: any, index: number) => {
               return (
-                <FeatureCard key={index} index={index} feature={feature} />
+                <div className="">
+                  <FeatureCard  key={index} index={index} feature={feature} />
+                </div>
               );
             })}
+          </div>
           </div>
         </ErrorLoading>
       )}

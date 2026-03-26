@@ -27,7 +27,7 @@ function Hero() {
              initial={{ opacity: 0, y: -500 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.5, ease: "easeInOut" }}
-             className="font-streach absolute uppercase [-webkit-text-stroke:4px_#ffffff] text-transparent relative text-[2.6rem] md:text-[9rem] z-50 text-center"
+             className="font-streach absolute uppercase font-light md:font-normal [-webkit-text-stroke:1px_#ffffff] md:[-webkit-text-stroke:4px_#ffffff] text-transparent relative text-[2.6rem] md:text-[9rem] z-50 text-center"
            >
              {STYLED_SITE_NAME}
            </motion.h1>

@@ -36,9 +36,10 @@ function Faq({ ref }: { ref: any }) {
   const [slide, setSlide] = useState(false);
   const { data, isLoading, error } = useSWR("/api/faqs", fetcher);
   const faqs = data?.data ? transformFaqs(data.data) : [];
-  const {scrollYProgress} = useScroll({
+
+  const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start","end end"]
+    offset: ["start start", "end end"]
   });
   useMotionValueEvent(scrollYProgress, "change", (v: number) => {
     if (v >= 1) setExpand(true);
@@ -115,6 +116,7 @@ function Faq({ ref }: { ref: any }) {
             />
           </div>
         </motion.div>
+
       </div>
 
       {/* Clients */}
