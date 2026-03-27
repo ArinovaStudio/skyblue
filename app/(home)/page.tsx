@@ -138,7 +138,7 @@ export default function Home() {
         </div>
 
         {/* 🔥 Scroll spacers (define heights) */}
-        <section ref={sectionRefs[0] as any} className="h-[15vh]" />
+        {/* <section ref={sectionRefs[0] as any} className="h-[15vh]" />
         <section
           ref={sectionRefs[1] as any}
           className="min-h-[200vh] prevent"
@@ -152,15 +152,15 @@ export default function Home() {
           ref={sectionRefs[4] as any}
           className="min-h-[200vh]"
         />
-        <section ref={sectionRefs[5] as any} className="min-h-[200vh]" />
+        <section ref={sectionRefs[5] as any} className="min-h-[200vh]" /> */}
 
         {/* New */}
 
-        {/* <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
+        <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
 
         <section
           ref={sectionRefs[1] as any}
-          className="min-h-[215vh]"
+          className="lg:min-h-[215vh] min-h-[600vh]"
         />
 
         <section
@@ -170,7 +170,7 @@ export default function Home() {
 
         <section
           ref={sectionRefs[3] as any}
-          className="min-h-[150vh]"
+          className="lg:min-h-[150vh] min-h-[600vh]"
         />
 
         <section
@@ -181,7 +181,7 @@ export default function Home() {
         <section
           ref={sectionRefs[5] as any}
           className="min-h-[120vh]"
-        /> */}
+        />
       </div>
     </>
   ) : (
