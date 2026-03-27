@@ -77,7 +77,7 @@ export default function Home() {
     loadAssets();
   }, []);
   useMotionValueEvent(scrollY, "change", (y) => {
-    const triggerLine = y + 0.5;
+    const triggerLine = y + window.innerHeight * 0.5;
     // y + window.innerHeight * 0.5
 
     let newIndex = -1;

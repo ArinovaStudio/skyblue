@@ -40,7 +40,7 @@ function Hero2({ ref }: { ref: any }) {
       offset: ["start start", "end end"],
     });
     useMotionValueEvent(scrollYProgress, "change", (v) => {
-      if (v > 0.5) {
+      if (v > 0.7) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
