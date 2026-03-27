@@ -192,7 +192,7 @@ export default function Home() {
 
         <section
           ref={sectionRefs[2] as any}
-          className="min-h-[100vh]"
+          className="lg:min-h-[100vh] min-h-[900vh]"
         />
 
         <section
