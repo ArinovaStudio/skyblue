@@ -152,7 +152,7 @@ function Hero2({ ref }: { ref: any }) {
   }}
   initial={{ opacity: 0, y: 60 }}
   animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.7, ease: "easeOut" }}
+  transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
   >
             <div
             className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center prevent"

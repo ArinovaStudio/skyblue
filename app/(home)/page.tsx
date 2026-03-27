@@ -77,7 +77,8 @@ export default function Home() {
     loadAssets();
   }, []);
   useMotionValueEvent(scrollY, "change", (y) => {
-    const triggerLine = y + window.innerHeight * 0.5;
+    const triggerLine = y + 0.5;
+    // y + window.innerHeight * 0.5
 
     let newIndex = -1;
 
@@ -96,7 +97,9 @@ export default function Home() {
     if (newIndex !== -1) {
       setSection(newIndex + 1);
     }
+
   });
+  
   const [section, setSection] = useState(1);
   return loaded ? (
     <>
@@ -156,11 +159,11 @@ export default function Home() {
 
         {/* New */}
 
-        {/* <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
+        <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
 
         <section
           ref={sectionRefs[1] as any}
-          className="lg:min-h-[215vh] min-h-[600vh]"
+          className="min-h-[220vh]"
         />
 
         <section
@@ -170,7 +173,7 @@ export default function Home() {
 
         <section
           ref={sectionRefs[3] as any}
-          className="lg:min-h-[150vh] min-h-[600vh]"
+          className="min-h-[150vh]"
         />
 
         <section
@@ -181,9 +184,9 @@ export default function Home() {
         <section
           ref={sectionRefs[5] as any}
           className="min-h-[120vh]"
-        /> */}
+        />
 
-        <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
+        {/* <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
 
         <section
           ref={sectionRefs[1] as any}
@@ -208,7 +211,7 @@ export default function Home() {
         <section
           ref={sectionRefs[5] as any}
           className="lg:min-h-[120vh] min-h-[900vh]"
-        />
+        /> */}
       </div>
     </>
   ) : (
