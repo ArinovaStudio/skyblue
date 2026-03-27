@@ -160,7 +160,7 @@ export default function Home() {
 
         <section
           ref={sectionRefs[1] as any}
-          className="min-h-[210vh]"
+          className="min-h-[215vh]"
         />
 
         <section
