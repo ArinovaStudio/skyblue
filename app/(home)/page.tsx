@@ -156,7 +156,7 @@ export default function Home() {
 
         {/* New */}
 
-        <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
+        {/* <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
 
         <section
           ref={sectionRefs[1] as any}
@@ -181,6 +181,33 @@ export default function Home() {
         <section
           ref={sectionRefs[5] as any}
           className="min-h-[120vh]"
+        /> */}
+
+        <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
+
+        <section
+          ref={sectionRefs[1] as any}
+          className="lg:min-h-[215vh] min-h-[900vh]"
+        />
+
+        <section
+          ref={sectionRefs[2] as any}
+          className="min-h-[100vh]"
+        />
+
+        <section
+          ref={sectionRefs[3] as any}
+          className="lg:min-h-[150vh] min-h-[900vh]"
+        />
+
+        <section
+          ref={sectionRefs[4] as any}
+          className="lg:min-h-[110vh] min-h-[900vh]"
+        />
+
+        <section
+          ref={sectionRefs[5] as any}
+          className="lg:min-h-[120vh] min-h-[900vh]"
         />
       </div>
     </>
