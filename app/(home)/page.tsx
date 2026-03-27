@@ -53,7 +53,7 @@ export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const { scrollY } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end start"],
   });
   useEffect(() => {
     const loadAssets = async () => {
@@ -156,11 +156,11 @@ export default function Home() {
 
         {/* New */}
 
-        <section ref={sectionRefs[0] as any} className="h-[40vh]" />
+        <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
 
         <section
           ref={sectionRefs[1] as any}
-          className="min-h-[110vh]"
+          className="min-h-[120vh]"
         />
 
         <section
@@ -170,7 +170,7 @@ export default function Home() {
 
         <section
           ref={sectionRefs[3] as any}
-          className="min-h-[130vh]"
+          className="min-h-[150vh]"
         />
 
         <section

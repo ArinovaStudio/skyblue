@@ -62,7 +62,7 @@ export default function Loader() {
           </div>
 
           {/* PROGRESS BAR */}
-          <div className="w-full h-[6px] bg-gray-700/30 rounded-full overflow-hidden">
+          <div className="w-full h-[6px] bg-gray-800 rounded-full overflow-hidden">
             <div
               className="h-full bg-white transition-all duration-200 ease-out"
               style={{ width: `${progress}%` }}

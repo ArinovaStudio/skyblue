@@ -134,7 +134,8 @@ function Hero2({ ref }: { ref: any }) {
           loaderClassName="mx-auto max-w-[1200px] place-items-center w-full mt-12 min-h-[400px]"
         >
           {/*  */}
-          <div className="w-full h-screen flex items-center " style={{
+          <motion.div className="w-full h-screen flex items-center " 
+          style={{
     background: `
       linear-gradient(
         to right,
@@ -148,7 +149,11 @@ function Hero2({ ref }: { ref: any }) {
         #252017 100%
       )
     `,
-  }}>
+  }}
+  initial={{ opacity: 0, y: 60 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  >
             <div
             className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center prevent"
             data-lenis-prevent
@@ -163,7 +168,7 @@ function Hero2({ ref }: { ref: any }) {
               );
             })}
           </div>
-          </div>
+          </motion.div>
         </ErrorLoading>
       )}
     </div>
