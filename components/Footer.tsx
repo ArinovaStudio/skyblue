@@ -26,10 +26,10 @@ function Footer() {
       />
 
       {/* Top Hero */}
-      <div className="relative flex flex-col items-center justify-center py-10 md:py-12 max-md:top-15 px-6">
+      <div className="relative flex flex-col items-center justify-center py-10 md:py-12 max-md:top-15 px-6 mt-40">
         <motion.h1
           initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
+          whileInView={{ scale: 1.3 }}
           transition={transition}
           className="font-streach uppercase text-white text-4xl md:text-[80px] lg:text-[100px] text-center leading-none"
         >
@@ -57,7 +57,7 @@ function Footer() {
         whileInView={{ opacity: 1 }}
         transition={transition}
         viewport={{ once: true, amount: 0.3 }}
-        className="w-full backdrop-blur-sm bg-gradient-to-b from-transparent via-white/10 to-white/30 px-6 lg:px-12 py-2 md:py-10 h-[57%]"
+        className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 to-white/30 px-6 lg:px-12 py-2 md:py-10 h-[40%]"
       >
         {/* Top Row */}
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 justify-between">
@@ -125,7 +125,7 @@ function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={transition}
-          className="flex flex-wrap gap-2 md:gap-3 mt-4 text-black font-syne font-bold text-xs md:text-base uppercase"
+          className="flex flex-wrap gap-2 md:gap-3 mt-20 text-black font-syne font-bold text-xs md:text-base uppercase"
         >
           <Link href="/">About Us</Link>
           <span>|</span>
