@@ -62,7 +62,7 @@ export default function Branding1({ref}:{ref: any}) {
   return (
     <div
       // className={`h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden ${section>4 ? "max-md:overflow-auto":""}`}
-      className={`h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden 
+      className={`min-h-screen md:h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden 
   ${section > 4 ? "max-md:overflow-auto" : ""}`}
   style={{
     backgroundColor: section === 6 ? "#372D22" : "transparent",

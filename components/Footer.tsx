@@ -57,7 +57,7 @@ function Footer() {
         whileInView={{ opacity: 1 }}
         transition={transition}
         viewport={{ once: true, amount: 0.3 }}
-        className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 px-6 lg:px-12 py-2 md:py-10"
+        className="w-full backdrop-blur-sm bg-gradient-to-b from-transparent via-white/10 to-white/30 px-6 lg:px-12 py-2 md:py-10 h-[57%]"
       >
         {/* Top Row */}
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 justify-between">
