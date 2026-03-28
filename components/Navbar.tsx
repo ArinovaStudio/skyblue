@@ -49,12 +49,12 @@ function Navbar({ section }: { section: number }) {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex">
-          <LiquidGlass className="flex items-center px-8 py-3 gap-10">
+          <LiquidGlass className="flex items-center px-6 py-3 gap-10">
             {options.map((opt) => (
               <Link
                 href={opt.link}
                 key={opt.name}
-                className="group font-roxter uppercase inline-block perspective-[1000px]"
+                className="group font-roxter uppercase text-sm inline-block perspective-[1000px]"
               >
                 {opt.name.split("").map((char, i) => (
                   <span

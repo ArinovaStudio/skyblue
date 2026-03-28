@@ -30,7 +30,7 @@ export function transformFeatures(tasks: any[]) {
     return obj;
   });
 }
-function Hero2({ ref }: { ref: any }) {
+function Hero2({ ref }: { ref?: any }) {
   const transition = { duration: 0.8, ease: easeInOut };
   const { data, isLoading, error } = useSWR("/api/features", fetcher);
   const features = data?.data ? transformFeatures(data.data) : [];

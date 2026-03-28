@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import LoadingPlane from "@/assets/plane-loading.png";
-import Image from "next/image";
 import { syne } from "@/utils/fonts";
 
 export default function Loader() {
@@ -34,15 +32,9 @@ export default function Loader() {
         </div> */}
         <div className="relative h-25 w-35 flex items-center justify-center">
 
-          <span className="text-4xl md:text-5xl font-extrabold tracking-tight tabular-nums">
+          <span className="text-4xl md:text-5xl font-extrabold font-streach tracking-tight">
             {progress}%
           </span>
-
-          {/* subtle shadow/glow (optional but nice) */}
-          {/* <div className="absolute left-2 top-13 w-28 h-6 rounded-full 
-    bg-gradient-to-br from-gray-700 to-gray-900 
-    opacity-[0.2] blur-sm" /> */}
-
         </div>
 
         {/* <span className={`uppercase bg-orange-500 text-5xl text-gray-500 bg-clip-text font-extrabold ${syne.className}`}>Loading</span> */}
@@ -62,9 +54,9 @@ export default function Loader() {
           </div>
 
           {/* PROGRESS BAR */}
-          <div className="w-full h-[6px] bg-gray-800 rounded-full overflow-hidden">
+          <div className="w-full h-[6px] bg-gray-300 rounded-full overflow-hidden">
             <div
-              className="h-full bg-white transition-all duration-200 ease-out"
+              className="h-full bg-black transition-all duration-200 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>

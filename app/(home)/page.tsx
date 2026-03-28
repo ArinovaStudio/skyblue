@@ -76,36 +76,42 @@ export default function Home() {
 
     loadAssets();
   }, []);
-  useMotionValueEvent(scrollY, "change", (y) => {
-    const triggerLine = y + window.innerHeight * 0.5;
-    // y + window.innerHeight * 0.5
+const lastSectionChange = useRef(0);
+const THROTTLE_MS = 600; // minimum time between section changes
 
-    let newIndex = -1;
+useMotionValueEvent(scrollY, "change", (y) => {
+  const now = Date.now();
+  
+  if (now - lastSectionChange.current < THROTTLE_MS) return;
 
-    sectionRefs.forEach((ref, index) => {
-      const section = ref.current;
-      if (!section) return;
+  const triggerLine = y + window.innerHeight * 0.7; // slightly earlier trigger
 
-      const top = section.offsetTop;
-      const bottom = top + section.offsetHeight;
+  let newIndex = -1;
 
-      if (triggerLine >= top && triggerLine < bottom) {
-        newIndex = index;
-      }
-    });
+  sectionRefs.forEach((ref, index) => {
+    const section = ref.current;
+    if (!section) return;
 
-    if (newIndex !== -1) {
-      setSection(newIndex + 1);
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+
+    if (triggerLine >= top && triggerLine < bottom) {
+      newIndex = index;
     }
-
   });
+
+  if (newIndex !== -1 && newIndex + 1 !== section) {
+    setSection(newIndex + 1);
+    lastSectionChange.current = now;
+  }
+});
   
   const [section, setSection] = useState(1);
   return loaded ? (
     <>
       {section !== 6 && <CTAButton />}
       <Navbar section={section} />
-      <AnimatePresence mode="sync">
+      <AnimatePresence mode="wait" initial={false}>
         {section !== 5 && (
           <motion.img
             key={[3, 4].includes(section) ? "sunny" : "sky"}
@@ -118,7 +124,7 @@ export default function Home() {
           />
         )}
       </AnimatePresence>
-      <div ref={containerRef}>
+      <div ref={containerRef} className="relative">
         {/* Sticky UI */}
         <div className="sticky top-0 overflow-hidden">
           <AnimatePresence mode="popLayout">
@@ -140,35 +146,18 @@ export default function Home() {
           </AnimatePresence>
         </div>
 
-        {/* 🔥 Scroll spacers (define heights) */}
-        {/* <section ref={sectionRefs[0] as any} className="h-[15vh]" />
-        <section
-          ref={sectionRefs[1] as any}
-          className="min-h-[200vh] prevent"
-          data-lenis-prevent
-          data-lenis-prevent-touch
-          data-lenis-prevent-wheel
+        <section ref={sectionRefs[0] as any} 
+        className="min-h-screen"
         />
-        <section ref={sectionRefs[2] as any} className="min-h-[200vh]" />
-        <section ref={sectionRefs[3] as any} className="min-h-[350vh]" />
-        <section
-          ref={sectionRefs[4] as any}
-          className="min-h-[200vh]"
-        />
-        <section ref={sectionRefs[5] as any} className="min-h-[200vh]" /> */}
-
-        {/* New */}
-
-        <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
 
         <section
           ref={sectionRefs[1] as any}
-          className="min-h-[220vh]"
+          className="min-h-[250vh]"
         />
 
         <section
           ref={sectionRefs[2] as any}
-          className="min-h-[100vh]"
+          className="min-h-[150vh]"
         />
 
         <section
@@ -178,7 +167,7 @@ export default function Home() {
 
         <section
           ref={sectionRefs[4] as any}
-          className="min-h-[110vh]"
+          className="min-h-[300vh]"
         />
 
         <section
@@ -186,32 +175,6 @@ export default function Home() {
           className="min-h-[120vh]"
         />
 
-        {/* <section ref={sectionRefs[0] as any} className="h-[10vh]"/>
-
-        <section
-          ref={sectionRefs[1] as any}
-          className="lg:min-h-[215vh] min-h-[900vh]"
-        />
-
-        <section
-          ref={sectionRefs[2] as any}
-          className="lg:min-h-[100vh] min-h-[900vh]"
-        />
-
-        <section
-          ref={sectionRefs[3] as any}
-          className="lg:min-h-[150vh] min-h-[900vh]"
-        />
-
-        <section
-          ref={sectionRefs[4] as any}
-          className="lg:min-h-[110vh] min-h-[900vh]"
-        />
-
-        <section
-          ref={sectionRefs[5] as any}
-          className="lg:min-h-[120vh] min-h-[900vh]"
-        /> */}
       </div>
     </>
   ) : (

@@ -72,7 +72,7 @@ export default function Branding1({ref}:{ref: any}) {
     >
 
       <motion.div
-  className="absolute inset-0 z-0"
+  className="absolute h-auto inset-0 z-0"
   style={{
     backgroundColor: "#372D22",
     opacity: section === 5 ? 1 : 0,
@@ -95,12 +95,13 @@ export default function Branding1({ref}:{ref: any}) {
           {...section === 4
             ? { y: 0 }
             : section === 5
-              ? { scale: 2, y: 200}
-              : { scale: 3},
+              ? { scale: 1, y: 200, opacity: 0}
+              : section === 6 ? {scale: 3, y: 600, opacity: 0}
+              : { scale: 0, y: 0, opacity: 0},
             opacity: 1
             }
         }
-        transition={{ duration: 1.7, ease: "easeInOut" }}
+        transition={{ duration: 0.9, ease: "easeInOut", delay: 0 }}
         viewport={{ once: false }}
         className={`absolute -top-70 z-100 ${section>4 ? "max-md:hidden":""}`}
       >
@@ -118,7 +119,7 @@ export default function Branding1({ref}:{ref: any}) {
             whileInView={{ left: 0, opacity: 1 }}
             exit={{ opacity: 0, bottom: 100 }}
             viewport={{once: false}}
-            className="max-h-[600px] md:ml-5 w-full text-background max-w-[450px] h-full flex flex-col justify-between gap-5 text-right items-center "
+            className="max-h-[600px] h-auto md:ml-5 w-full text-background max-w-[450px] md:h-full flex flex-col justify-between gap-5 text-right items-center "
           >
             <div className="flex flex-col items-start w-full gap-3">
               <span

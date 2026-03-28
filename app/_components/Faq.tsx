@@ -30,7 +30,7 @@ export function transformFaqs(tasks: any[]) {
     return obj;
   });
 }
-function Faq({ ref }: { ref: any }) {
+function Faq({ ref }: { ref?: any }) {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const [expand, setExpand] = useState(false);
   const [slide, setSlide] = useState(false);
