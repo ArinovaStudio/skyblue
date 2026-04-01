@@ -16,7 +16,7 @@ function Footer() {
   const transition = { duration: 1, delay: 0.5 };
 
   return (
-    <footer className="h-screen max-h-screen relative overflow-hidden flex flex-col justify-between">
+    <footer className="min-h-screen relative flex flex-col justify-between">
       {/* Background (if you want to use it) */}
       <Image
         src={bg}
@@ -58,7 +58,7 @@ function Footer() {
         transition={transition}
         viewport={{ once: true, amount: 0.3 }}
         className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 to-white/30 px-6 lg:px-12 py-2 md:py-10 h-[40%]"
-      >
+        >
         {/* Top Row */}
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 justify-between">
           {/* Description */}
