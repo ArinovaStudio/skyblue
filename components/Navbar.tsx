@@ -74,7 +74,7 @@ function Navbar({ section }: { section: number }) {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <PillComponent Visit="/" className="pl-4 pr-3 py-1">
+          <PillComponent Visit="/contact" className="pl-4 pr-3 py-1">
             <div className="flex items-center gap-3">
               <p
                 className={`uppercase ${

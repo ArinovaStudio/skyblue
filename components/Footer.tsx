@@ -127,11 +127,13 @@ function Footer() {
           transition={transition}
           className="flex flex-wrap gap-2 md:gap-3 mt-20 text-black font-syne font-bold text-xs md:text-base uppercase"
         >
-          <Link href="/">About Us</Link>
+          <Link href="/about">About Us</Link>
           <span>|</span>
-          <Link href="/">Privacy Policy</Link>
+          <Link href="/privacy">Privacy Policy</Link>
           <span>|</span>
-          <Link href="/">Terms & Conditions</Link>
+          <Link href="/terms">Terms & Conditions</Link>
+          <span>|</span>
+          <Link href="/contact">Contact Us</Link>
           <span>|</span>
           <Link href="/">Refund Policy</Link>
         </motion.div>
