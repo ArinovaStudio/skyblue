@@ -58,8 +58,9 @@
   }
 } */
 
-body {
-  /* scroll-behavior: smooth; */
+html, body {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar,::-webkit-scrollbar-button,::-webkit-scrollbar-thumb{

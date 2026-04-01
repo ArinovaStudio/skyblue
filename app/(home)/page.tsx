@@ -76,37 +76,37 @@ export default function Home() {
 
     loadAssets();
   }, []);
-const lastSectionChange = useRef(0);
-const THROTTLE_MS = 600; // minimum time between section changes
+  const [section, setSection] = useState(1);
+  const lastSectionChange = useRef(0);
+  const THROTTLE_MS = 600; // minimum time between section changes
+  const isJumping = useRef(false);
 
-useMotionValueEvent(scrollY, "change", (y) => {
-  const now = Date.now();
-  
-  if (now - lastSectionChange.current < THROTTLE_MS) return;
+  useEffect(() => {
+    // We no longer need manual wheel/touch jump logic as we've enabled CSS Scroll Snapping.
+    // This provides the best experience across all devices (Trackpad, Mouse, Mobile).
+  }, []);
 
-  const triggerLine = y + window.innerHeight * 0.7; // slightly earlier trigger
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const triggerLine = y + window.innerHeight * 0.5; // Trigger at center of viewport
 
-  let newIndex = -1;
+    let newIndex = -1;
+    sectionRefs.forEach((ref, index) => {
+      const sectionEl = ref.current;
+      if (!sectionEl) return;
 
-  sectionRefs.forEach((ref, index) => {
-    const section = ref.current;
-    if (!section) return;
+      const top = sectionEl.offsetTop;
+      const bottom = top + sectionEl.offsetHeight;
 
-    const top = section.offsetTop;
-    const bottom = top + section.offsetHeight;
+      if (triggerLine >= top && triggerLine < bottom) {
+        newIndex = index;
+      }
+    });
 
-    if (triggerLine >= top && triggerLine < bottom) {
-      newIndex = index;
+    if (newIndex !== -1 && newIndex + 1 !== section) {
+      setSection(newIndex + 1);
     }
   });
 
-  if (newIndex !== -1 && newIndex + 1 !== section) {
-    setSection(newIndex + 1);
-    lastSectionChange.current = now;
-  }
-});
-  
-  const [section, setSection] = useState(1);
   return loaded ? (
     <>
       {section !== 6 && <CTAButton />}
@@ -146,35 +146,36 @@ useMotionValueEvent(scrollY, "change", (y) => {
           </AnimatePresence>
         </div>
 
-        <section ref={sectionRefs[0] as any} 
-        className="min-h-screen"
+        {/* Dummy Sections with Scroll Snapping */}
+        <section
+          ref={sectionRefs[0] as any}
+          className="min-h-screen snap-start snap-always"
         />
 
         <section
           ref={sectionRefs[1] as any}
-          className="min-h-[250vh]"
+          className="min-h-[120vh] snap-start snap-always" 
         />
 
         <section
           ref={sectionRefs[2] as any}
-          className="min-h-[150vh]"
+          className="min-h-[120vh] snap-start snap-always"
         />
 
         <section
           ref={sectionRefs[3] as any}
-          className="min-h-[150vh]"
+          className="min-h-[120vh] snap-start snap-always"
         />
 
         <section
           ref={sectionRefs[4] as any}
-          className="min-h-[300vh]"
+          className="min-h-[120vh] snap-start snap-always"
         />
 
         <section
           ref={sectionRefs[5] as any}
-          className="min-h-[120vh]"
+          className="min-h-[120vh] snap-start snap-always"
         />
-
       </div>
     </>
   ) : (

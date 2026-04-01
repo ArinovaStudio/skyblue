@@ -23,7 +23,9 @@ export default function RootLayout({
       <body
         className={`${dmSans.className} ${streach.variable} ${roxter.variable} ${syne.variable} antialiased relative`}
       >
-          {children}
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
       </body>
     </html>
   );
