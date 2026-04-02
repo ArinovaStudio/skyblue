@@ -7,15 +7,14 @@ import plane from "@/assets/plane.png";
 import background from "@/assets/sky-bg.png";
 import SunnyDay from "@/assets/sunny-day.png";
 import Loader from "@/components/Loader";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import CTAButton from "@/components/CTAButton";
+import gsap from "gsap";
+import { Observer } from "gsap/dist/Observer";
+import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+
 const Navbar = dynamic(() => import("@/components/Navbar"));
 const Hero = dynamic(() => import("@/app/_components/Hero"));
 const Hero2 = dynamic(() => import("../_components/Hero2"));
@@ -23,6 +22,10 @@ const Features = dynamic(() => import("../_components/Features"));
 const Branding1 = dynamic(() => import("../_components/Branding1"));
 const Faq = dynamic(() => import("@/app/_components/Faq"));
 const Footer = dynamic(() => import("@/components/Footer"));
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Observer, ScrollToPlugin);
+}
 
 let images = [
   background.src,
@@ -50,11 +53,12 @@ export default function Home() {
     faqRef,
     footerRef,
   ];
+
   const [loaded, setLoaded] = useState(false);
-  const { scrollY } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
+  const [section, setSection] = useState(1);
+  const [currentStopIndex, setCurrentStopIndex] = useState(0);
+  const isAnimating = useRef(false);
+
   useEffect(() => {
     const loadAssets = async () => {
       await Promise.all(
@@ -62,50 +66,95 @@ export default function Home() {
           return new Promise<void>((resolve, reject) => {
             const img = new Image();
             img.src = image;
-
             img.onload = () => resolve();
-            img.onerror = () => reject(); // good practice
+            img.onerror = () => reject();
           });
         })
       );
-
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
       setLoaded(true);
     };
-
     loadAssets();
   }, []);
-  const [section, setSection] = useState(1);
-  const lastSectionChange = useRef(0);
-  const THROTTLE_MS = 600; // minimum time between section changes
-  const isJumping = useRef(false);
+
+  // Map logical stops to pixel offsets and parent section IDs
+  const getScrollStops = useCallback(() => {
+    const stops = [
+      { y: 0, sectionID: 1 }, // Stop 0: Hero
+      { y: (sectionRefs[1].current?.offsetTop || 0) + 1, sectionID: 2 }, // Stop 1: Hero2 (Plane View)
+      {
+        y:
+          (sectionRefs[1].current?.offsetTop || 0) +
+          (sectionRefs[1].current?.offsetHeight || 0) * 0.8,
+        sectionID: 2,
+      }, // Stop 2: Hero2 (Feature Cards)
+      { y: (sectionRefs[2].current?.offsetTop || 0) + 1, sectionID: 3 }, // Stop 3: Features Flyby
+      { y: (sectionRefs[3].current?.offsetTop || 0) + 1, sectionID: 4 }, // Stop 4: Branding1 (Stage 1)
+      {
+        y:
+          (sectionRefs[3].current?.offsetTop || 0) +
+          (sectionRefs[3].current?.offsetHeight || 0) * 0.45,
+        sectionID: 4,
+      }, // Stop 5: Branding 1 (Stage 2)
+      {
+        y:
+          (sectionRefs[3].current?.offsetTop || 0) +
+          (sectionRefs[3].current?.offsetHeight || 0) * 0.8,
+        sectionID: 4,
+      }, // Stop 6: Branding 1 (Stage 3)
+      { y: (sectionRefs[4].current?.offsetTop || 0) + 1, sectionID: 5 }, // Stop 7: Faq
+      { y: (sectionRefs[5].current?.offsetTop || 0) + 1, sectionID: 6 }, // Stop 8: Footer
+    ];
+    return stops;
+  }, [sectionRefs]);
+
+  const goToStop = (index: number) => {
+    const stops = getScrollStops();
+    if (isAnimating.current || index < 0 || index >= stops.length) return;
+
+    isAnimating.current = true;
+    const target = stops[index];
+
+    // Update section ID to drive sticky UI and cross-fades
+    setSection(target.sectionID);
+    setCurrentStopIndex(index);
+
+    gsap.to(window, {
+      scrollTo: { y: target.y, autoKill: false },
+      duration: 1.2,
+      ease: "power2.inOut",
+      onComplete: () => {
+        isAnimating.current = false;
+      },
+    });
+  };
 
   useEffect(() => {
-    // We no longer need manual wheel/touch jump logic as we've enabled CSS Scroll Snapping.
-    // This provides the best experience across all devices (Trackpad, Mouse, Mobile).
-  }, []);
+    if (!loaded) return;
 
-  useMotionValueEvent(scrollY, "change", (y) => {
-    const triggerLine = y + window.innerHeight * 0.5; // Trigger at center of viewport
-
-    let newIndex = -1;
-    sectionRefs.forEach((ref, index) => {
-      const sectionEl = ref.current;
-      if (!sectionEl) return;
-
-      const top = sectionEl.offsetTop;
-      const bottom = top + sectionEl.offsetHeight;
-
-      if (triggerLine >= top && triggerLine < bottom) {
-        newIndex = index;
-      }
+    const obs = Observer.create({
+      target: window,
+      type: "wheel,touch,pointer",
+      wheelSpeed: 1,
+      onUp: () => !isAnimating.current && goToStop(currentStopIndex - 1),
+      onDown: () => !isAnimating.current && goToStop(currentStopIndex + 1),
+      tolerance: 25,
+      preventDefault: true,
     });
 
-    if (newIndex !== -1 && newIndex + 1 !== section) {
-      setSection(newIndex + 1);
-    }
-  });
+    return () => obs.kill();
+  }, [loaded, currentStopIndex]);
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isAnimating.current) return;
+      if (e.key === "ArrowDown") goToStop(currentStopIndex + 1);
+      if (e.key === "ArrowUp") goToStop(currentStopIndex - 1);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [currentStopIndex]);
 
   return loaded ? (
     <>
@@ -125,7 +174,6 @@ export default function Home() {
         )}
       </AnimatePresence>
       <div ref={containerRef} className="relative">
-        {/* Sticky UI */}
         <div className="sticky top-0 overflow-hidden">
           <AnimatePresence mode="popLayout">
             <motion.div
@@ -146,36 +194,13 @@ export default function Home() {
           </AnimatePresence>
         </div>
 
-        {/* Dummy Sections with Scroll Snapping */}
-        <section
-          ref={sectionRefs[0] as any}
-          className="min-h-screen snap-start snap-always"
-        />
-
-        <section
-          ref={sectionRefs[1] as any}
-          className="min-h-[120vh] snap-start snap-always" 
-        />
-
-        <section
-          ref={sectionRefs[2] as any}
-          className="min-h-[120vh] snap-start snap-always"
-        />
-
-        <section
-          ref={sectionRefs[3] as any}
-          className="min-h-[120vh] snap-start snap-always"
-        />
-
-        <section
-          ref={sectionRefs[4] as any}
-          className="min-h-[120vh] snap-start snap-always"
-        />
-
-        <section
-          ref={sectionRefs[5] as any}
-          className="min-h-[120vh] snap-start snap-always"
-        />
+        {/* Dummy Sections with specific heights to accommodate internal transitions */}
+        <section ref={sectionRefs[0] as any} className="min-h-screen" />
+        <section ref={sectionRefs[1] as any} className="min-h-[140vh]" />
+        <section ref={sectionRefs[2] as any} className="min-h-screen" />
+        <section ref={sectionRefs[3] as any} className="min-h-[160vh]" />
+        <section ref={sectionRefs[4] as any} className="min-h-screen" />
+        <section ref={sectionRefs[5] as any} className="min-h-screen" />
       </div>
     </>
   ) : (
@@ -185,3 +210,5 @@ export default function Home() {
     </>
   );
 }
+
+
