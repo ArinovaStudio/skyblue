@@ -49,8 +49,6 @@ export function transformFaqs(tasks: any[]) {
 }
 function Faq({ ref }: { ref?: any }) {
   const [isOpen, setIsOpen] = useState<null | number>(null);
-  const [expand, setExpand] = useState(false);
-  const [slide, setSlide] = useState(false);
   const { data, isLoading, error } = useSWR("/api/faqs", fetcher);
   const faqs = data?.data ? transformFaqs(data.data) : [];
 
@@ -58,10 +56,7 @@ function Faq({ ref }: { ref?: any }) {
     target: ref,
     offset: ["start start", "end end"]
   });
-  useMotionValueEvent(scrollYProgress, "change", (v: number) => {
-    if (v >= 1) setExpand(true);
-    else setExpand(false);
-  });
+  // Removed expand logic to prevent disruptive layout jumps during section transitions
 
   const x = useMotionValue(0);
 
@@ -119,29 +114,20 @@ function Faq({ ref }: { ref?: any }) {
           </div>
         </div>
 
-        {/* Image */}
+        {/* Image - Simplified transition */}
         <motion.div
           layout
-          initial={{ bottom: 0, scale: 2 }}
-          animate={{
-            scale: expand ? 1.5 : 1,
-            width: expand ? "100%" : "45%",
-            ...(expand
-              ? { height: "100%", bottom: 0, top: "80px" }
-              : { overflow: "hidden" }),
-          }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           style={{ transformOrigin: "center center" }}
-          exit={{ y: -400 }}
-          transition={{ duration: 0.4 }}
-          className={`${!expand && "max-md:hidden md:max-h-[450px]"
-            } w-full w-[45%] flex-1 overflow-hidden flex justify-center items-center ${expand ? "absolute right-0 inset-0 z-50 w-full" : "relative"
-            }`}
+          exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
+          className="hidden md:flex flex-1 w-full md:w-[45%] md:max-h-[450px] relative overflow-hidden justify-center items-center rounded-2xl bg-gray-900/10 backdrop-blur-sm shadow-2xl"
         >
-          <div className="w-full h-full bg-gray-200">
+          <div className="w-full h-full">
             <img
               src="https://picsum.photos/1080/1080"
-              alt="FAQ"
-              className="w-full h-full object-cover"
+              alt="FAQ illustration"
+              className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
             />
           </div>
         </motion.div>
