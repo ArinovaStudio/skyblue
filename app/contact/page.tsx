@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { roxter, streach, syne, dmSans } from "@/utils/fonts";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import LiquidGlass from "@/elements/LiquidGlass";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FAQCard } from "@/app/_components/FaqCard";
@@ -39,7 +38,6 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
     toast.success("Your message has been sent. Our team will contact you shortly.");
     setIsSubmitting(false);
@@ -48,123 +46,132 @@ export default function ContactPage() {
 
   return (
     <SmoothScroll>
-      <main className="bg-background text-foreground min-h-screen">
-        <Navbar section={1} />
+      <main className="bg-white text-black min-h-screen">
+        <Navbar section={5} />
 
-        {/* --- Hero Section --- */}
-        <section className="pt-40 pb-20 px-6 text-center">
-          <motion.h1
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className={`${streach.className} text-5xl md:text-8xl uppercase tracking-tighter`}
-          >
-            Connect with <br /> <span className="text-primary">Precision</span>
-          </motion.h1>
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className={`${syne.className} mt-6 text-foreground/60 uppercase tracking-[0.4em] text-sm md:text-lg`}
-          >
-            Your seamless journey begins here
-          </motion.p>
+        {/* --- Hero Section - 100vh Full Screen Split --- */}
+        <section className="w-full h-screen flex flex-col md:flex-row relative bg-black">
+           {/* Left side text */}
+           <div className="w-full md:w-1/2 h-full flex flex-col justify-center p-12 md:p-24 z-10">
+              <motion.h1
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className={`${streach.className} text-[3rem] md:text-[8rem] lg:text-[10rem] text-white uppercase tracking-tighter leading-none`}
+              >
+                Inquire
+              </motion.h1>
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className={`${syne.className} mt-8 text-white/50 uppercase tracking-[0.5em] text-sm`}
+              >
+                Global Concierge Team
+              </motion.p>
+           </div>
+           
+           {/* Right side image */}
+           <div className="absolute md:relative inset-0 md:w-1/2 w-full h-full overflow-hidden">
+             <motion.img
+               initial={{ scale: 1.1 }}
+               animate={{ scale: 1 }}
+               transition={{ duration: 2, ease: "easeOut" }}
+               src="https://picsum.photos/1080/1086"
+               alt="Contact"
+               className="w-full h-full object-cover opacity-30 md:opacity-100 grayscale"
+             />
+             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 md:via-transparent to-transparent md:bg-none" />
+           </div>
         </section>
 
-        {/* --- Contact Content --- */}
-        <section className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 pb-24 grid lg:grid-cols-2 gap-20">
+        {/* --- Two Column Form & Info --- */}
+        <section className="w-full flex flex-col lg:flex-row bg-white min-h-screen border-b border-black/10">
           
-          {/* Left Column: Info & FAQ */}
-          <motion.div
-            initial={{ x: -30, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-12"
-          >
-            <div className="grid md:grid-cols-2 gap-6">
-              <LiquidGlass className="p-8 group hover:bg-white/20 transition-all cursor-default">
-                <LucideMail className="mb-4 text-primary" size={32} />
-                <h3 className={`${roxter.className} text-xl uppercase mb-2`}>Email</h3>
-                <p className={`${dmSans.className} text-sm opacity-70`}>concierge@skyblue.aero</p>
-              </LiquidGlass>
+          {/* Left Column: Direct Info & FAQ */}
+          <div className="w-full lg:w-1/2 p-12 md:p-24 border-b lg:border-b-0 lg:border-r border-black/10 flex flex-col gap-24">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-8">
+              <div className="flex flex-col gap-4">
+                <LucideMail className="text-black/30" size={40} strokeWidth={1} />
+                <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Email</h3>
+                <p className={`${dmSans.className} text-xl text-black/60 font-light`}>concierge@skyblue.aero</p>
+              </div>
               
-              <LiquidGlass className="p-8 group hover:bg-white/20 transition-all cursor-default">
-                <LucidePhone className="mb-4 text-primary" size={32} />
-                <h3 className={`${roxter.className} text-xl uppercase mb-2`}>Direct Line</h3>
-                <p className={`${dmSans.className} text-sm opacity-70`}>+1 (800) SKY-BLUE</p>
-              </LiquidGlass>
+              <div className="flex flex-col gap-4">
+                <LucidePhone className="text-black/30" size={40} strokeWidth={1} />
+                <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Direct Line</h3>
+                <p className={`${dmSans.className} text-xl text-black/60 font-light`}>+1 (800) SKY-BLUE</p>
+              </div>
               
-              <LiquidGlass className="p-8 md:col-span-2 group hover:bg-white/20 transition-all cursor-default">
-                <LucideMapPin className="mb-4 text-primary" size={32} />
-                <h3 className={`${roxter.className} text-xl uppercase mb-2`}>Global Headquarters</h3>
-                <p className={`${dmSans.className} text-sm opacity-70 leading-relaxed`}>
+              <div className="md:col-span-2 flex flex-col gap-4 border-t border-black/10 pt-16">
+                <LucideMapPin className="text-black/30" size={40} strokeWidth={1} />
+                <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Global Headquarters</h3>
+                <p className={`${dmSans.className} text-xl text-black/60 font-light leading-relaxed`}>
                   Suite 450, Aviation Plaza, <br />
-                  Mumbai International Airport, India
+                  Mumbai International Airport, <br />
+                  India 400099
                 </p>
-              </LiquidGlass>
+              </div>
             </div>
 
-            <div className="mt-12">
-              <h2 className={`${roxter.className} text-3xl uppercase mb-8`}>Travel Inquiries FAQ</h2>
-              <div className="space-y-2">
+            <div>
+              <h2 className={`${roxter.className} text-4xl md:text-5xl uppercase mb-12 text-black leading-none`}>
+                Common <br /> Inquiries
+              </h2>
+              <div className="flex flex-col w-full border-t border-black/10">
                 {contactFaqs.map((faq, i) => (
-                  <FAQCard
-                    key={i}
-                    item={faq}
-                    i={i}
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
-                  />
+                   <FAQCard
+                     key={i}
+                     item={faq}
+                     i={i}
+                     isOpen={isOpen}
+                     setIsOpen={setIsOpen}
+                   />
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Form */}
-          <motion.div
-            initial={{ x: 30, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <LiquidGlass className="p-10 !rounded-3xl shadow-2xl bg-white/5 border-white/10">
-              <h2 className={`${roxter.className} text-3xl uppercase mb-8 text-white`}>Send a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className={`${syne.className} text-[10px] uppercase tracking-widest text-white/50 px-1`}>First Name</label>
-                    <Input required placeholder="John" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 h-12" />
+          <div className="w-full lg:w-1/2 p-12 md:p-24 bg-[#F9F9F9] flex flex-col justify-center">
+             <div className="max-w-xl mx-auto w-full">
+                <h2 className={`${roxter.className} text-4xl md:text-5xl uppercase mb-16 text-black leading-none`}>
+                  Request <br /> Flight
+                </h2>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-black/10 pb-12">
+                    <div className="flex flex-col gap-4">
+                      <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>First Name</label>
+                      <input required placeholder="John" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Last Name</label>
+                      <input required placeholder="Doe" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className={`${syne.className} text-[10px] uppercase tracking-widest text-white/50 px-1`}>Last Name</label>
-                    <Input required placeholder="Doe" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 h-12" />
+                  
+                  <div className="flex flex-col gap-4 border-b border-black/10 pb-12">
+                    <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Email Address</label>
+                    <input required type="email" placeholder="john@company.com" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
                   </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label className={`${syne.className} text-[10px] uppercase tracking-widest text-white/50 px-1`}>Email Address</label>
-                  <Input required type="email" placeholder="john@example.com" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 h-12" />
-                </div>
 
-                <div className="space-y-2">
-                  <label className={`${syne.className} text-[10px] uppercase tracking-widest text-white/50 px-1`}>Subject</label>
-                  <Input required placeholder="Corporate Charter Inquiry" className="bg-white/5 border-white/10 text-white placeholder:text-white/20 h-12" />
-                </div>
+                  <div className="flex flex-col gap-4 border-b border-black/10 pb-12">
+                    <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Inquiry Details</label>
+                    <textarea required placeholder="Discuss routing, dates, and aircraft preferences..." className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full min-h-[150px] resize-none text-black font-light" />
+                  </div>
 
-                <div className="space-y-2">
-                  <label className={`${syne.className} text-[10px] uppercase tracking-widest text-white/50 px-1`}>Message</label>
-                  <Textarea required placeholder="Tell us about your travel requirements..." className="bg-white/5 border-white/10 text-white placeholder:text-white/20 min-h-[150px] resize-none" />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`${dmSans.className} w-full py-4 bg-white text-background rounded-full font-bold uppercase tracking-widest hover:bg-primary transition-colors flex items-center justify-center gap-3 disabled:opacity-50`}
-                >
-                  {isSubmitting ? "Sending..." : "Send Request"}
-                  {!isSubmitting && <LucideSend size={18} />}
-                </button>
-              </form>
-            </LiquidGlass>
-          </motion.div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`${dmSans.className} mt-8 py-6 px-12 bg-black text-white hover:bg-black/80 transition-colors uppercase tracking-[0.2em] text-sm flex items-center justify-between group disabled:opacity-50`}
+                  >
+                    <span>{isSubmitting ? "Transmitting..." : "Submit Inquiry"}</span>
+                    {!isSubmitting && <LucideSend size={18} className="group-hover:translate-x-2 transition-transform" />}
+                  </button>
+                </form>
+             </div>
+          </div>
 
         </section>
 

@@ -134,9 +134,9 @@ function Hero2({ ref }: { ref?: any }) {
           loaderClassName="mx-auto max-w-[1200px] place-items-center w-full mt-12 min-h-[400px]"
         >
           {/*  */}
-          <motion.div className="w-full h-screen flex items-center " 
-          style={{
-    background: `
+          <motion.div className="w-full h-screen flex items-center "
+            style={{
+              background: `
       linear-gradient(
         to right,
         #857568 0%,
@@ -149,25 +149,25 @@ function Hero2({ ref }: { ref?: any }) {
         #252017 100%
       )
     `,
-  }}
-  initial={{ opacity: 0, y: 60 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-  >
-            <div
-            className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center prevent"
-            data-lenis-prevent
-            data-lenis-prevent-touch
-            data-lenis-prevent-wheel
+            }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           >
-            {features.map((feature: any, index: number) => {
-              return (
-                <div className="">
-                  <FeatureCard  key={index} index={index} feature={feature} />
-                </div>
-              );
-            })}
-          </div>
+            <div
+              className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center prevent"
+              data-lenis-prevent
+              data-lenis-prevent-touch
+              data-lenis-prevent-wheel
+            >
+              {features.map((feature: any, index: number) => {
+                return (
+                  <div className="">
+                    <FeatureCard key={index} index={index} feature={feature} />
+                  </div>
+                );
+              })}
+            </div>
           </motion.div>
         </ErrorLoading>
       )}

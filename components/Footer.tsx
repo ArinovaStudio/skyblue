@@ -134,8 +134,8 @@ function Footer() {
           <Link href="/terms">Terms & Conditions</Link>
           <span>|</span>
           <Link href="/contact">Contact Us</Link>
-          <span>|</span>
-          <Link href="/">Refund Policy</Link>
+          {/* <span>|</span>
+          <Link href="/">Refund Policy</Link> */}
         </motion.div>
 
         {/* Bottom Row */}

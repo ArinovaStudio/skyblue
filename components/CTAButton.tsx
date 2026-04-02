@@ -44,7 +44,7 @@ export default function CTAButton() {
                   ? "90vw"
                   : "36rem"
               : isMobile
-                ? "55vw"
+                ? "65vw"
                 : "17rem",
 
             height: opened
@@ -81,7 +81,7 @@ export default function CTAButton() {
               Plan a flight
             </Button>
 
-            <Button className="max-md:text-xs p-2 md:p-4" varient={"dark"}>
+            <Button className="max-md:text-xs text-sm p-2 md:p-4" varient={"dark"}>
               <Plane size={18} />
             </Button>
           </div>

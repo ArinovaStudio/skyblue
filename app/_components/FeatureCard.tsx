@@ -34,7 +34,7 @@ export function FeatureCard({
 }) {
   return (
     <motion.div
-      className="flex flex-col z-100 justify-center tracking-wide! items-center md:items-start space-y-3 md:space-y-5 w-full"
+      className="flex flex-col z-100 justify-center tracking-wide! items-center md:items-start space-y-3 md:space-y-5 w-full px-4"
       initial={{ x: -200 }}
       whileInView={{ x: 0 }}
       viewport={{ once: true }}
