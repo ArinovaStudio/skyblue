@@ -10,49 +10,49 @@ import useMobile from "@/hooks/useMobile";
 const aircraftDetails = [
   {
     label: "Maximum Operating Range",
-    value: "11,263 KM",
+    value: "8,334 KM",
   },
   {
     label: "Speed",
-    value: "480 Knots",
+    value: "474–482 Knots",
   },
   {
     label: "Passenger Capacity",
-    value: "Up to 12 seats (+1 cabin server)",
+    value: "Up to 12–14 passengers",
   },
   {
     label: "Endurance",
-    value: "14 hrs (maximum for European based aircraft)",
+    value: "10–11 hrs",
   },
   {
     label: "Baggage Capacity",
-    value: "5.52 m³",
+    value: "3.6 m³",
   },
   {
     label: "Cruising Altitude",
-    value: "15,544 m",
+    value: "15,545 m",
   },
   {
     label: "Cabin Length",
-    value: "14.05 m²",
+    value: "10.11 m",
   },
   {
     label: "Cabin Width",
-    value: "2.49 m²",
+    value: "2.34 m",
   },
   {
     label: "Cabin Height",
-    value: "1.92 m²",
+    value: "1.88 m",
   },
 ];
-export default function Branding1({ref}:{ref: any}) {
+export default function Branding1({ ref }: { ref: any }) {
   const [section, setSection] = useState(4);
   const containerRef = useRef<HTMLDivElement>(null);
-  const firstDetails = aircraftDetails.slice(0,6);
+  const firstDetails = aircraftDetails.slice(0, 6);
   const specifications = aircraftDetails.slice(6);
-  const {scrollYProgress} = useScroll({
+  const { scrollYProgress } = useScroll({
     target: ref || undefined,
-    offset: ["start start","end start"]
+    offset: ["start start", "end start"]
   });
   useMotionValueEvent(scrollYProgress, "change", (v: number) => {
     if (v < 0.3) setSection(4);
@@ -62,20 +62,20 @@ export default function Branding1({ref}:{ref: any}) {
   return (
     <div
       className={`min-h-screen md:h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden`}
-  style={{
-    backgroundColor: section === 6 ? "#372D22" : "transparent",
-    transition: "background-color 0.6s ease",
-  }}
+      style={{
+        backgroundColor: section === 6 ? "#372D22" : "transparent",
+        transition: "background-color 0.6s ease",
+      }}
     >
 
       <motion.div
-  className="absolute h-auto inset-0 z-0"
-  style={{
-    backgroundColor: "#372D22",
-    opacity: section === 5 ? 1 : 0,
-    transition: "opacity 0.6s ease",
-  }}
-/>
+        className="absolute h-auto inset-0 z-0"
+        style={{
+          backgroundColor: "#372D22",
+          opacity: section === 5 ? 1 : 0,
+          transition: "opacity 0.6s ease",
+        }}
+      />
       <h1
         className={`font-streach max-md:hidden absolute uppercase text-white text-3xl md:text-5xl ${roxter.className}`}
       >
@@ -87,20 +87,21 @@ export default function Branding1({ref}:{ref: any}) {
         {SITE_NAME}
       </h1>
       <motion.div
-        initial={{ y: -500 ,opacity: 0 }}
+        initial={{ y: -500, opacity: 0 }}
         whileInView={
-          {...section === 4
-            ? { y: 0 }
-            : section === 5
-              ? { scale: 1, y: 200, opacity: 0}
-              : section === 6 ? {scale: 3, y: 600, opacity: 0}
-              : { scale: 0, y: 0, opacity: 0},
+          {
+            ...section === 4
+              ? { y: 0 }
+              : section === 5
+                ? { scale: 1, y: 200, opacity: 0 }
+                : section === 6 ? { scale: 3, y: 600, opacity: 0 }
+                  : { scale: 0, y: 0, opacity: 0 },
             opacity: 1
-            }
+          }
         }
         transition={{ duration: 0.9, ease: "easeInOut", delay: 0 }}
         viewport={{ once: false }}
-        className={`absolute -top-70 z-100 ${section>4 ? "max-md:hidden":""}`}
+        className={`absolute -top-70 z-100 ${section > 4 ? "max-md:hidden" : ""}`}
       >
         <img
           src={airoplane.src}
@@ -115,17 +116,17 @@ export default function Branding1({ref}:{ref: any}) {
             initial={{ left: -100, opacity: 0 }}
             whileInView={{ left: 0, opacity: 1 }}
             exit={{ opacity: 0, bottom: 100 }}
-            viewport={{once: false}}
+            viewport={{ once: false }}
             className="max-h-[600px] h-auto md:ml-5 w-full text-background max-w-[450px] md:h-full flex flex-col justify-between gap-5 text-right items-center "
           >
             <div className="flex flex-col items-start w-full gap-3">
               <span
                 className={`text-3xl font-bold capitalize ${syne.className}`}
               >
-                Gulfstream
+                Falcon
               </span>
               <span className={`text-7xl uppercase font-extrabold`}>
-                65oer
+                900EX
               </span>
             </div>
             <div className="grid w-full text-left gap-4">
@@ -133,19 +134,19 @@ export default function Branding1({ref}:{ref: any}) {
                 <Separator />
                 <div className="grid md:grid-cols-3 gap-5">
                   {
-                    firstDetails.map(({label,value}:{label: string,value: string},index)=>{
-                      return <SectionDetailsVertical key={index} title={label} value={value}/>
+                    firstDetails.map(({ label, value }: { label: string, value: string }, index) => {
+                      return <SectionDetailsVertical key={index} title={label} value={value} />
                     })
                   }
                 </div>
               </div>
               <div className="grid gap-2">
-                <Separator/>
+                <Separator />
                 <span className={`uppercase text-lg text-background/70 font-bold ${syne.className}`}>specifications</span>
                 <div>
                   {
-                    specifications.map(({label,value}:{label: string,value: string},index)=>{
-                      return <SectionDetailsHorizontal key={index} title={label} value={value}/>
+                    specifications.map(({ label, value }: { label: string, value: string }, index) => {
+                      return <SectionDetailsHorizontal key={index} title={label} value={value} />
                     })
                   }
                 </div>
@@ -170,24 +171,65 @@ export default function Branding1({ref}:{ref: any}) {
             initial={{ right: 100, opacity: 0 }}
             whileInView={{ right: 0, opacity: 1 }}
             exit={{ opacity: 0, bottom: 100 }}
-            viewport={{once: false}}
-            className="max-md:text-left max-h-[350px] w-full max-w-[350px] text-background h-full flex flex-col justify-between gap-5 items-center ml-auto md:mr-10"
+            viewport={{ once: false }}
+            className="max-md:text-left max-h-[500px] w-full max-w-[350px] text-background h-full flex flex-col justify-between gap-6 items-center ml-auto md:mr-10"
           >
             <span className={`text-3xl font-bold ${syne.className}`}>
-              Ultra-Long-Range AirCraft
+              Long-Range Private Aircraft
             </span>
+
             <div className="flex flex-col gap-2">
               <Separator />
               <span className="font-semibold mb-3">
                 Direct Access To Private Travel
               </span>
               <span className="font-normal">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel,
-                est. Mollitia velit maiores necessitatibus ex eaque. Esse magni
-                explicabo harum ab corporis dignissimos et impedit omnis
-                consequatur pariatur, voluptatem, blanditiis qui
+                Engineered for performance and comfort, this tri-jet aircraft offers
+                multi-zone cabin configurations, intercontinental range, and fully
+                berthable seating—delivering a refined long-haul experience for up to
+                14 passengers.
               </span>
             </div>
+
+            {/* NEW CONTENT */}
+            <div className="flex flex-col gap-4 w-full mt-3">
+              <Separator />
+
+              <span className={`uppercase text-lg font-bold ${syne.className}`}>
+                A Better Way to Fly
+              </span>
+
+              <div className="flex flex-col gap-3 text-sm">
+
+                <div>
+                  <span className="font-semibold block">24/7 Availability</span>
+                  <span className="font-normal">
+                    Our team operates around the clock to ensure every journey is
+                    seamlessly managed—anytime, anywhere.
+                  </span>
+                </div>
+
+                <div>
+                  <span className="font-semibold block">Onboard Services</span>
+                  <span className="font-normal">
+                    Indulge in thoughtfully curated onboard experiences, including
+                    premium catering, refined interiors, and personalized service
+                    designed around your preferences.
+                  </span>
+                </div>
+
+                <div>
+                  <span className="font-semibold block">Efficiency</span>
+                  <span className="font-normal">
+                    Optimized routing and expert crew coordination ensure reduced
+                    travel time, operational efficiency, and a seamless end-to-end
+                    experience.
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
           </motion.div>
         ) : (
           <div className="h-full flex flex-col gap-5 items-end text-right justify-end">

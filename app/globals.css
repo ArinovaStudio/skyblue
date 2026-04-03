@@ -63,20 +63,6 @@ html, body {
   overscroll-behavior: none;
 }
 
-<<<<<<< HEAD
-::-webkit-scrollbar,
-::-webkit-scrollbar-button,
-::-webkit-scrollbar-thumb {
-  display: none !important;
-}
-
-* {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-=======
-
->>>>>>> 7e81b6d (changes in some section)
 
 /* ---break---  */
 

@@ -115,8 +115,7 @@ function Hero2({ ref }: { ref?: any }) {
               viewport={{ once: false, amount: "some" }}
               className={`${syne.className} max-md:bottom-12  max-md:left-0 max-md:text-center w-full md:max-w-md text-right font-thin! text-sm md:text-lg md:pr-5`}
             >
-              SkyAero enables seamless private jet bookings —connecting you to
-              luxury aircraft, global destinations, and uncompromising comfort.
+              Experience private aviation, seamlessly redefined. With SkyBlue Aero, charter on demand, access a global fleet, and rely on expert trip management—meticulously tailored to your schedule.
             </motion.span>
           </div>
         </div>
