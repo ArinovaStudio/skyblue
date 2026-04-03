@@ -9,6 +9,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import LiquidGlass from "@/elements/LiquidGlass";
+import bg from "@/assets/footer-bg.png";
+import plane from "@/assets/plane.png";
+import { LucideFacebook } from "lucide-react";
+import Link from "next/link";
 
 const teamStats = [
   { label: "Expert Pilots", value: "50+" },
@@ -18,13 +22,22 @@ const teamStats = [
 ];
 
 export default function AboutPage() {
+  const [section, setSection] = React.useState(1);
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
+  const getCurrentYear = () => {
+    const currentDate = new Date();
+    return currentDate.getFullYear();
+  };
+
+  const transition = { duration: 1, delay: 0.5 };
+
   return (
     <SmoothScroll>
-      <main className="bg-white text-black min-h-screen">
-        <Navbar section={1} />
+      <main>
+        <div className="bg-white text-black min-h-screen">
+          <Navbar section={section} />
         
         {/* --- Hero Section - 100vh Full Screen --- */}
         <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
@@ -60,7 +73,10 @@ export default function AboutPage() {
         </section>
 
         {/* --- Our Story Section --- */}
-        <section className="w-full flex flex-col md:flex-row items-center bg-white min-h-[80vh]">
+        <section 
+        onMouseEnter={() => setSection(5)}
+        onMouseLeave={() => setSection(1)}
+        className="w-full flex flex-col md:flex-row items-center bg-white min-h-[80vh]">
           <div className="w-full md:w-1/2 p-12 md:p-24 flex flex-col justify-center">
             <motion.div
               initial={{ x: -50, opacity: 0 }}
@@ -68,11 +84,11 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`${roxter.className} text-5xl md:text-8xl uppercase mb-12 text-black leading-none`}>
+              <h2 className={`${roxter.className} text-2xl md:text-7xl uppercase mb-12 text-black leading-none`}>
                 Our <br/> Identity
               </h2>
               <div className={`${dmSans.className} space-y-8 text-lg md:text-2xl text-black/70 leading-relaxed font-light`}>
-                <p>
+                <p className="text-[1.3rem]">
                   SkyBlue was born from a singular vision: to transcend the boundaries of commercial travel and offer an experience that is as unique as the individuals we serve. With over two decades of excellence, we have redefined what it means to fly.
                 </p>
                 <p>
@@ -94,14 +110,17 @@ export default function AboutPage() {
         </section>
 
         {/* --- Gallery Section (Bento Grid) --- */}
-        <section className="py-24 px-6 md:px-12 lg:px-24 bg-white border-t border-black/5">
+        <section 
+        onMouseEnter={() => setSection(5)}
+        onMouseLeave={() => setSection(1)}
+        className="py-24 px-6 md:px-12 lg:px-24 bg-white border-t border-black/5">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className={`${roxter.className} text-4xl md:text-6xl text-black uppercase`}>
+            <h2 className={`${roxter.className} text-2xl md:text-5xl text-black uppercase`}>
               The Experience
             </h2>
             <p className={`${syne.className} mt-4 text-sm text-black/50 uppercase tracking-widest`}>A visual journey of luxury</p>
@@ -185,7 +204,10 @@ export default function AboutPage() {
         </section>
 
         {/* --- Crew Section - Edge To Edge Grid --- */}
-        <section className="w-full grid md:grid-cols-2 bg-[#F9F9F9] border-b border-black/5">
+        <section 
+        onMouseEnter={() => setSection(5)}
+        onMouseLeave={() => setSection(1)}
+        className="w-full grid md:grid-cols-2 bg-[#F9F9F9] border-b border-black/5">
            <div className="relative h-[60vh] md:h-[90vh] w-full overflow-hidden">
               <Image
                 src="/images/about/team.png"
@@ -199,7 +221,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-x-8 gap-y-16">
                 {teamStats.map((stat, i) => (
                   <div key={i} className="flex flex-col border-t border-black/10 pt-6">
-                    <h5 className={`${streach.className} text-5xl md:text-7xl text-black`}>{stat.value}</h5>
+                    <h5 className={`${streach.className} text-3xl md:text-5xl text-black`}>{stat.value}</h5>
                     <span className={`${syne.className} text-xs md:text-sm uppercase font-bold tracking-widest text-black/50 mt-4 block`}>
                       {stat.label}
                     </span>
@@ -208,7 +230,7 @@ export default function AboutPage() {
               </div>
               
               <div className="mt-20">
-                <p className={`${dmSans.className} text-2xl md:text-3xl font-light text-black/80 leading-relaxed`}>
+                <p className={`${dmSans.className} text-xl md:text-2xl font-light text-black/80 leading-relaxed`}>
                   "Our teams are our greatest asset. From the ground crew in Mumbai to flight dispatchers in Zurich, every SkyBlue employee is a custodian of your safety."
                 </p>
                 <div className="mt-8 flex items-center gap-6">
@@ -218,8 +240,167 @@ export default function AboutPage() {
               </div>
            </div>
         </section>
+        </div>
 
-        <Footer />
+        <footer className="min-h-screen relative flex flex-col justify-between overflow-hidden">
+
+          {/* Background */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={bg}
+              alt="footer background"
+              fill
+              priority
+              className="object-cover"
+            />
+
+            {/* fade from white to transparent */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-transparent" />
+          </div>
+
+          {/* CONTENT WRAPPER (fix) */}
+          <div className="relative z-10 flex flex-col justify-between min-h-screen">
+
+            {/* Top Hero */}
+            <div className="relative flex flex-col items-center justify-center py-10 md:py-12 max-md:top-15 px-6 mt-40">
+              <motion.h1
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1.3 }}
+                transition={transition}
+                className="font-streach uppercase text-black text-4xl md:text-[80px] lg:text-[100px] text-center leading-none"
+              >
+                skybblue
+              </motion.h1>
+
+              <motion.div
+                initial={{ scale: 0.4 }}
+                whileInView={{ scale: 5 }}
+                transition={{ duration: 1, delay: 1 }}
+                className="relative w-full max-w-[120px] h-[50px] md:max-w-[500px] md:h-[120px] top-20"
+              >
+                <Image
+                  src={plane}
+                  alt="flying plane"
+                  fill
+                  className="object-contain"
+                />
+              </motion.div>
+            </div>
+
+            {/* Glass Section */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={transition}
+              viewport={{ once: true, amount: 0.3 }}
+              className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 px-6 lg:px-12 py-2 md:py-10 h-[40%]"
+            >
+              {/* Top Row */}
+              <div className="flex flex-col lg:flex-row gap-6 md:gap-8 justify-between">
+
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={transition}
+                  viewport={{ once: true }}
+                  className="font-syne font-bold text-white text-base md:text-lg lg:w-[40%]"
+                >
+                  Fly beyond commercial limits with SkyAero. A private jet booking
+                  experience crafted for elite travelers who demand precision,
+                  privacy, and prestige.
+                </motion.p>
+
+                {/* Contact */}
+                <motion.div
+                  initial={{ opacity: 0, x: 60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={transition}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-start lg:items-end"
+                >
+                  <h2 className="font-streach uppercase text-white text-2xl md:text-3xl">
+                    Contact us
+                  </h2>
+
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="font-syne font-bold text-white text-base mt-4"
+                  >
+                    info@skyblue.aero
+                  </motion.p>
+
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="font-syne font-bold text-white text-base mt-1"
+                  >
+                    9086345xx2
+                  </motion.p>
+
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ delay: 0.6, duration: 0.4 }}
+                    className="flex gap-3 mt-4"
+                  >
+                    <div className="w-10 h-10 bg-white rounded-full grid place-items-center">
+                      <LucideFacebook size={18} color="black" />
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </div>
+
+              {/* Footer Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={transition}
+                className="flex flex-wrap gap-2 md:gap-3 mt-20 text-black font-syne font-bold text-xs md:text-base uppercase"
+              >
+                <Link href="/about">About Us</Link>
+                <span>|</span>
+                <Link href="/privacy">Privacy Policy</Link>
+                <span>|</span>
+                <Link href="/terms">Terms & Conditions</Link>
+                <span>|</span>
+                <Link href="/contact">Contact Us</Link>
+              </motion.div>
+
+              {/* Bottom Row */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={transition}
+                className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mt-6"
+              >
+                <p className="font-syne font-semibold text-sm md:text-base">
+                  © {getCurrentYear()} All copyright are reserved.
+                </p>
+
+                <div className="hidden lg:block flex-1 border-t border-black mx-6"></div>
+
+                <p className="font-sans text-sm md:text-base">
+                  Designed by{" "}
+                  <Link href="https://arinova.studio" className="font-syne font-bold">
+                    Arinova Studio
+                  </Link>{" "}
+                  X{" "}
+                  <Link
+                    href="https://outrightcreators.com"
+                    className="font-syne font-bold"
+                  >
+                    Outright Creators
+                  </Link>
+                </p>
+              </motion.div>
+            </motion.div>
+
+          </div>
+        </footer>
       </main>
     </SmoothScroll>
   );

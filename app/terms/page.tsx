@@ -72,10 +72,10 @@ export default function TermsPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>01</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-2xl md:text-5xl text-black uppercase mb-8 leading-none`}>
-                    Acceptance <br /> of Terms
+                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>
+                    Acceptance of Terms
                   </h2>
-                  <p>
+                  <p className="text-[1.2rem]">
                     By accessing the SkyBlue platform or utilizing our charter services, you agree to be bound by these Terms and Conditions. These terms constitute a legally binding agreement between you and SkyBlue Aviation.
                   </p>
                 </section>
@@ -85,10 +85,10 @@ export default function TermsPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>02</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-2xl md:text-5xl text-black uppercase mb-8 leading-none`}>
-                    Booking <br /> and Payments
+                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>
+                    Booking and Payments
                   </h2>
-                  <p>
+                  <p className="text-[1.2rem]">
                     All bookings are subject to aircraft availability and final confirmation by SkyBlue. Full payment is required at the time of booking unless otherwise agreed in writing. Payments are processed through secure, high-end financial institutions to ensure the safety of your transactions.
                   </p>
                 </section>
@@ -98,8 +98,8 @@ export default function TermsPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>03</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-2xl md:text-5xl text-black uppercase mb-8 leading-none`}>Cancellation Policy</h2>
-                  <p>
+                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>Cancellation Policy</h2>
+                  <p className="text-[1.2rem]">
                     Cancellations made more than 48 hours prior to departure are eligible for a partial refund as per our specific tier-based refund policy. Cancellations within 24 hours of departure will incur the full charter cost.
                   </p>
                 </section>
@@ -109,8 +109,8 @@ export default function TermsPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>04</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-2xl md:text-5xl text-black uppercase mb-8 leading-none`}>Passenger Responsibility</h2>
-                  <p>
+                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>Passenger Responsibility</h2>
+                  <p className="text-[1.2rem]">
                     Passengers are responsible for possessing valid travel documentation (passports, visas, etc.) and adhering to all safety protocols communicated by the flight crew. SkyBlue reserves the right to refuse boarding to any passenger who poses a safety risk.
                   </p>
                 </section>
@@ -120,8 +120,8 @@ export default function TermsPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>05</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-2xl md:text-5xl text-black uppercase mb-8 leading-none`}>Liability</h2>
-                  <p>
+                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>Liability</h2>
+                  <p className="text-[1.2rem]">
                     SkyBlue Aviation acts as an agent or operator and maintains comprehensive insurance coverage. Our liability is limited to the terms set forth in our specific aircraft insurance policies and international aviation conventions.
                   </p>
                 </section>
