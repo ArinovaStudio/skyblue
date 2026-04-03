@@ -136,8 +136,16 @@ export default function Home() {
       target: window,
       type: "wheel,touch,pointer",
       wheelSpeed: 1,
-      onUp: () => !isAnimating.current && goToStop(currentStopIndex - 1),
-      onDown: () => !isAnimating.current && goToStop(currentStopIndex + 1),
+      onUp: (self) => {
+        if (isAnimating.current) return;
+        const isTouch = self.event.type.includes("touch") || (self.event as any).pointerType === "touch";
+        goToStop(currentStopIndex + (isTouch ? 1 : -1));
+      },
+      onDown: (self) => {
+        if (isAnimating.current) return;
+        const isTouch = self.event.type.includes("touch") || (self.event as any).pointerType === "touch";
+        goToStop(currentStopIndex + (isTouch ? -1 : 1));
+      },
       tolerance: 25,
       preventDefault: true,
     });
