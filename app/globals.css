@@ -59,12 +59,19 @@
 } */
 
 html, body {
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  overscroll-behavior: none;
 }
 
-::-webkit-scrollbar,::-webkit-scrollbar-button,::-webkit-scrollbar-thumb{
-  display: none;
+::-webkit-scrollbar,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-thumb {
+  display: none !important;
+}
+
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* ---break---  */

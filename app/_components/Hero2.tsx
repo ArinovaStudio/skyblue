@@ -1,6 +1,6 @@
 "use client";
 import PlaneWindow from "@/assets/plane-window.png";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { Ref, useRef, useState } from "react";
 import { fetcher, SITE_NAME } from "@/lib/constants";
 import { roxter, syne } from "@/utils/fonts";
@@ -34,26 +34,25 @@ function Hero2({ ref }: { ref?: any }) {
   const transition = { duration: 0.8, ease: easeInOut };
   const { data, isLoading, error } = useSWR("/api/features", fetcher);
   const features = data?.data ? transformFeatures(data.data) : [];
-  if (ref) {
-    const { scrollYProgress } = useScroll({
-      target: ref,
-      offset: ["start start", "end end"],
-    });
-    useMotionValueEvent(scrollYProgress, "change", (v) => {
-      if (v > 0.7) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    });
-  }
+  const { scrollYProgress } = useScroll({
+    target: ref || undefined,
+    offset: ["start start", "end end"],
+  });
+  
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (v > 0.4) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  });
+
+  // Drive the grid's Y translation based on scroll from 0.5 to 1.0
+  const yGrid = useTransform(scrollYProgress, [0.5, 1], [0, -1000]); // Adjust based on grid height
   const [isScrolled, setIsScrolled] = useState(false);
   return (
     <div
-      className="min-h-screen relative flex items-center justify-center prevent"
-      data-lenis-prevent
-      data-lenis-prevent-touch
-      data-lenis-prevent-wheel
+      className="min-h-screen relative flex items-center justify-center w-full overflow-hidden"
     >
       <motion.img
         src={PlaneWindow.src}
@@ -66,7 +65,7 @@ function Hero2({ ref }: { ref?: any }) {
         transition={transition}
         exit={{ scale: 5 }}
         viewport={{ once: false }}
-        className={`w-full h-full -z-[5] absolute top-0 ${isScrolled ? "object-fit" : "object-cover"} `}
+        className={`w-full h-full -z-[5] absolute top-0 object-cover`}
       />
       {!isScrolled && (
         <div className="absolute flex md:grid md:grid-cols-3 justify-between items-center text-background px-2 md:px-5 w-full h-full">
@@ -130,7 +129,7 @@ function Hero2({ ref }: { ref?: any }) {
           loadingCount={4}
           loadingCols={2}
           loadingRows={2}
-          className="w-full overflow-scroll"
+          className="w-full h-full flex"
           loaderClassName="mx-auto max-w-[1200px] place-items-center w-full mt-12 min-h-[400px]"
         >
           {/*  */}
@@ -154,11 +153,9 @@ function Hero2({ ref }: { ref?: any }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           >
-            <div
-              className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center prevent"
-              data-lenis-prevent
-              data-lenis-prevent-touch
-              data-lenis-prevent-wheel
+            <motion.div
+              style={{ y: yGrid }}
+              className="mx-auto md:pt-20 max-w-[1200px] max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-auto items-start pb-20"
             >
               {features.map((feature: any, index: number) => {
                 return (
@@ -167,7 +164,7 @@ function Hero2({ ref }: { ref?: any }) {
                   </div>
                 );
               })}
-            </div>
+            </motion.div>
           </motion.div>
         </ErrorLoading>
       )}

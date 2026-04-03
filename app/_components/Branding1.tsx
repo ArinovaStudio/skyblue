@@ -51,7 +51,7 @@ export default function Branding1({ref}:{ref: any}) {
   const firstDetails = aircraftDetails.slice(0,6);
   const specifications = aircraftDetails.slice(6);
   const {scrollYProgress} = useScroll({
-    target: ref,
+    target: ref || undefined,
     offset: ["start start","end start"]
   });
   useMotionValueEvent(scrollYProgress, "change", (v: number) => {
@@ -61,14 +61,11 @@ export default function Branding1({ref}:{ref: any}) {
   });
   return (
     <div
-      // className={`h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden ${section>4 ? "max-md:overflow-auto":""}`}
-      className={`min-h-screen md:h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden 
-  ${section > 4 ? "max-md:overflow-auto" : ""}`}
+      className={`min-h-screen md:h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden`}
   style={{
     backgroundColor: section === 6 ? "#372D22" : "transparent",
     transition: "background-color 0.6s ease",
   }}
-       data-lenis-prevent data-lenis-prevent-wheel
     >
 
       <motion.div
