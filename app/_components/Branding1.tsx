@@ -1,259 +1,554 @@
+// "use client";
+// import React, { useRef, useState, useEffect } from "react";
+// import Image from "next/image";
+// import { dmSans, roxter, streach, syne } from "@/utils/fonts";
+// import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+// import airoplane from "@/assets/airoplane.png";
+// import { SITE_NAME } from "@/lib/constants";
+// import { Separator } from "@/components/ui/separator";
+// import useMobile from "@/hooks/useMobile";
+// const aircraftDetails = [
+//   {
+//     label: "Maximum Operating Range",
+//     value: "8,334 KM",
+//   },
+//   {
+//     label: "Speed",
+//     value: "474–482 Knots",
+//   },
+//   {
+//     label: "Passenger Capacity",
+//     value: "Up to 12–14 passengers",
+//   },
+//   {
+//     label: "Endurance",
+//     value: "10–11 hrs",
+//   },
+//   {
+//     label: "Baggage Capacity",
+//     value: "3.6 m³",
+//   },
+//   {
+//     label: "Cruising Altitude",
+//     value: "15,545 m",
+//   },
+//   {
+//     label: "Cabin Length",
+//     value: "10.11 m",
+//   },
+//   {
+//     label: "Cabin Width",
+//     value: "2.34 m",
+//   },
+//   {
+//     label: "Cabin Height",
+//     value: "1.88 m",
+//   },
+// ];
+// export default function Branding1({ ref }: { ref: any }) {
+//   const [section, setSection] = useState(4);
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const firstDetails = aircraftDetails.slice(0, 6);
+//   const specifications = aircraftDetails.slice(6);
+//   const { scrollYProgress } = useScroll({
+//     target: ref || undefined,
+//     offset: ["start start", "end start"]
+//   });
+//   useMotionValueEvent(scrollYProgress, "change", (v: number) => {
+//     if (v < 0.3) setSection(4);
+//     else if (v < 0.6) setSection(5);
+//     else setSection(6);
+//   });
+//   return (
+//     <div
+//       className={`min-h-screen md:h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden`}
+//       style={{
+//         backgroundColor: section === 6 ? "#372D22" : "transparent",
+//         transition: "background-color 0.6s ease",
+//       }}
+//     >
+
+//       <motion.div
+//         className="absolute h-auto inset-0 z-0"
+//         style={{
+//           backgroundColor: "#372D22",
+//           opacity: section === 5 ? 1 : 0,
+//           transition: "opacity 0.6s ease",
+//         }}
+//       />
+//       <h1
+//         className={`font-streach max-md:hidden absolute uppercase text-white text-3xl md:text-5xl ${roxter.className}`}
+//       >
+//         {SITE_NAME}
+//       </h1>
+//       <h1
+//         className={`font-streach max-md:hidden absolute uppercase [-webkit-text-stroke:1px_#ffffff] text-transparent text-3xl md:text-5xl z-50 text-center ${roxter.className}`}
+//       >
+//         {SITE_NAME}
+//       </h1>
+//       <motion.div
+//         initial={{ y: -500, opacity: 0 }}
+//         whileInView={
+//           {
+//             ...section === 4
+//               ? { y: 0 }
+//               : section === 5
+//                 ? { scale: 1, y: 200, opacity: 0 }
+//                 : section === 6 ? { scale: 3, y: 600, opacity: 0 }
+//                   : { scale: 0, y: 0, opacity: 0 },
+//             opacity: 1
+//           }
+//         }
+//         transition={{ duration: 0.9, ease: "easeInOut", delay: 0 }}
+//         viewport={{ once: false }}
+//         className={`absolute -top-70 z-100 ${section > 4 ? "max-md:hidden" : ""}`}
+//       >
+//         <img
+//           src={airoplane.src}
+//           alt={"Plane"}
+//           className="rotate-180 h-250 object-cover rotate-y-180!"
+//         />
+//       </motion.div>
+
+//       <div className="w-full max-h-[75%] px-5 h-full absolute gap-5 grid md:grid-cols-2">
+//         {section > 4 ? (
+//           <motion.div
+//             initial={{ left: -100, opacity: 0 }}
+//             whileInView={{ left: 0, opacity: 1 }}
+//             exit={{ opacity: 0, bottom: 100 }}
+//             viewport={{ once: false }}
+//             className="max-h-[600px] h-auto md:ml-5 w-full text-background max-w-[450px] md:h-full flex flex-col justify-between gap-5 text-right items-center "
+//           >
+//             <div className="flex flex-col items-start w-full gap-3">
+//               <span
+//                 className={`text-3xl font-bold capitalize ${syne.className}`}
+//               >
+//                 Falcon
+//               </span>
+//               <span className={`text-7xl uppercase font-extrabold`}>
+//                 900EX
+//               </span>
+//             </div>
+//             <div className="grid w-full text-left gap-4">
+//               <div className="grid gap-2">
+//                 <Separator />
+//                 <div className="grid md:grid-cols-3 gap-5">
+//                   {/* {
+//                     firstDetails.map(({ label, value }: { label: string, value: string }, index) => {
+//                       return <SectionDetailsVertical key={index} title={label} value={value} />
+//                     })
+//                   } */}
+//                 </div>
+//               </div>
+//               <div className="grid gap-2">
+//                 <Separator />
+//                 <span className={`uppercase text-lg text-background/70 font-bold ${syne.className}`}>specifications</span>
+//                 <div>
+//                   {/* {
+//                     specifications.map(({ label, value }: { label: string, value: string }, index) => {
+//                       return <SectionDetailsHorizontal key={index} title={label} value={value} />
+//                     })
+//                   } */}
+//                 </div>
+//               </div>
+//             </div>
+//           </motion.div>
+//         ) : (
+//           <div className="h-full flex items-start justify-center">
+//             <motion.span
+//               initial={{ x: -150, opacity: 0 }}
+//               whileInView={{ x: 0, opacity: 1 }}
+//               transition={{ duration: 1, delay: 1 }}
+//               viewport={{ once: false }}
+//               className={`text-background ${roxter.className} uppercase text-5xl md:text-8xl`}
+//             >
+//               fly in
+//             </motion.span>
+//           </div>
+//         )}
+//         {section > 4 ? (
+//           <motion.div
+//             initial={{ right: 100, opacity: 0 }}
+//             whileInView={{ right: 0, opacity: 1 }}
+//             exit={{ opacity: 0, bottom: 100 }}
+//             viewport={{ once: false }}
+//             className="max-md:text-left max-h-[500px] w-full max-w-[350px] text-background h-full flex flex-col justify-between gap-6 items-center ml-auto md:mr-10"
+//           >
+//             <span className={`text-3xl font-bold ${syne.className}`}>
+//               Long-Range Private Aircraft
+//             </span>
+
+//             <div className="flex flex-col gap-2">
+//               <Separator />
+//               <span className="font-semibold mb-3">
+//                 Direct Access To Private Travel
+//               </span>
+//               <span className="font-normal">
+//                 Engineered for performance and comfort, this tri-jet aircraft offers
+//                 multi-zone cabin configurations, intercontinental range, and fully
+//                 berthable seating—delivering a refined long-haul experience for up to
+//                 14 passengers.
+//               </span>
+//             </div>
+
+//             {/* NEW CONTENT */}
+//             <div className="flex flex-col gap-4 w-full mt-3">
+//               <Separator />
+
+//               <span className={`uppercase text-lg font-bold ${syne.className}`}>
+//                 A Better Way to Fly
+//               </span>
+
+//               <div className="flex flex-col gap-3 text-sm">
+
+//                 <div>
+//                   <span className="font-semibold block">24/7 Availability</span>
+//                   <span className="font-normal">
+//                     Our team operates around the clock to ensure every journey is
+//                     seamlessly managed—anytime, anywhere.
+//                   </span>
+//                 </div>
+
+//                 <div>
+//                   <span className="font-semibold block">Onboard Services</span>
+//                   <span className="font-normal">
+//                     Indulge in thoughtfully curated onboard experiences, including
+//                     premium catering, refined interiors, and personalized service
+//                     designed around your preferences.
+//                   </span>
+//                 </div>
+
+//                 <div>
+//                   <span className="font-semibold block">Efficiency</span>
+//                   <span className="font-normal">
+//                     Optimized routing and expert crew coordination ensure reduced
+//                     travel time, operational efficiency, and a seamless end-to-end
+//                     experience.
+//                   </span>
+//                 </div>
+
+//               </div>
+//             </div>
+
+//           </motion.div>
+//         ) : (
+//           <div className="h-full flex flex-col gap-5 items-end text-right justify-end">
+//             <motion.span
+//               initial={{ x: 150, opacity: 0 }}
+//               whileInView={{ x: 0, opacity: 1 }}
+//               transition={{ duration: 1, delay: 1 }}
+//               viewport={{ once: false }}
+//               className={`uppercase text-5xl md:text-7xl text-background ${roxter.className}`}
+//             >
+//               LUXURY
+//             </motion.span>
+//             <motion.span
+//               initial={{ y: 150 }}
+//               whileInView={{ y: 0 }}
+//               transition={{ duration: 1, delay: 1 }}
+//               viewport={{ once: false }}
+//               className={`uppercase text-sm md:text-xl text-background ${syne.className} font-extrabold [font-stretch:normal] [font-variation-settings:'wdth'_100]`}
+//             >
+//               luxury that <br /> actually{" "}
+//               <span className="font-streach">feels</span>
+//             </motion.span>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export function SectionDetailsHorizontal({ title, value }: { title: string; value: string }) {
+//   return (
+//     <div className="grid grid-cols-2">
+//       <span className={`uppercase text-sm font-semibold`}>{title}</span>
+//       <span className={`uppercase text-xs text-background/70 font-semibold`}>{value}</span>
+//     </div>
+//   );
+// }
+
+// export function SectionDetailsVertical({ title, value }: { title: string; value: string }) {
+//   return (
+//     <div className="grid">
+//       <span className={`uppercase text-sm font-semibold text-background/70`}>{title}</span>
+//       <span className={`uppercase text-xs font-semibold`}>{value}</span>
+//     </div>
+//   );
+// }
+
+
 "use client";
-import React, { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import { dmSans, roxter, streach, syne } from "@/utils/fonts";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import React, { useState, useCallback } from "react";
+import { roxter, syne } from "@/utils/fonts";
+import { motion } from "framer-motion";
 import airoplane from "@/assets/airoplane.png";
 import { SITE_NAME } from "@/lib/constants";
 import { Separator } from "@/components/ui/separator";
-import useMobile from "@/hooks/useMobile";
+import { useSectionScrollLock } from "@/hooks/useSectionScrollLock";
+
 const aircraftDetails = [
-  {
-    label: "Maximum Operating Range",
-    value: "8,334 KM",
-  },
-  {
-    label: "Speed",
-    value: "474–482 Knots",
-  },
-  {
-    label: "Passenger Capacity",
-    value: "Up to 12–14 passengers",
-  },
-  {
-    label: "Endurance",
-    value: "10–11 hrs",
-  },
-  {
-    label: "Baggage Capacity",
-    value: "3.6 m³",
-  },
-  {
-    label: "Cruising Altitude",
-    value: "15,545 m",
-  },
-  {
-    label: "Cabin Length",
-    value: "10.11 m",
-  },
-  {
-    label: "Cabin Width",
-    value: "2.34 m",
-  },
-  {
-    label: "Cabin Height",
-    value: "1.88 m",
-  },
+  { label: "Maximum Operating Range", value: "8,334 KM" },
+  { label: "Speed", value: "474–482 Knots" },
+  { label: "Passenger Capacity", value: "Up to 12–14 passengers" },
+  { label: "Endurance", value: "10–11 hrs" },
+  { label: "Baggage Capacity", value: "3.6 m³" },
+  { label: "Cruising Altitude", value: "15,545 m" },
+  { label: "Cabin Length", value: "10.11 m" },
+  { label: "Cabin Width", value: "2.34 m" },
+  { label: "Cabin Height", value: "1.88 m" },
 ];
-export default function Branding1({ ref }: { ref: any }) {
-  const [section, setSection] = useState(4);
-  const containerRef = useRef<HTMLDivElement>(null);
+
+type Props = {
+  active: boolean;
+  entryDirection: 1 | -1;
+  onScrollForward: () => void;
+  onScrollBackward: () => void;
+};
+
+export default function Branding1({
+  active,
+  entryDirection,
+  onScrollForward,
+  onScrollBackward,
+}: Props) {
   const firstDetails = aircraftDetails.slice(0, 6);
   const specifications = aircraftDetails.slice(6);
-  const { scrollYProgress } = useScroll({
-    target: ref || undefined,
-    offset: ["start start", "end start"]
-  });
-  useMotionValueEvent(scrollYProgress, "change", (v: number) => {
-    if (v < 0.3) setSection(4);
-    else if (v < 0.6) setSection(5);
-    else setSection(6);
-  });
-  return (
-    <div
-      className={`min-h-screen md:h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden`}
-      style={{
-        backgroundColor: section === 6 ? "#372D22" : "transparent",
-        transition: "background-color 0.6s ease",
-      }}
-    >
 
+  const TOTAL_STEPS = 2;
+  const startAtDetails = entryDirection === -1;
+
+  const [step, setStep] = useState(startAtDetails ? TOTAL_STEPS - 1 : 0);
+  const [isExiting, setIsExiting] = useState(false);
+
+  const handleNext = useCallback(() => setStep((s) => Math.min(s + 1, TOTAL_STEPS - 1)), []);
+  const handlePrev = useCallback(() => {
+    setIsExiting(false);
+    setStep((s) => Math.max(s - 1, 0));
+  }, []);
+
+  const handleExitForward = useCallback(() => {
+    setIsExiting(true);
+    setTimeout(() => {
+      setIsExiting(false);
+      onScrollForward();
+    }, 900);
+  }, [onScrollForward]);
+
+  useSectionScrollLock({
+    active,
+    totalSteps: TOTAL_STEPS,
+    currentStep: step,
+    onNext: handleNext,
+    onPrev: handlePrev,
+    onExitForward: handleExitForward,
+    onExitBackward: onScrollBackward,
+  });
+
+  const showDetails = step === 1;
+  const planeTransition = { duration: 0.9, ease: [0.22, 1, 0.36, 1] as any };
+
+  return (
+    <div className="min-h-screen md:h-screen flex items-center py-10 justify-center w-full relative md:overflow-hidden">
+
+      {/* ── Brown bg fades in on step 1 ───────────────────────────────── */}
       <motion.div
-        className="absolute h-auto inset-0 z-0"
-        style={{
-          backgroundColor: "#372D22",
-          opacity: section === 5 ? 1 : 0,
-          transition: "opacity 0.6s ease",
-        }}
+        className="absolute inset-0 z-0"
+        initial={{ opacity: startAtDetails ? 1 : 0 }}
+        animate={{ opacity: showDetails ? 1 : 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        style={{ backgroundColor: "#372D22" }}
       />
-      <h1
-        className={`font-streach max-md:hidden absolute uppercase text-white text-3xl md:text-5xl ${roxter.className}`}
+
+      {/* ── Watermark fades out on step 1 ─────────────────────────────── */}
+      <motion.h1
+        initial={{ opacity: startAtDetails ? 0 : 1 }}
+        animate={{ opacity: showDetails ? 0 : 1 }}
+        transition={{ duration: 0.5 }}
+        className={`max-md:hidden absolute uppercase text-white text-3xl md:text-5xl z-10 ${roxter.className}`}
       >
         {SITE_NAME}
-      </h1>
-      <h1
-        className={`font-streach max-md:hidden absolute uppercase [-webkit-text-stroke:1px_#ffffff] text-transparent text-3xl md:text-5xl z-50 text-center ${roxter.className}`}
+      </motion.h1>
+      <motion.h1
+        initial={{ opacity: startAtDetails ? 0 : 1 }}
+        animate={{ opacity: showDetails ? 0 : 1 }}
+        transition={{ duration: 0.5 }}
+        className={`max-md:hidden absolute uppercase [-webkit-text-stroke:1px_#ffffff] text-transparent text-3xl md:text-5xl z-10 text-center ${roxter.className}`}
       >
         {SITE_NAME}
-      </h1>
+      </motion.h1>
+
+      {/* ── Step 0 plane: drops in from top, flies up to step 1 ──────── */}
       <motion.div
-        initial={{ y: -500, opacity: 0 }}
-        whileInView={
-          {
-            ...section === 4
-              ? { y: 0 }
-              : section === 5
-                ? { scale: 1, y: 200, opacity: 0 }
-                : section === 6 ? { scale: 3, y: 600, opacity: 0 }
-                  : { scale: 0, y: 0, opacity: 0 },
-            opacity: 1
-          }
-        }
-        transition={{ duration: 0.9, ease: "easeInOut", delay: 0 }}
-        viewport={{ once: false }}
-        className={`absolute -top-70 z-100 ${section > 4 ? "max-md:hidden" : ""}`}
+        initial={startAtDetails ? { y: -1000, opacity: 0 } : { y: -500, opacity: 0 }}
+        animate={showDetails ? { y: -1000, opacity: 0 } : { y: 0, opacity: 1 }}
+        transition={planeTransition}
+        className="absolute -top-70 z-20 left-0 right-0 flex justify-center pointer-events-none"
       >
         <img
           src={airoplane.src}
-          alt={"Plane"}
+          alt="Plane"
           className="rotate-180 h-250 object-cover rotate-y-180!"
         />
       </motion.div>
 
-      <div className="w-full max-h-[75%] px-5 h-full absolute gap-5 grid md:grid-cols-2">
-        {section > 4 ? (
+      {/* ── Step 1 plane: BIG centered, flies up on exit ──────────────── */}
+      <motion.div
+        className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
+        initial={startAtDetails ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 80, scale: 1 }}
+        animate={{
+          opacity: isExiting ? 0 : showDetails ? 1 : 0,
+          y: isExiting ? -600 : showDetails ? 0 : 80,
+          scale: isExiting ? 1.1 : 1,
+        }}
+        transition={
+          isExiting
+            ? { duration: 0.85, ease: [0.22, 1, 0.36, 1] as any }
+            : { duration: 0.9, ease: [0.4, 0, 0.2, 1] as any }
+        }
+      >
+        <img
+          src={airoplane.src}
+          alt="Plane centered"
+          className="rotate-180 rotate-y-180! object-cover"
+          style={{ height: "clamp(380px, 55vh, 680px)", width: "auto", opacity: 0.92 }}
+        />
+      </motion.div>
+
+      {/* ── Content grid ──────────────────────────────────────────────── */}
+      <div className="w-full max-h-[75%] px-5 h-full absolute gap-5 grid md:grid-cols-2 z-30">
+
+        {/* ── Left column ───────────────────────────────────────────────── */}
+        <div className="h-full relative overflow-hidden">
+
+          {/* Step 0 left: "fly in" — NO x animation, just opacity fade */}
           <motion.div
-            initial={{ left: -100, opacity: 0 }}
-            whileInView={{ left: 0, opacity: 1 }}
-            exit={{ opacity: 0, bottom: 100 }}
-            viewport={{ once: false }}
-            className="max-h-[600px] h-auto md:ml-5 w-full text-background max-w-[450px] md:h-full flex flex-col justify-between gap-5 text-right items-center "
+            initial={{ opacity: startAtDetails ? 0 : 1 }}   // ← no x, stays in place
+            animate={{ opacity: showDetails ? 0 : 1 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute inset-0 flex items-start justify-center"
           >
-            <div className="flex flex-col items-start w-full gap-3">
-              <span
-                className={`text-3xl font-bold capitalize ${syne.className}`}
-              >
-                Falcon
-              </span>
-              <span className={`text-7xl uppercase font-extrabold`}>
-                900EX
-              </span>
-            </div>
-            <div className="grid w-full text-left gap-4">
-              <div className="grid gap-2">
-                <Separator />
-                <div className="grid md:grid-cols-3 gap-5">
-                  {
-                    firstDetails.map(({ label, value }: { label: string, value: string }, index) => {
-                      return <SectionDetailsVertical key={index} title={label} value={value} />
-                    })
-                  }
-                </div>
-              </div>
-              <div className="grid gap-2">
-                <Separator />
-                <span className={`uppercase text-lg text-background/70 font-bold ${syne.className}`}>specifications</span>
-                <div>
-                  {
-                    specifications.map(({ label, value }: { label: string, value: string }, index) => {
-                      return <SectionDetailsHorizontal key={index} title={label} value={value} />
-                    })
-                  }
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <div className="h-full flex items-start justify-center">
-            <motion.span
-              initial={{ x: -150, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              viewport={{ once: false }}
-              className={`text-background ${roxter.className} uppercase text-5xl md:text-8xl`}
-            >
+            <span className={`text-background ${roxter.className} uppercase text-5xl md:text-8xl`}>
               fly in
-            </motion.span>
-          </div>
-        )}
-        {section > 4 ? (
-          <motion.div
-            initial={{ right: 100, opacity: 0 }}
-            whileInView={{ right: 0, opacity: 1 }}
-            exit={{ opacity: 0, bottom: 100 }}
-            viewport={{ once: false }}
-            className="max-md:text-left max-h-[500px] w-full max-w-[350px] text-background h-full flex flex-col justify-between gap-6 items-center ml-auto md:mr-10"
-          >
-            <span className={`text-3xl font-bold ${syne.className}`}>
-              Long-Range Private Aircraft
             </span>
+          </motion.div>
 
-            <div className="flex flex-col gap-2">
-              <Separator />
-              <span className="font-semibold mb-3">
-                Direct Access To Private Travel
-              </span>
-              <span className="font-normal">
-                Engineered for performance and comfort, this tri-jet aircraft offers
-                multi-zone cabin configurations, intercontinental range, and fully
-                berthable seating—delivering a refined long-haul experience for up to
-                14 passengers.
-              </span>
-            </div>
-
-            {/* NEW CONTENT */}
-            <div className="flex flex-col gap-4 w-full mt-3">
-              <Separator />
-
-              <span className={`uppercase text-lg font-bold ${syne.className}`}>
-                A Better Way to Fly
-              </span>
-
-              <div className="flex flex-col gap-3 text-sm">
-
-                <div>
-                  <span className="font-semibold block">24/7 Availability</span>
-                  <span className="font-normal">
-                    Our team operates around the clock to ensure every journey is
-                    seamlessly managed—anytime, anywhere.
-                  </span>
+          {/* Step 1 left: Falcon 900EX details — slides in from left */}
+          <motion.div
+            initial={startAtDetails ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+            animate={{
+              opacity: isExiting ? 0 : showDetails ? 1 : 0,
+              x: isExiting ? -80 : showDetails ? 0 : -100,
+            }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="absolute inset-0 flex items-center"
+          >
+            <div className="max-h-[600px] h-auto md:ml-5 w-full text-background max-w-[450px] md:h-full flex flex-col justify-between gap-5 items-center">
+              <div className="flex flex-col items-start w-full gap-3">
+                <span className={`text-3xl font-bold capitalize ${syne.className}`}>Falcon</span>
+                <span className="text-7xl uppercase font-extrabold">900EX</span>
+              </div>
+              <div className="grid w-full text-left gap-4">
+                <div className="grid gap-2">
+                  <Separator />
+                  <div className="grid md:grid-cols-3 gap-5">
+                    {firstDetails.map(({ label, value }, index) => (
+                      <SectionDetailsVertical key={index} title={label} value={value} />
+                    ))}
+                  </div>
                 </div>
-
-                <div>
-                  <span className="font-semibold block">Onboard Services</span>
-                  <span className="font-normal">
-                    Indulge in thoughtfully curated onboard experiences, including
-                    premium catering, refined interiors, and personalized service
-                    designed around your preferences.
+                <div className="grid gap-2">
+                  <Separator />
+                  <span className={`uppercase text-lg text-background/70 font-bold ${syne.className}`}>
+                    specifications
                   </span>
+                  <div>
+                    {specifications.map(({ label, value }, index) => (
+                      <SectionDetailsHorizontal key={index} title={label} value={value} />
+                    ))}
+                  </div>
                 </div>
-
-                <div>
-                  <span className="font-semibold block">Efficiency</span>
-                  <span className="font-normal">
-                    Optimized routing and expert crew coordination ensure reduced
-                    travel time, operational efficiency, and a seamless end-to-end
-                    experience.
-                  </span>
-                </div>
-
               </div>
             </div>
-
           </motion.div>
-        ) : (
-          <div className="h-full flex flex-col gap-5 items-end text-right justify-end">
-            <motion.span
-              initial={{ x: 150, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-              viewport={{ once: false }}
-              className={`uppercase text-5xl md:text-7xl text-background ${roxter.className}`}
-            >
+        </div>
+
+        {/* ── Right column ──────────────────────────────────────────────── */}
+        <div className="h-full relative overflow-hidden">
+
+          {/* Step 0 right: "LUXURY" — NO x animation, just opacity fade */}
+          <motion.div
+            initial={{ opacity: startAtDetails ? 0 : 1 }}   // ← no x, stays in place
+            animate={{ opacity: showDetails ? 0 : 1 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute inset-0 flex flex-col gap-5 items-end text-right justify-end"
+          >
+            <span className={`uppercase text-5xl md:text-7xl text-background ${roxter.className}`}>
               LUXURY
-            </motion.span>
-            <motion.span
-              initial={{ y: 150 }}
-              whileInView={{ y: 0 }}
-              transition={{ duration: 1, delay: 1 }}
-              viewport={{ once: false }}
-              className={`uppercase text-sm md:text-xl text-background ${syne.className} font-extrabold [font-stretch:normal] [font-variation-settings:'wdth'_100]`}
-            >
-              luxury that <br /> actually{" "}
-              <span className="font-streach">feels</span>
-            </motion.span>
-          </div>
-        )}
+            </span>
+            <span className={`uppercase text-sm md:text-xl text-background ${syne.className} font-extrabold [font-stretch:normal] [font-variation-settings:'wdth'_100]`}>
+              luxury that <br /> actually <span className="font-streach">feels</span>
+            </span>
+          </motion.div>
+
+          {/* Step 1 right: description — slides in from right */}
+          <motion.div
+            initial={startAtDetails ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
+            animate={{
+              opacity: isExiting ? 0 : showDetails ? 1 : 0,
+              x: isExiting ? 80 : showDetails ? 0 : 100,
+            }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="absolute inset-0 flex items-center"
+          >
+            <div className="max-md:text-left max-h-[500px] w-full max-w-[350px] text-background h-full flex flex-col justify-between gap-6 items-center ml-auto md:mr-10">
+              <span className={`text-3xl font-bold ${syne.className}`}>
+                Long-Range Private Aircraft
+              </span>
+              <div className="flex flex-col gap-2">
+                <Separator />
+                <span className="font-semibold mb-3">Direct Access To Private Travel</span>
+                <span className="font-normal">
+                  Engineered for performance and comfort, this tri-jet aircraft offers
+                  multi-zone cabin configurations, intercontinental range, and fully
+                  berthable seating—delivering a refined long-haul experience for up to
+                  14 passengers.
+                </span>
+              </div>
+              <div className="flex flex-col gap-4 w-full mt-3">
+                <Separator />
+                <span className={`uppercase text-lg font-bold ${syne.className}`}>
+                  A Better Way to Fly
+                </span>
+                <div className="flex flex-col gap-3 text-sm">
+                  <div>
+                    <span className="font-semibold block">24/7 Availability</span>
+                    <span className="font-normal">
+                      Our team operates around the clock to ensure every journey is
+                      seamlessly managed—anytime, anywhere.
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-semibold block">Onboard Services</span>
+                    <span className="font-normal">
+                      Indulge in thoughtfully curated onboard experiences, including
+                      premium catering, refined interiors, and personalized service
+                      designed around your preferences.
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-semibold block">Efficiency</span>
+                    <span className="font-normal">
+                      Optimized routing and expert crew coordination ensure reduced
+                      travel time, operational efficiency, and a seamless end-to-end
+                      experience.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -262,8 +557,8 @@ export default function Branding1({ ref }: { ref: any }) {
 export function SectionDetailsHorizontal({ title, value }: { title: string; value: string }) {
   return (
     <div className="grid grid-cols-2">
-      <span className={`uppercase text-sm font-semibold`}>{title}</span>
-      <span className={`uppercase text-xs text-background/70 font-semibold`}>{value}</span>
+      <span className="uppercase text-sm font-semibold">{title}</span>
+      <span className="uppercase text-xs text-background/70 font-semibold">{value}</span>
     </div>
   );
 }
@@ -271,8 +566,8 @@ export function SectionDetailsHorizontal({ title, value }: { title: string; valu
 export function SectionDetailsVertical({ title, value }: { title: string; value: string }) {
   return (
     <div className="grid">
-      <span className={`uppercase text-sm font-semibold text-background/70`}>{title}</span>
-      <span className={`uppercase text-xs font-semibold`}>{value}</span>
+      <span className="uppercase text-sm font-semibold text-background/70">{title}</span>
+      <span className="uppercase text-xs font-semibold">{value}</span>
     </div>
   );
 }

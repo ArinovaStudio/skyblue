@@ -75,10 +75,10 @@ export default function PrivacyPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>01</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>
+                  <h2 className={`${roxter.className} text-sm md:text-xl text-black uppercase mb-8 leading-none`}>
                     Information We Collect
                   </h2>
-                  <p className="text-[1.2rem]">
+                  <p className="text-[1rem]">
                     At SkyBlue, we collect personal information necessary to provide our premium aviation services. This includes your name, contact details, passport information for international travel, and payment details. We also collect technical data such as IP addresses and browser information to improve our digital experience.
                   </p>
                 </section>
@@ -88,10 +88,10 @@ export default function PrivacyPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>02</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>
+                  <h2 className={`${roxter.className} text-sm md:text-xl text-black uppercase mb-8 leading-none`}>
                     How We Use Your Data
                   </h2>
-                  <p className="text-[1.2rem]">
+                  <p className="text-[1rem]">
                     Your information is used strictly to facilitate flight bookings, manage your travel itinerary, and ensure compliance with international aviation safety and security protocols. We may also use your contact details to provide updates about your journey or occasional corporate announcements.
                   </p>
                 </section>
@@ -101,8 +101,8 @@ export default function PrivacyPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>03</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>Data Protection</h2>
-                  <p className="text-[1.2rem]">
+                  <h2 className={`${roxter.className} text-sm md:text-xl text-black uppercase mb-8 leading-none`}>Data Protection</h2>
+                  <p className="text-[1rem]">
                     We implement industry-leading security measures, including end-to-end encryption and secure vault storage for sensitive financial and identity data. Your privacy is managed with the same level of precision and care as our flight operations.
                   </p>
                 </section>
@@ -112,8 +112,8 @@ export default function PrivacyPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>04</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>Third-Party Sharing</h2>
-                  <p className="text-[1.2rem]">
+                  <h2 className={`${roxter.className} text-sm md:text-xl text-black uppercase mb-8 leading-none`}>Third-Party Sharing</h2>
+                  <p className="text-[1rem]">
                     We only share your data with trusted partners essential to your journey—such as ground handling agents, catering services, and customs officials. We never sell your personal information to third-party marketing firms.
                   </p>
                 </section>
@@ -123,8 +123,8 @@ export default function PrivacyPage() {
                     <span className={`${syne.className} text-sm font-bold tracking-[0.2em] text-black/30`}>05</span>
                     <div className="h-[1px] flex-1 bg-black/10" />
                   </div>
-                  <h2 className={`${roxter.className} text-sm md:text-2xl text-black uppercase mb-8 leading-none`}>Your Rights</h2>
-                  <p className="text-[1.2rem]">
+                  <h2 className={`${roxter.className} text-sm md:text-xl text-black uppercase mb-8 leading-none`}>Your Rights</h2>
+                  <p className="text-[1rem]">
                     You have the right to access, correct, or request the deletion of your personal data at any time. For such inquiries, please contact our Data Protection Officer at privacy@skyblue.aero.
                   </p>
                 </section>

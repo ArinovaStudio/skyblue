@@ -32,21 +32,41 @@ const clients = [
   { id: 11, name: "Adani", logo: regent.src },
   { id: 12, name: "Adani", logo: vista.src },
 ];
+
+// export function transformFaqs(tasks: any[]) {
+//   return tasks.map((task) => {
+//     const obj: any = {
+//       id: task.gid,
+//     };
+
+//     task.custom_fields.forEach((field: any) => {
+//       if (field.type === "text") {
+//         obj[field.name] = field.text_value;
+//       }
+//     });
+
+//     return obj;
+//   });
+// }
+
 export function transformFaqs(tasks: any[]) {
   return tasks.map((task) => {
     const obj: any = {
       id: task.gid,
     };
 
-    task.custom_fields.forEach((field: any) => {
+    const fields = task.custom_fields ?? [];
+
+    fields.forEach((field: any) => {
       if (field.type === "text") {
-        obj[field.name] = field.text_value;
+        obj[field.name] = field.text_value || field.display_value || "";
       }
     });
 
     return obj;
   });
 }
+
 function Faq({ ref }: { ref?: any }) {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const { data, isLoading, error } = useSWR("/api/faqs", fetcher);
@@ -73,7 +93,7 @@ function Faq({ ref }: { ref?: any }) {
   });
 
   return (
-    <div className="flex h-screen flex-col items-center py-20 md:pt-30 px-3 md:px-6 gap-6">
+    <div className="flex h-screen flex-col items-center py-20 md:pt-30 px-3 md:px-6 gap-6 bg-white">
       {/* Top Section */}
       <div className="max-w-[1300px] overflow-auto md:h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* FAQ */}

@@ -1,126 +1,348 @@
+// "use client";
+// import PlaneWindow from "@/assets/plane-window.png";
+// import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+// import { Ref, useRef, useState } from "react";
+// import { fetcher, SITE_NAME } from "@/lib/constants";
+// import { roxter, syne } from "@/utils/fonts";
+// import { easeInOut } from "framer-motion";
+// import useSWR from "swr";
+// import ErrorLoading from "@/components/ErrorLoading";
+// import { FeatureCard, FeatureCardSkeleton } from "./FeatureCard";
+// import useMobile from "@/hooks/useMobile";
+// // export function transformFeatures(tasks: any[]) {
+// //   return tasks.map((task) => {
+// //     const obj: any = {
+// //       id: task.gid,
+// //       title: "",
+// //       description: "",
+// //     };
+
+// //     task.custom_fields.forEach((field: any) => {
+// //       if (field.name === "title") {
+// //         obj.title = field.text_value || "";
+// //       }
+
+// //       if (field.name === "feature_description") {
+// //         obj.description = field.text_value || "";
+// //       }
+// //     });
+
+// //     return obj;
+// //   });
+// // }
+// export function transformFeatures(tasks: any[]) {
+//   return tasks.map((task) => {
+//     const obj: any = {
+//       id: task.gid,
+//       title: "",
+//       description: "",
+//     };
+
+//     if (!task?.custom_fields) return obj;
+
+//     task.custom_fields.forEach((field: any) => {
+//       if (field.name === "title") {
+//         obj.title = field.text_value || "";
+//       }
+
+//       if (field.name === "feature_description") {
+//         obj.description = field.text_value || "";
+//       }
+//     });
+
+//     return obj;
+//   });
+// }
+
+// function Hero2({ ref }: { ref: any }) {
+//   const transition = { duration: 0.8, ease: easeInOut };
+//   const { data, isLoading, error } = useSWR("/api/features", fetcher);
+//   const features = data?.data ? transformFeatures(data.data) : [];
+//   if (ref) {
+//     const { scrollYProgress } = useScroll({
+//       target: ref,
+//       offset: ["start start", "end end"],
+//     });
+//     useMotionValueEvent(scrollYProgress, "change", (v) => {
+//       if (v > 0.5) {
+//         setIsScrolled(true);
+//       } else {
+//         setIsScrolled(false);
+//       }
+//     });
+//   }
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   return (
+//     <div
+//       className="min-h-screen relative flex items-center justify-center prevent"
+//       data-lenis-prevent
+//       data-lenis-prevent-touch
+//       data-lenis-prevent-wheel
+//     >
+//       <motion.img
+//         src={PlaneWindow.src}
+//         initial={{ scale: 5 }}
+//         alt="Plane window"
+//         whileInView={{
+//           scale: isScrolled ? 3 : 1,
+//           ...(isScrolled ? { x: "-100%" } : {}),
+//         }}
+//         transition={transition}
+//         exit={{ scale: 5 }}
+//         viewport={{ once: false }}
+//         className={`w-full h-full -z-[5] absolute top-0 ${isScrolled ? "object-fit" : "object-cover"} `}
+//       />
+//       {!isScrolled && (
+//         <div className="absolute flex md:grid md:grid-cols-3 justify-between items-center text-background px-2 md:px-5 w-full h-full">
+//           <motion.div
+//             viewport={{ once: false, amount: "some" }}
+//             initial={{ opacity: 1, x: -100 }}
+//             whileInView={{ opacity: 1, x: 0 }}
+//             transition={{ duration: 0.8 }}
+//             className={`flex flex-col max-md:absolute max-md:top-[9%] justify-start uppercase overflow-hidden items-start md:gap-2 ${roxter.className}`}
+//           >
+//             <span className={`text-2xl md:text-8xl`}>book</span>
+//             <span className={`text-md md:text-5xl`}>private jet</span>
+//           </motion.div>
+//           <motion.div
+//             viewport={{ once: false, amount: "some" }}
+//             initial={{ opacity: 0, y: 10 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8 }}
+//             className={`overflow-hidden max-md:absolute left-23 text-center text-3xl ${roxter.className}`}
+//           >
+//             {SITE_NAME}
+//           </motion.div>
+//           <div className="flex max-md:max-h-[630px] max-md:h-full flex-col justify-between overflow-hidden items-end gap-2 md:gap-5">
+//             <motion.span
+//               initial={{ opacity: 0 }}
+//               whileInView={{ opacity: 1 }}
+//               transition={{ duration: 0.8, delay: 2 }}
+//               viewport={{ once: false, amount: "some" }}
+//               className="uppercase max-md:pt-2 font-streach flex flex-col items-start md:pr-5"
+//             >
+//               <span className="text-2xl md:text-5xl">10+</span>{" "}
+//               <span className="text-lg md:text-3xl">jeets</span>
+//             </motion.span>
+//             <div className="h-100 w-5 md:w-10">
+//               <span
+//                 className={`uppercase flex items-center whitespace-nowrap text-background/90 gap-5 rotate-90`}
+//               >
+//                 <div className="min-w-30 border-1 border-background/40" />{" "}
+//                 Scroll down{" "}
+//                 <div className="min-w-30 border-1 border-background/40" />
+//               </span>
+//             </div>
+//             <motion.span
+//               initial={{ x: 20 }}
+//               whileInView={{ x: 0 }}
+//               transition={{ duration: 0.8 }}
+//               viewport={{ once: false, amount: "some" }}
+//               className={`${syne.className} max-md:bottom-12  max-md:left-0 max-md:text-center w-full md:max-w-md text-right font-thin! text-sm md:text-lg md:pr-5`}
+//             >
+//               SkyAero enables seamless private jet bookings —connecting you to
+//               luxury aircraft, global destinations, and uncompromising comfort.
+//             </motion.span>
+//           </div>
+//         </div>
+//       )}
+//       {isScrolled && (
+//         <ErrorLoading
+//           loading={isLoading}
+//           error={error}
+//           loadingCard={FeatureCardSkeleton}
+//           loadingCount={4}
+//           loadingCols={2}
+//           loadingRows={2}
+//           className="w-full overflow-scroll"
+//           loaderClassName="mx-auto max-w-[1200px] place-items-center w-full mt-12 min-h-[400px]"
+//         >
+//           {/*  */}
+//           <div className="w-full h-screen flex items-center " style={{
+//     background: `
+//       linear-gradient(
+//         to right,
+//         #857568 0%,
+//         #726052 15%,
+//         #483829 30%,
+//         #392E22 45%,
+//         #342B20 60%,
+//         #2C2419 75%,
+//         #292219 85%,
+//         #252017 100%
+//       )
+//     `,
+//   }}>
+//             <div
+//             className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center prevent"
+//             data-lenis-prevent
+//             data-lenis-prevent-touch
+//             data-lenis-prevent-wheel
+//           >
+//             {features.map((feature: any, index: number) => {
+//               return (
+//                 <div className="">
+//                   <FeatureCard  key={index} index={index} feature={feature} />
+//                 </div>
+//               );
+//             })}
+//           </div>
+//           </div>
+//         </ErrorLoading>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Hero2;
 "use client";
+
 import PlaneWindow from "@/assets/plane-window.png";
-import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
-import { Ref, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { fetcher, SITE_NAME } from "@/lib/constants";
 import { roxter, syne } from "@/utils/fonts";
 import { easeInOut } from "framer-motion";
 import useSWR from "swr";
 import ErrorLoading from "@/components/ErrorLoading";
 import { FeatureCard, FeatureCardSkeleton } from "./FeatureCard";
-import useMobile from "@/hooks/useMobile";
+import { useSectionScrollLock } from "@/hooks/useSectionScrollLock";
+
 export function transformFeatures(tasks: any[]) {
   return tasks.map((task) => {
-    const obj: any = {
-      id: task.gid,
-      title: "",
-      description: "",
-    };
-
+    const obj: any = { id: task.gid, title: "", description: "" };
+    if (!task?.custom_fields) return obj;
     task.custom_fields.forEach((field: any) => {
-      if (field.name === "title") {
-        obj.title = field.text_value || "";
-      }
-
-      if (field.name === "feature_description") {
-        obj.description = field.text_value || "";
-      }
+      if (field.name === "title") obj.title = field.text_value || "";
+      if (field.name === "feature_description") obj.description = field.text_value || "";
     });
-
     return obj;
   });
 }
-function Hero2({ ref }: { ref?: any }) {
-  const transition = { duration: 0.8, ease: easeInOut };
+
+type Props = {
+  active: boolean;
+  entryDirection: 1 | -1;
+  onScrollForward: () => void;
+  onScrollBackward: () => void;
+};
+
+function Hero2({ active, entryDirection, onScrollForward, onScrollBackward }: Props) {
   const { data, isLoading, error } = useSWR("/api/features", fetcher);
   const features = data?.data ? transformFeatures(data.data) : [];
-  const { scrollYProgress } = useScroll({
-    target: ref || undefined,
-    offset: ["start start", "end end"],
-  });
-  
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (v > 0.4) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
+
+  // If entering from below (back-scroll from Features), start on step 1
+  const [isScrolled, setIsScrolled] = useState(entryDirection === -1);
+
+  // Sync if entryDirection changes (e.g. dot navigation)
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (!didMount.current) { didMount.current = true; return; }
+    setIsScrolled(entryDirection === -1);
+  }, [entryDirection]);
+
+  const handleNext = useCallback(() => setIsScrolled(true), []);
+  const handlePrev = useCallback(() => setIsScrolled(false), []);
+
+  // Lock immediately — useSectionScrollLock handles the entry cooldown internally
+  useSectionScrollLock({
+    active,
+    totalSteps: 2,
+    currentStep: isScrolled ? 1 : 0,
+    onNext: handleNext,
+    onPrev: handlePrev,
+    onExitForward: onScrollForward,
+    onExitBackward: onScrollBackward,
+    stepCooldownMs: 750,
   });
 
-  // Drive the grid's Y translation based on scroll from 0.5 to 1.0
-  const yGrid = useTransform(scrollYProgress, [0.5, 1], [0, -1000]); // Adjust based on grid height
-  const [isScrolled, setIsScrolled] = useState(false);
+  const transition = { duration: 0.7, ease: easeInOut };
+
   return (
-    <div
-      className="min-h-screen relative flex items-center justify-center w-full overflow-hidden"
-    >
+    <div className="min-h-screen w-full relative flex items-center justify-center overflow-hidden">
+
+      {/* ── Plane window image ─────────────────────────────────────────── */}
       <motion.img
         src={PlaneWindow.src}
-        initial={{ scale: 5 }}
         alt="Plane window"
-        whileInView={{
+        animate={{
           scale: isScrolled ? 3 : 1,
-          ...(isScrolled ? { x: "-100%" } : {}),
+          x: isScrolled ? "-100%" : "0%",
         }}
         transition={transition}
-        exit={{ scale: 5 }}
-        viewport={{ once: false }}
-        className={`w-full h-full -z-[5] absolute top-0 object-cover`}
+        className={`w-full h-full absolute top-0 ${isScrolled ? "object-contain" : "object-cover"}`}
       />
-      {!isScrolled && (
-        <div className="absolute flex md:grid md:grid-cols-3 justify-between items-center text-background px-2 md:px-5 w-full h-full">
-          <motion.div
-            viewport={{ once: false, amount: "some" }}
-            initial={{ opacity: 1, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className={`flex flex-col max-md:absolute max-md:top-[9%] justify-start uppercase overflow-hidden items-start md:gap-2 ${roxter.className}`}
+
+      {/* ── Step 0: text overlay ───────────────────────────────────────── */}
+      <motion.div
+        animate={{
+          opacity: isScrolled ? 0 : 1,
+          x: isScrolled ? "-8%" : "0%",
+          pointerEvents: isScrolled ? "none" : "auto",
+        }}
+        transition={transition}
+        className="absolute flex md:grid md:grid-cols-3 justify-between items-center text-background px-2 md:px-5 w-full h-full"
+      >
+        <motion.div
+          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: -60 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className={`flex flex-col max-md:absolute max-md:top-[9%] justify-start uppercase overflow-hidden items-start md:gap-2 ${roxter.className}`}
+        >
+          <span className="text-2xl md:text-8xl">book</span>
+          <span className="text-md md:text-5xl">private jet</span>
+        </motion.div>
+
+        <motion.div
+          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className={`overflow-hidden max-md:absolute left-23 text-center text-3xl ${roxter.className}`}
+        >
+          {SITE_NAME}
+        </motion.div>
+
+        <div className="flex max-md:max-h-[630px] max-md:h-full flex-col justify-between overflow-hidden items-end gap-2 md:gap-5">
+          <motion.span
+            animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="uppercase max-md:pt-2 font-streach flex flex-col items-start md:pr-5"
           >
-            <span className={`text-2xl md:text-8xl`}>book</span>
-            <span className={`text-md md:text-5xl`}>private jet</span>
-          </motion.div>
-          <motion.div
-            viewport={{ once: false, amount: "some" }}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className={`overflow-hidden max-md:absolute left-23 text-center text-3xl ${roxter.className}`}
-          >
-            {SITE_NAME}
-          </motion.div>
-          <div className="flex max-md:max-h-[630px] max-md:h-full flex-col justify-between overflow-hidden items-end gap-2 md:gap-5">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 2 }}
-              viewport={{ once: false, amount: "some" }}
-              className="uppercase max-md:pt-2 font-streach flex flex-col items-start md:pr-5"
-            >
-              <span className="text-2xl md:text-5xl">10+</span>{" "}
-              <span className="text-lg md:text-3xl">jeets</span>
-            </motion.span>
-            <div className="h-100 w-5 md:w-10">
-              <span
-                className={`uppercase flex items-center whitespace-nowrap text-background/90 gap-5 rotate-90`}
-              >
-                <div className="min-w-30 border-1 border-background/40" />{" "}
-                Scroll down{" "}
-                <div className="min-w-30 border-1 border-background/40" />
-              </span>
-            </div>
-            <motion.span
-              initial={{ x: 20 }}
-              whileInView={{ x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: false, amount: "some" }}
-              className={`${syne.className} max-md:bottom-12  max-md:left-0 max-md:text-center w-full md:max-w-md text-right font-thin! text-sm md:text-lg md:pr-5`}
-            >
-              Experience private aviation, seamlessly redefined. With SkyBlue Aero, charter on demand, access a global fleet, and rely on expert trip management—meticulously tailored to your schedule.
-            </motion.span>
+            <span className="text-2xl md:text-5xl">10+</span>
+            <span className="text-lg md:text-3xl">jeets</span>
+          </motion.span>
+
+          <div className="h-100 w-5 md:w-10">
+            <span className="uppercase flex items-center whitespace-nowrap text-background/90 gap-5 rotate-90">
+              <div className="min-w-30 border-1 border-background/40" />
+              Scroll down
+              <div className="min-w-30 border-1 border-background/40" />
+            </span>
           </div>
+
+          <motion.span
+            animate={{ x: 0 }}
+            initial={{ x: 20 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className={`${syne.className} max-md:bottom-12 max-md:left-0 max-md:text-center w-full md:max-w-md text-right font-thin! text-sm md:text-lg md:pr-5`}
+          >
+            SkyAero enables seamless private jet bookings —connecting you to
+            luxury aircraft, global destinations, and uncompromising comfort.
+          </motion.span>
         </div>
-      )}
-      {isScrolled && (
+      </motion.div>
+
+      {/* ── Step 1: Features grid ──────────────────────────────────────── */}
+      <motion.div
+        animate={{
+          opacity: isScrolled ? 1 : 0,
+          x: isScrolled ? "0%" : "6%",
+          pointerEvents: isScrolled ? "auto" : "none",
+        }}
+        transition={transition}
+        className="absolute inset-0 overflow-hidden"
+      >
         <ErrorLoading
           loading={isLoading}
           error={error}
@@ -128,45 +350,29 @@ function Hero2({ ref }: { ref?: any }) {
           loadingCount={4}
           loadingCols={2}
           loadingRows={2}
-          className="w-full h-full flex"
+          className="w-full h-full"
           loaderClassName="mx-auto max-w-[1200px] place-items-center w-full mt-12 min-h-[400px]"
         >
-          {/*  */}
-          <motion.div className="w-full h-screen flex items-center "
+          <div
+            className="w-full h-screen flex items-center"
             style={{
-              background: `
-      linear-gradient(
-        to right,
-        #857568 0%,
-        #726052 15%,
-        #483829 30%,
-        #392E22 45%,
-        #342B20 60%,
-        #2C2419 75%,
-        #292219 85%,
-        #252017 100%
-      )
-    `,
+              background: `linear-gradient(
+                to right,
+                #857568 0%, #726052 15%, #483829 30%, #392E22 45%,
+                #342B20 60%, #2C2419 75%, #292219 85%, #252017 100%
+              )`,
             }}
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           >
-            <motion.div
-              style={{ y: yGrid }}
-              className="mx-auto md:pt-20 max-w-[1200px] max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-auto items-start pb-20"
-            >
-              {features.map((feature: any, index: number) => {
-                return (
-                  <div className="">
-                    <FeatureCard key={index} index={index} feature={feature} />
-                  </div>
-                );
-              })}
-            </motion.div>
-          </motion.div>
+            <div className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center">
+              {features.map((feature: any, index: number) => (
+                <div key={index}>
+                  <FeatureCard index={index} feature={feature} />
+                </div>
+              ))}
+            </div>
+          </div>
         </ErrorLoading>
-      )}
+      </motion.div>
     </div>
   );
 }

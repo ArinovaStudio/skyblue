@@ -84,14 +84,14 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className={`${roxter.className} text-2xl md:text-7xl uppercase mb-12 text-black leading-none`}>
+                <h2 className={`${roxter.className} text-xl md:text-5xl uppercase mb-12 text-black leading-none`}>
                   Our <br /> Identity
                 </h2>
                 <div className={`${dmSans.className} space-y-8 text-lg md:text-2xl text-black/70 leading-relaxed font-light`}>
-                  <p className="text-[1.3rem]">
+                  <p className="text-[1.2rem]">
                     SkyBlue was born from a singular vision: to transcend the boundaries of commercial travel and offer an experience that is as unique as the individuals we serve. With over two decades of excellence, we have redefined what it means to fly.
                   </p>
-                  <p>
+                  <p className="text-[1.2rem]">
                     Our commitment goes beyond simply getting you from A to B. We curate every detail—from the thread count of our linens to the precise vintage of our cellar selection—ensuring your journey is a masterpiece of comfort and efficiency.
                   </p>
                 </div>
@@ -120,7 +120,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className={`${roxter.className} text-2xl md:text-5xl text-black uppercase`}>
+              <h2 className={`${roxter.className} text-xl md:text-4xl text-black uppercase`}>
                 The Experience
               </h2>
               <p className={`${syne.className} mt-4 text-sm text-black/50 uppercase tracking-widest`}>A visual journey of luxury</p>
@@ -169,7 +169,7 @@ export default function AboutPage() {
           {/* --- The Fleet Section - Full Width Edge to Edge --- */}
           <section className="bg-black py-32 text-white border-t border-white/10 w-full overflow-hidden">
             <div className="w-full px-6 lg:px-24">
-              <h2 className={`${streach.className} text-[3rem] md:text-[8rem] uppercase mb-24 text-center text-white/10 leading-none`}>
+              <h2 className={`${streach.className} text-[2rem] md:text-[6rem] uppercase mb-24 text-center text-white/10 leading-none`}>
                 The Royal Fleet
               </h2>
               <div className="grid lg:grid-cols-3 gap-[1px] bg-white/10">
@@ -211,7 +211,7 @@ export default function AboutPage() {
           >
             <div className="max-w-[1200px] mx-auto text-center">
 
-              <h2 className={`${roxter.className} text-2xl md:text-5xl uppercase text-black`}>
+              <h2 className={`${roxter.className} text-xl md:text-4xl uppercase text-black`}>
                 Our Services
               </h2>
 
@@ -285,7 +285,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className={`${roxter.className} text-2xl md:text-5xl uppercase text-black mb-10 leading-none`}>
+                <h2 className={`${roxter.className} text-xl md:text-4xl uppercase text-black mb-10 leading-none`}>
                   Operational <br /> Excellence
                 </h2>
 
@@ -296,13 +296,13 @@ export default function AboutPage() {
                     performance, and turnaround efficiency.
                   </p>
 
-                  <p>
+                  <p className="text-[1.2rem]">
                     Backed by our in-house CAMO, we provide end-to-end continuing
                     airworthiness management, ensuring uncompromised compliance and
                     operational excellence.
                   </p>
 
-                  <p>
+                  <p className="text-[1.2rem]">
                     Our capabilities are also extended to external operators, offering
                     reliable maintenance and airworthiness solutions beyond our own fleet.
                   </p>
@@ -346,7 +346,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-x-8 gap-y-16">
                 {teamStats.map((stat, i) => (
                   <div key={i} className="flex flex-col border-t border-black/10 pt-6">
-                    <h5 className={`${streach.className} text-3xl md:text-5xl text-black`}>{stat.value}</h5>
+                    <h5 className={`${streach.className} text-2xl md:text-3xl text-black`}>{stat.value}</h5>
                     <span className={`${syne.className} text-xs md:text-sm uppercase font-bold tracking-widest text-black/50 mt-4 block`}>
                       {stat.label}
                     </span>
@@ -355,7 +355,7 @@ export default function AboutPage() {
               </div>
 
               <div className="mt-20">
-                <p className={`${dmSans.className} text-xl md:text-2xl font-light text-black/80 leading-relaxed`}>
+                <p className={`${dmSans.className} text-md md:text-xl font-light text-black/80 leading-relaxed`}>
                   "Our teams are our greatest asset. From the ground crew in Mumbai to flight dispatchers in Zurich, every SkyBlue employee is a custodian of your safety."
                 </p>
                 <div className="mt-8 flex items-center gap-6">
@@ -380,7 +380,7 @@ export default function AboutPage() {
             />
 
             {/* fade from white to transparent */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-transparent" />
+           <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-transparent" />
           </div>
 
           {/* CONTENT WRAPPER (fix) */}
