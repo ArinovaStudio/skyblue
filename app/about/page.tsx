@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { roxter, streach, syne, dmSans } from "@/utils/fonts";
@@ -21,7 +21,16 @@ const teamStats = [
   { label: "Global Offices", value: "8" },
 ];
 
+const images = [
+  "/images/about/hero.png",
+  "/images/about/interior.png",
+  "/images/about/team.png",
+  "/images/about/hero.png",
+];
+
 export default function AboutPage() {
+  const [currentImage, setCurrentImage] = useState(0);
+  const [open, setOpen] = useState(false);
   const [section, setSection] = React.useState(1);
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
@@ -32,6 +41,16 @@ export default function AboutPage() {
   };
 
   const transition = { duration: 1, delay: 0.5 };
+
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) =>
+      prev === 0 ? images.length - 1 : prev - 1
+    );
+  };
 
   return (
     <SmoothScroll>
@@ -154,14 +173,17 @@ export default function AboutPage() {
 
               {/* Bottom right image */}
               <motion.div
+                onClick={() => {
+                  setCurrentImage(0);
+                  setOpen(true);
+                }}
                 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.6 }}
-                className="relative min-h-[250px] overflow-hidden group bg-black flex items-center justify-center"
+                className="relative min-h-[250px] overflow-hidden group bg-black flex items-center justify-center cursor-pointer"
               >
-                <Image src="/images/about/hero.png" alt="Gallery 4" fill className="object-cover group-hover:scale-105 transition-transform duration-1000 opacity-40 " />
-                {/* <div className="relative z-10 text-center">
-              mix-blend-luminosity  //in image tag add this
-                 <h3 className={`${roxter.className} text-white text-3xl uppercase`}>View <br /> Gallery</h3>
-              </div> */}
+                <Image src="/images/about/hero.png" alt="Gallery 4" fill className="object-cover mix-blend-luminosity group-hover:scale-105 transition-transform duration-1000 opacity-40 " />
+                <div className="relative z-10 text-center">
+                  <h3 className={`${roxter.className} text-white text-3xl uppercase`}>View <br /> Gallery</h3>
+                </div>
               </motion.div>
             </div>
           </section>
@@ -380,7 +402,7 @@ export default function AboutPage() {
             />
 
             {/* fade from white to transparent */}
-           <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-transparent" />
           </div>
 
           {/* CONTENT WRAPPER (fix) */}
@@ -526,6 +548,46 @@ export default function AboutPage() {
 
           </div>
         </footer>
+
+
+        {open && (
+          <div className="fixed inset-0 z-[999] bg-black/90 flex items-center justify-center">
+
+            {/* Close */}
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-8 right-8 text-white text-3xl cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {/* Previous */}
+            <button
+              onClick={prevImage}
+              className="absolute left-10 text-white text-5xl cursor-pointer"
+            >
+              ‹
+            </button>
+
+            {/* Image */}
+            <div className="relative w-[90%] max-w-[900px] h-[600px]">
+              <Image
+                src={images[currentImage]}
+                alt="gallery"
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Next */}
+            <button
+              onClick={nextImage}
+              className="absolute right-10 text-white text-5xl cursor-pointer"
+            >
+              ›
+            </button>
+          </div>
+        )}
       </main>
     </SmoothScroll>
   );
