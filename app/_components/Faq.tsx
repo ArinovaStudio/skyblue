@@ -33,6 +33,93 @@ const clients = [
   { id: 12, name: "Adani", logo: vista.src },
 ];
 
+const FALLBACK_FAQ = [
+  {
+    gid: "1",
+    custom_fields: [
+      {
+        name: "question",
+        text_value: "What services does SkyBlue Aero provide?"
+      },
+      {
+        name: "answer",
+        text_value:
+          "SkyBlue Aero offers a comprehensive range of private aviation services including trip support, on-demand air charters, aircraft brokerage, aircraft maintenance, crew leasing, and complete flight operations management."
+      }
+    ]
+  },
+  {
+    gid: "2",
+    custom_fields: [
+      {
+        name: "question",
+        text_value: "Can I charter a private aircraft on short notice?"
+      },
+      {
+        name: "answer",
+        text_value:
+          "Yes. Our air charter services provide access to a global fleet of private aircraft available on demand. We specialize in arranging flights quickly while maintaining the highest standards of comfort, privacy, and flexibility."
+      }
+    ]
+  },
+  {
+    gid: "3",
+    custom_fields: [
+      {
+        name: "question",
+        text_value: "What is included in your trip support services?"
+      },
+      {
+        name: "answer",
+        text_value:
+          "Our trip support covers permits, fuel coordination, ground handling, flight planning, and operational logistics to ensure every flight operates smoothly and efficiently across all destinations."
+      }
+    ]
+  },
+  {
+    gid: "4",
+    custom_fields: [
+      {
+        name: "question",
+        text_value: "Do you provide aircraft maintenance services?"
+      },
+      {
+        name: "answer",
+        text_value:
+          "Yes. Through our CAR 145-certified maintenance organization and in-house CAMO, we deliver comprehensive maintenance and continuing airworthiness management to ensure aircraft safety, compliance, and operational reliability."
+      }
+    ]
+  },
+  {
+    gid: "5",
+    custom_fields: [
+      {
+        name: "question",
+        text_value: "Do you offer trained aviation crew for operations?"
+      },
+      {
+        name: "answer",
+        text_value:
+          "Yes. Our crew leasing services provide highly trained pilots and cabin crew who uphold the highest standards of professionalism, safety, and world-class service."
+      }
+    ]
+  },
+  {
+    gid: "6",
+    custom_fields: [
+      {
+        name: "question",
+        text_value: "Is SkyBlue Aero available 24/7?"
+      },
+      {
+        name: "answer",
+        text_value:
+          "Absolutely. Our operations team works around the clock to manage charter requests, flight planning, and trip logistics—ensuring seamless private aviation services anytime, anywhere."
+      }
+    ]
+  }
+];
+
 // export function transformFaqs(tasks: any[]) {
 //   return tasks.map((task) => {
 //     const obj: any = {
@@ -49,18 +136,32 @@ const clients = [
 //   });
 // }
 
+// export function transformFaqs(tasks: any[]) {
+//   return tasks.map((task) => {
+//     const obj: any = {
+//       id: task.gid,
+//     };
+
+//     const fields = task.custom_fields ?? [];
+
+//     fields.forEach((field: any) => {
+//       if (field.type === "text") {
+//         obj[field.name] = field.text_value || field.display_value || "";
+//       }
+//     });
+
+//     return obj;
+//   });
+// }
+
 export function transformFaqs(tasks: any[]) {
   return tasks.map((task) => {
-    const obj: any = {
-      id: task.gid,
-    };
+    const obj: any = { id: task.gid };
 
     const fields = task.custom_fields ?? [];
 
     fields.forEach((field: any) => {
-      if (field.type === "text") {
-        obj[field.name] = field.text_value || field.display_value || "";
-      }
+      obj[field.name] = field.text_value || field.display_value || "";
     });
 
     return obj;
@@ -70,7 +171,17 @@ export function transformFaqs(tasks: any[]) {
 function Faq({ ref }: { ref?: any }) {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const { data, isLoading, error } = useSWR("/api/faqs", fetcher);
-  const faqs = data?.data ? transformFaqs(data.data) : [];
+  // const faqs = data?.data ? transformFaqs(data.data) : [];
+  const backendFaqs = data?.data ? transformFaqs(data.data) : [];
+
+const validBackendFaqs = backendFaqs.filter(
+  (f) => f.question || f.answer
+);
+
+const faqs =
+  validBackendFaqs.length > 0
+    ? validBackendFaqs
+    : transformFaqs(FALLBACK_FAQ);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -91,6 +202,7 @@ function Faq({ ref }: { ref?: any }) {
       x.set(0);
     }
   });
+console.log(faqs);
 
   return (
     <div className="flex h-screen flex-col items-center py-20 md:pt-30 px-3 md:px-6 gap-6 bg-white">

@@ -208,6 +208,75 @@ import ErrorLoading from "@/components/ErrorLoading";
 import { FeatureCard, FeatureCardSkeleton } from "./FeatureCard";
 import { useSectionScrollLock } from "@/hooks/useSectionScrollLock";
 
+const FALLBACK_FEATURES = [
+  {
+    gid: "1",
+    custom_fields: [
+      { name: "title", text_value: "Trip Support" },
+      {
+        name: "feature_description",
+        text_value:
+          "Comprehensive global trip support covering permits, fuel coordination, ground handling, and logistics—ensuring every flight operates with precision across all destinations."
+      }
+    ]
+  },
+  {
+    gid: "2",
+    custom_fields: [
+      { name: "title", text_value: "Air Charters" },
+      {
+        name: "feature_description",
+        text_value:
+          "Charter private aircraft on demand with access to a worldwide fleet. Experience unmatched flexibility, complete privacy, and a journey tailored entirely around your schedule."
+      }
+    ]
+  },
+  {
+    gid: "3",
+    custom_fields: [
+      { name: "title", text_value: "Aircraft Brokerage" },
+      {
+        name: "feature_description",
+        text_value:
+          "Specialized aircraft brokerage for acquisition, sale, and leasing—connecting you with the right opportunities through a trusted global network."
+      }
+    ]
+  },
+  {
+    gid: "4",
+    custom_fields: [
+      { name: "title", text_value: "Aircraft Maintenance" },
+      {
+        name: "feature_description",
+        text_value:
+          "Dependable maintenance solutions that uphold the highest standards of safety, compliance, and performance—delivered with meticulous attention to detail."
+      }
+    ]
+  },
+  {
+    gid: "5",
+    custom_fields: [
+      { name: "title", text_value: "Crew Leasing" },
+      {
+        name: "feature_description",
+        text_value:
+          "Access highly trained pilots and cabin crew who bring professionalism, safety, and world-class service to every operation."
+      }
+    ]
+  },
+  {
+    gid: "6",
+    custom_fields: [
+      { name: "title", text_value: "Flight Operations" },
+      {
+        name: "feature_description",
+        text_value:
+          "End-to-end flight operations management including flight planning, routing optimization, weather analysis, and regulatory compliance—ensuring every mission is executed efficiently, safely, and on schedule."
+      }
+    ]
+  }
+];
+
 export function transformFeatures(tasks: any[]) {
   return tasks.map((task) => {
     const obj: any = { id: task.gid, title: "", description: "" };
@@ -229,7 +298,22 @@ type Props = {
 
 function Hero2({ active, entryDirection, onScrollForward, onScrollBackward }: Props) {
   const { data, isLoading, error } = useSWR("/api/features", fetcher);
-  const features = data?.data ? transformFeatures(data.data) : [];
+  // const features = data?.data ? transformFeatures(data.data) : [];
+  const backendFeatures = data?.data ? transformFeatures(data.data) : [];
+  const validBackendFeatures = backendFeatures.filter(
+    (f) => f.title && f.description
+  );
+  // const features =
+  //   data?.data && data.data.length > 0
+  //     ? transformFeatures(data.data)
+  //     : transformFeatures(FALLBACK_FEATURES);
+
+  const features =
+    validBackendFeatures.length > 0
+      ? backendFeatures
+      : transformFeatures(FALLBACK_FEATURES);
+
+  // const features = transformFeatures(FALLBACK_FEATURES);
 
   // If entering from below (back-scroll from Features), start on step 1
   const [isScrolled, setIsScrolled] = useState(entryDirection === -1);
