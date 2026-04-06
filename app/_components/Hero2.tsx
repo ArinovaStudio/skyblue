@@ -447,7 +447,7 @@ function Hero2({ active, entryDirection, onScrollForward, onScrollBackward }: Pr
               )`,
             }}
           >
-            <div className="mx-auto md:pt-20 max-w-[1200px] max-h-[600px] overflow-auto max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full h-screen items-center">
+            <div className="mx-auto md:pt-20 max-w-[1200px] max-md:py-2 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-10 md:gap-x-20 w-full items-center">
               {features.map((feature: any, index: number) => (
                 <div key={index}>
                   <FeatureCard index={index} feature={feature} />

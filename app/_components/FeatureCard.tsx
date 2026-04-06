@@ -42,7 +42,7 @@ export function FeatureCard({
       whileHover={{ scale: 1.03 }}
     >
       <motion.div
-        className={`text-background font-bold text-lg sm:text-xl ${roxter.className}`}
+        className={`text-background max-md:text-center text-xs sm:text-base md:text-lg font-thin ${syne.className}`}
         initial={{ opacity: 0, x: index % 2 ? 10 : -10 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ delay: 1 }}
