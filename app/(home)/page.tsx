@@ -222,6 +222,7 @@ let images = [
   cloud.src,
   PlaneWindow.src,
   airoplane.src,
+  "https://picsum.photos/1080/1080",
   plane.src,
 ];
 

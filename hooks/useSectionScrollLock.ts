@@ -239,7 +239,7 @@ export function useSectionScrollLock({
   onPrev,
   onExitForward,
   onExitBackward,
-  stepCooldownMs = 750,
+  stepCooldownMs = 1100,
 }: Options) {
   const stepRef = useRef(currentStep);
   const onNextRef = useRef(onNext);
