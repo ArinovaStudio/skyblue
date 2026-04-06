@@ -202,7 +202,6 @@ const faqs =
       x.set(0);
     }
   });
-console.log(faqs);
 
   return (
     <div className="flex h-screen flex-col items-center py-20 md:pt-30 px-3 md:px-6 gap-6 bg-white">
