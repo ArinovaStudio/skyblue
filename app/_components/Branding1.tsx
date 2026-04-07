@@ -380,11 +380,11 @@ export default function Branding1({
 
       {/* ── Step 0 plane: drops in from top, flies up to step 1 ──────── */}
       <motion.div
-        initial={startAtDetails ? { y: -1000, opacity: 0 } : { y: -500, opacity: 0 }}
-        animate={showDetails ? { y: -1000, opacity: 0 } : { y: 0, opacity: 1 }}
-        transition={planeTransition}
-        className="absolute -top-70 z-20 left-0 right-0 flex justify-center pointer-events-none"
-      >
+  initial={startAtDetails ? { y: -1000, opacity: 0 } : { y: -500, opacity: 0 }}
+  animate={showDetails ? { y: 1000, opacity: 0 } : { y: 0, opacity: 1 }}
+  transition={planeTransition}
+  className="absolute -top-70 z-20 left-0 right-0 flex justify-center pointer-events-none"
+>
         <img
           src={airoplane.src}
           alt="Plane"
@@ -395,23 +395,22 @@ export default function Branding1({
       {/* ── Step 1 plane: BIG centered, flies up on exit ──────────────── */}
       <motion.div
         className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
-        initial={startAtDetails ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 80, scale: 1 }}
+        initial={startAtDetails ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: -600, scale: 1 }}
         animate={{
           opacity: isExiting ? 0 : showDetails ? 1 : 0,
-          y: isExiting ? -600 : showDetails ? 0 : 80,
+          y: isExiting ? 600 : showDetails ? 0 : -600,
           scale: isExiting ? 1.1 : 1,
         }}
-        transition={
-          isExiting
-            ? { duration: 0.85, ease: [0.22, 1, 0.36, 1] as any }
-            : { duration: 0.9, ease: [0.4, 0, 0.2, 1] as any }
-        }
+        transition={{
+          duration: 0.9,
+          ease: [0.4, 0, 0.2, 1],
+        }}
       >
         <img
           src={airoplane.src}
           alt="Plane centered"
-          className="rotate-180 rotate-y-180! object-cover"
-          style={{ height: "clamp(380px, 55vh, 680px)", width: "auto", opacity: 0.92 }}
+          className="rotate-180 object-contain w-105 md:w-130 lg:w-250"
+  // style={{ height: "clamp(300px, 45vh, 560px)", width: "auto", opacity: 0.92 }}
         />
       </motion.div>
 

@@ -62,17 +62,17 @@ export default function ContactPage() {
         <div className="bg-white text-black min-h-screen">
           <Navbar section={5} />
 
-        {/* --- Hero Section - 100vh Full Screen Split --- */}
-        <section className="w-full h-screen flex flex-col md:flex-row relative bg-black">
-           {/* Left side text */}
-           <div className="w-full md:w-1/2 h-full flex flex-col justify-center p-12 md:p-24 z-10">
+          {/* --- Hero Section - 100vh Full Screen Split --- */}
+          <section className="w-full h-screen flex flex-col md:flex-row relative bg-black">
+            {/* Left side text */}
+            <div className="w-full md:w-1/2 h-full flex flex-col justify-center p-12 md:p-24 z-10">
               <motion.h1
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className={`${streach.className} text-[3rem] md:text-[8rem] lg:text-[10rem] text-white uppercase tracking-tighter leading-none`}
+                className={`${streach.className} text-[3rem] md:text-[8rem] lg:text-[10rem] text-white uppercase tracking-tighter leading-none -ml-15`}
               >
-                Inquire
+                Enquire
               </motion.h1>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
@@ -82,78 +82,78 @@ export default function ContactPage() {
               >
                 Global Concierge Team
               </motion.p>
-           </div>
-           
-           {/* Right side image */}
-           <div className="absolute md:relative inset-0 md:w-1/2 w-full h-full overflow-hidden">
-             <motion.img
-               initial={{ scale: 1.1 }}
-               animate={{ scale: 1 }}
-               transition={{ duration: 2, ease: "easeOut" }}
-               src="https://picsum.photos/1080/1086"
-               alt="Contact"
-               className="w-full h-full object-cover opacity-30 md:opacity-100 grayscale"
-             />
-             <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 md:via-transparent to-transparent md:bg-none" />
-           </div>
-        </section>
+            </div>
 
-        {/* --- Two Column Form & Info --- */}
-        <section className="w-full flex flex-col lg:flex-row bg-white min-h-screen border-b border-black/10">
-          
-          {/* Left Column: Direct Info & FAQ */}
-          <div className="w-full lg:w-1/2 p-12 md:p-24 border-b lg:border-b-0 lg:border-r border-black/10 flex flex-col gap-24">
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-8">
-              <div className="flex flex-col gap-4">
-                <LucideMail className="text-black/30" size={40} strokeWidth={1} />
-                <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Email</h3>
-                <p className={`${dmSans.className} text-xl text-black/60 font-light`}>concierge@skyblue.aero</p>
+            {/* Right side image */}
+            <div className="absolute md:relative inset-0 md:w-1/2 w-full h-full overflow-hidden">
+              <motion.img
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+                src="/contact.jpg"
+                alt="Contact"
+                className="w-full h-full object-cover opacity-30 md:opacity-100 grayscale"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 md:via-transparent to-transparent md:bg-none" />
+            </div>
+          </section>
+
+          {/* --- Two Column Form & Info --- */}
+          <section className="w-full flex flex-col lg:flex-row bg-white min-h-screen border-b border-black/10">
+
+            {/* Left Column: Direct Info & FAQ */}
+            <div className="w-full lg:w-1/2 p-12 md:p-24 border-b lg:border-b-0 lg:border-r border-black/10 flex flex-col gap-24">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-8">
+                <div className="flex flex-col gap-4">
+                  <LucideMail className="text-black/30" size={40} strokeWidth={1} />
+                  <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Email</h3>
+                  <p className={`${dmSans.className} text-xl text-black/60 font-light`}>concierge@skyblue.aero</p>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <LucidePhone className="text-black/30" size={40} strokeWidth={1} />
+                  <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Direct Line</h3>
+                  <p className={`${dmSans.className} text-xl text-black/60 font-light`}>+1 (800) SKY-BLUE</p>
+                </div>
+
+                <div className="md:col-span-2 flex flex-col gap-4 border-t border-black/10 pt-16">
+                  <LucideMapPin className="text-black/30" size={40} strokeWidth={1} />
+                  <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Global Headquarters</h3>
+                  <p className={`${dmSans.className} text-xl text-black/60 font-light leading-relaxed`}>
+                    Suite 450, Aviation Plaza, <br />
+                    Mumbai International Airport, <br />
+                    India 400099
+                  </p>
+                </div>
               </div>
-              
-              <div className="flex flex-col gap-4">
-                <LucidePhone className="text-black/30" size={40} strokeWidth={1} />
-                <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Direct Line</h3>
-                <p className={`${dmSans.className} text-xl text-black/60 font-light`}>+1 (800) SKY-BLUE</p>
-              </div>
-              
-              <div className="md:col-span-2 flex flex-col gap-4 border-t border-black/10 pt-16">
-                <LucideMapPin className="text-black/30" size={40} strokeWidth={1} />
-                <h3 className={`${syne.className} text-sm uppercase tracking-widest font-bold text-black`}>Global Headquarters</h3>
-                <p className={`${dmSans.className} text-xl text-black/60 font-light leading-relaxed`}>
-                  Suite 450, Aviation Plaza, <br />
-                  Mumbai International Airport, <br />
-                  India 400099
-                </p>
+
+              <div>
+                <h2 className={`${roxter.className} text-4xl md:text-5xl uppercase mb-12 text-black leading-none`}>
+                  Common <br /> Inquiries
+                </h2>
+                <div className="flex flex-col w-full border-t border-black/10">
+                  {contactFaqs.map((faq, i) => (
+                    <FAQCard
+                      key={i}
+                      item={faq}
+                      i={i}
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div>
-              <h2 className={`${roxter.className} text-4xl md:text-5xl uppercase mb-12 text-black leading-none`}>
-                Common <br /> Inquiries
-              </h2>
-              <div className="flex flex-col w-full border-t border-black/10">
-                {contactFaqs.map((faq, i) => (
-                   <FAQCard
-                     key={i}
-                     item={faq}
-                     i={i}
-                     isOpen={isOpen}
-                     setIsOpen={setIsOpen}
-                   />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Form */}
-          <div className="w-full lg:w-1/2 p-12 md:p-24 bg-[#F9F9F9] flex flex-col justify-center">
-             <div className="max-w-xl mx-auto w-full">
+            {/* Right Column: Form */}
+            <div className="w-full lg:w-1/2 p-12 md:p-24 bg-[#F9F9F9] flex flex-col justify-center">
+              <div className="max-w-xl mx-auto w-full">
                 <h2 className={`${roxter.className} text-4xl md:text-5xl uppercase mb-16 text-black leading-none`}>
                   Request <br /> Flight
                 </h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-12">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-black/10 pb-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-black/10 pb-12">
                     <div className="flex flex-col gap-4">
                       <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>First Name</label>
                       <input required placeholder="John" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
@@ -163,13 +163,13 @@ export default function ContactPage() {
                       <input required placeholder="Doe" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
                     </div>
                   </div>
-                  
-                  <div className="flex flex-col gap-4 border-b border-black/10 pb-12">
+
+                  <div className="flex flex-col gap-4  border-black/10 pb-12">
                     <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Email Address</label>
                     <input required type="email" placeholder="john@company.com" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
                   </div>
 
-                  <div className="flex flex-col gap-4 border-b border-black/10 pb-12">
+                  <div className="flex flex-col gap-4 border-black/10 pb-12">
                     <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Inquiry Details</label>
                     <textarea required placeholder="Discuss routing, dates, and aircraft preferences..." className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full min-h-[150px] resize-none text-black font-light" />
                   </div>
@@ -183,10 +183,10 @@ export default function ContactPage() {
                     {!isSubmitting && <LucideSend size={18} className="group-hover:translate-x-2 transition-transform" />}
                   </button>
                 </form>
-             </div>
-          </div>
+              </div>
+            </div>
 
-        </section>
+          </section>
         </div>
 
         <footer className="min-h-screen relative flex flex-col justify-between overflow-hidden">
@@ -240,8 +240,8 @@ export default function ContactPage() {
               whileInView={{ opacity: 1 }}
               transition={transition}
               viewport={{ once: true, amount: 0.3 }}
-              className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 px-6 lg:px-12 py-2 md:py-10 h-[40%]"
-            >
+              className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 px-6 lg:px-12 py-6 md:py-10"
+              >
               {/* Top Row */}
               <div className="flex flex-col lg:flex-row gap-6 md:gap-8 justify-between">
 
@@ -307,7 +307,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={transition}
                 className="flex flex-wrap gap-2 md:gap-3 mt-20 text-black font-syne font-bold text-xs md:text-base uppercase"
-              >
+                >
                 <Link href="/about">About Us</Link>
                 <span>|</span>
                 <Link href="/privacy">Privacy Policy</Link>
@@ -323,7 +323,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={transition}
                 className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mt-6"
-              >
+                >
                 <p className="font-syne font-semibold text-sm md:text-base">
                   © {getCurrentYear()} All copyright are reserved.
                 </p>
