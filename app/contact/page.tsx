@@ -40,13 +40,45 @@ export default function ContactPage() {
   const [isOpen, setIsOpen] = useState<null | number>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast.success("Your message has been sent. Our team will contact you shortly.");
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      inquiryDetails: formData.get("inquiryDetails"),
+    };
+
+    try {
+      setIsSubmitting(true);
+      console.log(data);
+
+      const res = await fetch("/api/request-flight", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to send request");
+      }
+
+      toast.success(
+        "Your flight request has been sent. Our team will contact you shortly."
+      );
+
+      form.reset();
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getCurrentYear = () => {
@@ -156,28 +188,28 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-black/10 pb-12">
                     <div className="flex flex-col gap-4">
                       <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>First Name</label>
-                      <input required placeholder="John" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
+                      <input name="firstName" required placeholder="John" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
                     </div>
                     <div className="flex flex-col gap-4">
                       <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Last Name</label>
-                      <input required placeholder="Doe" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
+                      <input name="lastName" required placeholder="Doe" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-4  border-black/10 pb-12">
                     <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Email Address</label>
-                    <input required type="email" placeholder="john@company.com" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
+                    <input name="email" required type="email" placeholder="john@company.com" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
                   </div>
 
                   <div className="flex flex-col gap-4 border-black/10 pb-12">
                     <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Inquiry Details</label>
-                    <textarea required placeholder="Discuss routing, dates, and aircraft preferences..." className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full min-h-[150px] resize-none text-black font-light" />
+                    <textarea name="inquiryDetails" required placeholder="Discuss routing, dates, and aircraft preferences..." className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full min-h-[150px] resize-none text-black font-light" />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`${dmSans.className} mt-8 py-6 px-12 bg-black text-white hover:bg-black/80 transition-colors uppercase tracking-[0.2em] text-sm flex items-center justify-between group disabled:opacity-50`}
+                    className={`${dmSans.className} cursor-pointer mt-8 py-6 px-12 bg-black text-white hover:bg-black/80 transition-colors uppercase tracking-[0.2em] text-sm flex items-center justify-between group disabled:opacity-50`}
                   >
                     <span>{isSubmitting ? "Transmitting..." : "Submit Inquiry"}</span>
                     {!isSubmitting && <LucideSend size={18} className="group-hover:translate-x-2 transition-transform" />}
@@ -241,7 +273,7 @@ export default function ContactPage() {
               transition={transition}
               viewport={{ once: true, amount: 0.3 }}
               className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 px-6 lg:px-12 py-6 md:py-10"
-              >
+            >
               {/* Top Row */}
               <div className="flex flex-col lg:flex-row gap-6 md:gap-8 justify-between">
 
@@ -307,7 +339,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={transition}
                 className="flex flex-wrap gap-2 md:gap-3 mt-20 text-black font-syne font-bold text-xs md:text-base uppercase"
-                >
+              >
                 <Link href="/about">About Us</Link>
                 <span>|</span>
                 <Link href="/privacy">Privacy Policy</Link>
@@ -323,7 +355,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={transition}
                 className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mt-6"
-                >
+              >
                 <p className="font-syne font-semibold text-sm md:text-base">
                   © {getCurrentYear()} All copyright are reserved.
                 </p>
