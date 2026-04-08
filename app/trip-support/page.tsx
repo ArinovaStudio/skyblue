@@ -100,7 +100,7 @@ export default function TripSupportPage() {
                   <div></div>
                   <div>
                     <a
-                      href="https://www.skyblue.aero/wp-content/uploads/2019/09/Skyblue-Aircraft-Brokerage.pdf"
+                      href="https://www.skyblue.aero/wp-content/uploads/2020/07/Skyblue-International-Trip-Support1.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group inline-flex items-center gap-3 mt-6 px-7 py-3

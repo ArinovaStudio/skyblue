@@ -48,7 +48,7 @@ export default function MaintenancePage() {
                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                 className={`${streach.className} text-4xl md:text-[6rem] lg:text-[8rem] text-white uppercase tracking-tighter leading-none`}
               >
-                Aircraft Maintenance
+                Aircraft Management
               </motion.h1>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
