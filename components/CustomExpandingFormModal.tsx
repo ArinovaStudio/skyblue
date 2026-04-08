@@ -142,7 +142,7 @@ export function ExpandingFormModal({
               toast.error(response.message);
             }
           }}
-          className="w-full mb-30 mt-10 "
+          className="w-full "
         >
           {saved ? (
             <motion.div
