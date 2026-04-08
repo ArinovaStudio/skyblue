@@ -81,6 +81,32 @@ export default function BrokeragePage() {
                     An aircraft transaction is not only an important financial decision but also a reflection on the company or individuals involved. When helping clients with an acquisition, we have all the tools to define a mission profile and find the most appropriate aircraft—one the client will be pleased with long after the transaction is over. When selling, we have the respect and global relationships necessary to find the right buyer at the right price.
                   </p>
                 </div>
+                <div className="flex justify-between">
+                  <div></div>
+                  <div>
+                    <a
+                      href="https://www.skyblue.aero/wp-content/uploads/2019/09/Skyblue-Aircraft-Brokerage.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 mt-6 px-7 py-3
+                            rounded-full
+                            border border-neutral-300/40
+                             bg-white/40 backdrop-blur-md
+                             text-neutral-900
+                             font-medium tracking-wide
+                             shadow-[0_8px_30px_rgba(0,0,0,0.08)]
+                             hover:bg-white/60
+                             hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)]
+                             transition-all duration-300"
+                        >
+                      Download Crew Leasing PDF
+
+                      <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white shadow-sm group-hover:translate-x-1 transition">
+                        ↗
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </motion.div>
             </div>
 
