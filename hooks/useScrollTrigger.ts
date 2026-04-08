@@ -232,16 +232,15 @@ export function useScrollTrigger({
   const isLocked = useRef(false);
   const accumulated = useRef(0);
   const touchStartY = useRef(0);
-
+  const isCooldown = useRef(false);
   const goTo = useCallback(
     (targetIdx: number, dir: 1 | -1) => {
-      if (isLocked.current) return;
+      if (isLocked.current || isCooldown.current) return;
       if (targetIdx < 0 || targetIdx >= totalSections) return;
       if (targetIdx === sectionRef.current) return;
-
       isLocked.current = true;
       accumulated.current = 0;
-
+      isCooldown.current = true
       setDirection(dir);
       setIsTransitioning(true);
 
@@ -256,6 +255,9 @@ export function useScrollTrigger({
           isLocked.current = false;
         }, cooldownMs);
       }, animationMs);
+      setTimeout(() => {
+      isCooldown.current = false;
+    }, cooldownMs);
     },
     [totalSections, animationMs, cooldownMs]
   );
@@ -266,7 +268,7 @@ export function useScrollTrigger({
       if (target.closest("[data-scrollable]")) {
         return; // ✅ allow native scroll
       }
-      if (disabled) return;
+      if (disabled || isCooldown.current) return;
       e.preventDefault();
 
       if (scrollLock.isLocked()) {
@@ -294,7 +296,7 @@ export function useScrollTrigger({
 
   useEffect(() => {
     const onTouchStart = (e: TouchEvent) => {
-      if (disabled) return;
+      if (disabled || isCooldown.current) return;
       const target = e.target as HTMLElement;
       if (target.closest("[data-scrollable]")) {
         return; // ✅ allow native scroll
@@ -322,7 +324,7 @@ export function useScrollTrigger({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (disabled) return;
+      if (disabled || isCooldown.current) return;
       const target = e.target as HTMLElement;
       if (target.closest("[data-scrollable]")) {
         return; // ✅ allow native scroll

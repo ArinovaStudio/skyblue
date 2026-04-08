@@ -236,7 +236,7 @@ const backgrounds = [
 ];
 
 const ANIMATION_MS = 600;
-const WHEEL_THRESHOLD = 250;
+const WHEEL_THRESHOLD = 350;
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -255,7 +255,7 @@ export default function Home() {
     totalSections: backgrounds.length,
     wheelThreshold: WHEEL_THRESHOLD,
     animationMs: ANIMATION_MS,
-    cooldownMs: 650,
+    cooldownMs: 2000,
     disabled: opened
   });
 

@@ -62,7 +62,7 @@ function Footer() {
           whileInView={{ opacity: 1 }}
           transition={transition}
           viewport={{ once: true, amount: 0.3 }}
-          className="w-full backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 px-6 lg:px-12 py-6 md:py-10"
+          className="w-full absolute bottom-0 backdrop-blur-sm bg-gradient-to-b from-black/30 to-white/80 px-6 lg:px-12 py-6 md:py-10"
         >
           {/* Top Row */}
           <div className="flex flex-col lg:flex-row gap-6 md:gap-8 justify-between">
@@ -128,7 +128,7 @@ function Footer() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={transition}
-            className="flex flex-wrap gap-2 md:gap-3 mt-20 text-black font-syne font-bold text-xs md:text-base uppercase"
+            className="flex flex-wrap gap-2 md:gap-3 text-black font-syne font-bold text-xs md:text-base uppercase"
           >
             <Link href="/about">About Us</Link>
             <span>|</span>
@@ -144,7 +144,7 @@ function Footer() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={transition}
-            className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mt-6"
+            className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mt-2"
           >
             <p className="font-syne font-semibold text-sm md:text-base">
               © {getCurrentYear()} All copyright are reserved.
