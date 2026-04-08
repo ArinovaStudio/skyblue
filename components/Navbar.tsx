@@ -23,7 +23,7 @@ function Navbar({ section }: { section: number }) {
   const options = [
     { name: "Trip support", link: "/trip-support" },
     { name: "Brokerage", link: "/brokerage" },
-    { name: "Maintenance", link: "/maintenance" },
+    { name: "Management", link: "/maintenance" },
     { name: "Crew leasing", link: "/crewleasing" },
   ];
 

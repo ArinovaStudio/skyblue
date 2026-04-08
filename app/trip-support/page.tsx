@@ -48,7 +48,7 @@ export default function TripSupportPage() {
                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                 className={`${streach.className} text-4xl md:text-[6rem] lg:text-[8rem] text-white uppercase tracking-tighter leading-none`}
               >
-                Air Charters
+                 Trip Support
               </motion.h1>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
@@ -74,25 +74,53 @@ export default function TripSupportPage() {
                 transition={{ duration: 0.8 }}
               >
                 <h2 className={`${roxter.className} text-3xl md:text-5xl uppercase mb-12 text-black leading-none`}>
-                  Exceptional <br /> Service
+                  Trip <br /> Support
                 </h2>
                 <div className={`${dmSans.className} space-y-6 text-lg text-black/70 leading-relaxed font-light`}>
+                  <div className="flex gap-5">
+                    <div className=" hover:text-gray-800">
+                      <a target="_blank" href="https://avplat.vercel.app/">Trips Operator</a>
+                    </div>
+                    <div>
+                      <p>|</p>
+                    </div>
+                    <div className=" hover:text-gray-800">
+                      <a target="_blank" href="https://avplat.com/service-provider/">Trips Service Provider</a>
+                    </div>
+                  </div>
                   <p>
-                    For corporate travel or for pleasure, Air Charters from Skyblue are an ideal choice that virtually eliminates all the stresses of air travel. No matter what your travel requirements are, Skyblue will get you where you need to go on time and in comfort.
+                    Short Notice Specialists
                   </p>
                   <p>
-                    Our customers tell us that the #1 reason they return to us time after time for their Air Charter needs is our service. As our customer, you’ll receive personalized attention from a dedicated Charter Services Manager and a team of service managers for a true 24/7 customer service. Our professional staff ensures all necessary arrangements for your charter are taken care of, including pilot briefing, flight planning, securing clearances, permits and visas.
+                    We provide comprehensive and personalized Flight Planning and Trip Support Services, such as Fuel Provisioning, Permits, Ground Handling, Catering, Hotel, Transport etc. Our dedicated and experienced 24x7 Ops Team ensures you have a smooth trip that is tailored to your particular needs.
                   </p>
-                  <p>
-                    With one of the largest charter fleets in the world and with charter offices strategically located worldwide, we are able to provide you with personalized service and the aircraft you need whenever and wherever your travels take you.
-                  </p>
-                  <p>
-                    We provide only guaranteed quotes, meaning you know exactly what your trip will cost – in advance. Other companies provide only estimates that can change dramatically after you book and fly your trip.
-                  </p>
-                  <ul className="list-disc pl-5 mt-4 space-y-2">
-                    <li>Fly anywhere you wish from small, unimproved runways to large, international airports.</li>
-                    <li>We manage a fleet of over 200 state-of-the-art aircraft for any type of mission.</li>
-                  </ul>
+                </div>
+
+                <div className="flex justify-between">
+                  <div></div>
+                  <div>
+                    <a
+                      href="https://www.skyblue.aero/wp-content/uploads/2019/09/Skyblue-Aircraft-Brokerage.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-3 mt-6 px-7 py-3
+                            rounded-full
+                            border border-neutral-300/40
+                             bg-white/40 backdrop-blur-md
+                             text-neutral-900
+                             font-medium tracking-wide
+                             shadow-[0_8px_30px_rgba(0,0,0,0.08)]
+                             hover:bg-white/60
+                             hover:shadow-[0_12px_40px_rgba(0,0,0,0.12)]
+                             transition-all duration-300"
+                    >
+                      Download Trip Support PDF
+
+                      <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white shadow-sm group-hover:translate-x-1 transition">
+                        ↗
+                      </span>
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             </div>
