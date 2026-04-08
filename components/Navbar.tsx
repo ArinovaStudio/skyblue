@@ -21,10 +21,10 @@ function Navbar({ section }: { section: number }) {
   const [open, setOpen] = useState(false);
 
   const options = [
-    { name: "Trip support", link: "#" },
-    { name: "Brokerage", link: "#" },
-    { name: "Maintenance", link: "#" },
-    { name: "Crew leasing", link: "#" },
+    { name: "Trip support", link: "/trip-support" },
+    { name: "Brokerage", link: "/brokerage" },
+    { name: "Maintenance", link: "/maintenance" },
+    { name: "Crew leasing", link: "/crewleasing" },
   ];
 
   return (

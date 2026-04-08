@@ -206,7 +206,7 @@ const faqs =
   return (
     <div className="flex h-screen flex-col items-center py-20 md:pt-30 px-3 md:px-6 gap-6 bg-white">
       {/* Top Section */}
-      <div className="max-w-[1300px] overflow-auto md:h-[460px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+      <div className="max-w-[1300px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
         {/* FAQ */}
         <div className="w-full lg:w-[55%]">
           <h1 className="uppercase font-roxter text-2xl md:text-4xl text-gray-300">

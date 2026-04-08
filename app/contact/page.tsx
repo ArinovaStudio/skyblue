@@ -185,7 +185,7 @@ export default function ContactPage() {
                   Request <br /> Flight
                 </h2>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-12">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-black/10 pb-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-black/10 ">
                     <div className="flex flex-col gap-4">
                       <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>First Name</label>
                       <input name="firstName" required placeholder="John" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
@@ -196,14 +196,14 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-4  border-black/10 pb-12">
+                  <div className="flex flex-col gap-4  border-black/10 ">
                     <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Email Address</label>
                     <input name="email" required type="email" placeholder="john@company.com" className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full text-black font-light" />
                   </div>
 
-                  <div className="flex flex-col gap-4 border-black/10 pb-12">
+                  <div className="flex flex-col gap-4 border-black/10 ">
                     <label className={`${syne.className} text-xs uppercase tracking-[0.2em] font-bold text-black/50`}>Inquiry Details</label>
-                    <textarea name="inquiryDetails" required placeholder="Discuss routing, dates, and aircraft preferences..." className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full min-h-[150px] resize-none text-black font-light" />
+                    <textarea name="inquiryDetails" required placeholder="Discuss routing, dates, and aircraft preferences..." className="bg-transparent border-0 border-b border-black/20 pb-4 text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-colors rounded-none w-full min-h-[80px] resize-none text-black font-light" />
                   </div>
 
                   <button
