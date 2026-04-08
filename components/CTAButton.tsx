@@ -114,7 +114,7 @@ export default function CTAButton() {
           height: opened
             ? saved
               ? "min(85vh, 700px)"
-              : "min(65vh, 500px)"
+              : "min(65vh, 400px)"
             : "3.5rem",
         }}
         data-lenis-prevent
