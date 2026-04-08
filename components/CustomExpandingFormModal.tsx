@@ -148,7 +148,7 @@ export function ExpandingFormModal({
             <motion.div
               transition={{ duration: 0.4, ease: "easeInOut" }}
               viewport={{once: true}}
-              className="bg-transparent transition-all duration-400 h-full rounded-2xl p-6 py-10 md:p-8 w-full overflow-y-auto"
+              className="bg-transparent transition-all duration-400 h-full rounded-2xl p-6 py-10 md:px-8 md:py-4 w-full overflow-y-auto"
             >
               <div className="flex justify-between items-center">
                 <span className="text-2xl font-semibold">Plan Your Flight</span>
@@ -285,7 +285,7 @@ export function ExpandingFormModal({
           ) : (
             <motion.div
               transition={{ duration: 0 }}
-              className="bg-transparent transition-all duration-400 h-full rounded-2xl p-6 w-full"
+              className="bg-transparent transition-all duration-400 h-full rounded-2xl px-6 w-full"
             >
               <div className="flex justify-between items-center">
                 <span className="text-2xl font-semibold">Book Flight</span>

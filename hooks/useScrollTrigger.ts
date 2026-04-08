@@ -177,6 +177,14 @@
 
 import { useRef, useState, useCallback, useEffect } from "react";
 
+export type ScrollTriggerOptions = {
+  totalSections: number;
+  wheelThreshold?: number;
+  animationMs?: number;
+  cooldownMs?: number;
+  disabled?: boolean;
+};
+
 class ScrollLockRegistry {
   private locked = false;
   private handler: ((dir: 1 | -1) => void) | null = null;
@@ -191,7 +199,9 @@ class ScrollLockRegistry {
     this.handler = null;
   }
 
-  isLocked() { return this.locked; }
+  isLocked() {
+    return this.locked;
+  }
 
   notify(dir: 1 | -1) {
     if (this.locked && this.handler) this.handler(dir);
@@ -199,14 +209,6 @@ class ScrollLockRegistry {
 }
 
 export const scrollLock = new ScrollLockRegistry();
-
-export type ScrollTriggerOptions = {
-  totalSections: number;
-  wheelThreshold?: number;
-  animationMs?: number;
-  cooldownMs?: number;
-  disabled?: boolean; // ✅ NEW
-};
 
 export type ScrollTriggerReturn = {
   section: number;
@@ -220,7 +222,7 @@ export function useScrollTrigger({
   wheelThreshold = 300,
   animationMs = 500,
   cooldownMs = 700,
-  disabled = false, // ✅ NEW
+  disabled = false,
 }: ScrollTriggerOptions): ScrollTriggerReturn {
   const [section, setSection] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -233,7 +235,6 @@ export function useScrollTrigger({
 
   const goTo = useCallback(
     (targetIdx: number, dir: 1 | -1) => {
-      if (disabled) return; // 🔥 BLOCK when disabled
       if (isLocked.current) return;
       if (targetIdx < 0 || targetIdx >= totalSections) return;
       if (targetIdx === sectionRef.current) return;
@@ -256,15 +257,22 @@ export function useScrollTrigger({
         }, cooldownMs);
       }, animationMs);
     },
-    [totalSections, animationMs, cooldownMs, disabled]
+    [totalSections, animationMs, cooldownMs]
   );
 
-  // ✅ WHEEL
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
-      if (disabled) return; // 🔥 DO NOTHING (allow modal scroll)
-
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-scrollable]")) {
+        return; // ✅ allow native scroll
+      }
+      if (disabled) return;
       e.preventDefault();
+
+      if (scrollLock.isLocked()) {
+        scrollLock.notify(e.deltaY > 0 ? 1 : -1);
+        return;
+      }
 
       if (isLocked.current) return;
 
@@ -284,50 +292,59 @@ export function useScrollTrigger({
     return () => window.removeEventListener("wheel", onWheel);
   }, [goTo, wheelThreshold, disabled]);
 
-  // ✅ TOUCH
   useEffect(() => {
     const onTouchStart = (e: TouchEvent) => {
+      if (disabled) return;
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-scrollable]")) {
+        return; // ✅ allow native scroll
+      }
       touchStartY.current = e.touches[0].clientY;
     };
-
     const onTouchEnd = (e: TouchEvent) => {
-      if (disabled) return;
-
       const delta = touchStartY.current - e.changedTouches[0].clientY;
       if (Math.abs(delta) < 60) return;
-
       const dir: 1 | -1 = delta > 0 ? 1 : -1;
-
+      if (scrollLock.isLocked()) {
+        scrollLock.notify(dir);
+        return;
+      }
       if (isLocked.current) return;
-
       goTo(sectionRef.current + dir, dir);
     };
-
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
-
     return () => {
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchend", onTouchEnd);
     };
   }, [goTo, disabled]);
 
-  // ✅ KEYBOARD
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (disabled) return;
-
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-scrollable]")) {
+        return; // ✅ allow native scroll
+      }
       if (e.key === "ArrowDown" || e.key === "PageDown") {
         e.preventDefault();
+        if (scrollLock.isLocked()) {
+          scrollLock.notify(1);
+          return;
+        }
         if (isLocked.current) return;
         goTo(sectionRef.current + 1, 1);
       } else if (e.key === "ArrowUp" || e.key === "PageUp") {
         e.preventDefault();
+        if (scrollLock.isLocked()) {
+          scrollLock.notify(-1);
+          return;
+        }
         if (isLocked.current) return;
         goTo(sectionRef.current - 1, -1);
       }
     };
-
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [goTo, disabled]);

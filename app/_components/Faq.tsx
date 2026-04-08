@@ -1,6 +1,12 @@
 "use client";
 import { fetcher } from "@/lib/constants";
-import { motion, useMotionValueEvent, useScroll, useAnimationFrame, useMotionValue } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useAnimationFrame,
+  useMotionValue,
+} from "framer-motion";
 import React, { useState } from "react";
 import useSWR from "swr";
 import { FAQCard, FAQCardSkeleton } from "./FaqCard";
@@ -39,85 +45,85 @@ const FALLBACK_FAQ = [
     custom_fields: [
       {
         name: "question",
-        text_value: "What services does SkyBlue Aero provide?"
+        text_value: "What services does SkyBlue Aero provide?",
       },
       {
         name: "answer",
         text_value:
-          "SkyBlue Aero offers a comprehensive range of private aviation services including trip support, on-demand air charters, aircraft brokerage, aircraft maintenance, crew leasing, and complete flight operations management."
-      }
-    ]
+          "SkyBlue Aero offers a comprehensive range of private aviation services including trip support, on-demand air charters, aircraft brokerage, aircraft maintenance, crew leasing, and complete flight operations management.",
+      },
+    ],
   },
   {
     gid: "2",
     custom_fields: [
       {
         name: "question",
-        text_value: "Can I charter a private aircraft on short notice?"
+        text_value: "Can I charter a private aircraft on short notice?",
       },
       {
         name: "answer",
         text_value:
-          "Yes. Our air charter services provide access to a global fleet of private aircraft available on demand. We specialize in arranging flights quickly while maintaining the highest standards of comfort, privacy, and flexibility."
-      }
-    ]
+          "Yes. Our air charter services provide access to a global fleet of private aircraft available on demand. We specialize in arranging flights quickly while maintaining the highest standards of comfort, privacy, and flexibility.",
+      },
+    ],
   },
   {
     gid: "3",
     custom_fields: [
       {
         name: "question",
-        text_value: "What is included in your trip support services?"
+        text_value: "What is included in your trip support services?",
       },
       {
         name: "answer",
         text_value:
-          "Our trip support covers permits, fuel coordination, ground handling, flight planning, and operational logistics to ensure every flight operates smoothly and efficiently across all destinations."
-      }
-    ]
+          "Our trip support covers permits, fuel coordination, ground handling, flight planning, and operational logistics to ensure every flight operates smoothly and efficiently across all destinations.",
+      },
+    ],
   },
   {
     gid: "4",
     custom_fields: [
       {
         name: "question",
-        text_value: "Do you provide aircraft maintenance services?"
+        text_value: "Do you provide aircraft maintenance services?",
       },
       {
         name: "answer",
         text_value:
-          "Yes. Through our CAR 145-certified maintenance organization and in-house CAMO, we deliver comprehensive maintenance and continuing airworthiness management to ensure aircraft safety, compliance, and operational reliability."
-      }
-    ]
+          "Yes. Through our CAR 145-certified maintenance organization and in-house CAMO, we deliver comprehensive maintenance and continuing airworthiness management to ensure aircraft safety, compliance, and operational reliability.",
+      },
+    ],
   },
   {
     gid: "5",
     custom_fields: [
       {
         name: "question",
-        text_value: "Do you offer trained aviation crew for operations?"
+        text_value: "Do you offer trained aviation crew for operations?",
       },
       {
         name: "answer",
         text_value:
-          "Yes. Our crew leasing services provide highly trained pilots and cabin crew who uphold the highest standards of professionalism, safety, and world-class service."
-      }
-    ]
+          "Yes. Our crew leasing services provide highly trained pilots and cabin crew who uphold the highest standards of professionalism, safety, and world-class service.",
+      },
+    ],
   },
   {
     gid: "6",
     custom_fields: [
       {
         name: "question",
-        text_value: "Is SkyBlue Aero available 24/7?"
+        text_value: "Is SkyBlue Aero available 24/7?",
       },
       {
         name: "answer",
         text_value:
-          "Absolutely. Our operations team works around the clock to manage charter requests, flight planning, and trip logistics—ensuring seamless private aviation services anytime, anywhere."
-      }
-    ]
-  }
+          "Absolutely. Our operations team works around the clock to manage charter requests, flight planning, and trip logistics—ensuring seamless private aviation services anytime, anywhere.",
+      },
+    ],
+  },
 ];
 
 // export function transformFaqs(tasks: any[]) {
@@ -174,18 +180,16 @@ function Faq({ ref }: { ref?: any }) {
   // const faqs = data?.data ? transformFaqs(data.data) : [];
   const backendFaqs = data?.data ? transformFaqs(data.data) : [];
 
-const validBackendFaqs = backendFaqs.filter(
-  (f) => f.question || f.answer
-);
+  const validBackendFaqs = backendFaqs.filter((f) => f.question || f.answer);
 
-const faqs =
-  validBackendFaqs.length > 0
-    ? validBackendFaqs
-    : transformFaqs(FALLBACK_FAQ);
+  const faqs =
+    validBackendFaqs.length > 0
+      ? validBackendFaqs
+      : transformFaqs(FALLBACK_FAQ);
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"]
+    offset: ["start start", "end end"],
   });
   // Removed expand logic to prevent disruptive layout jumps during section transitions
 
@@ -206,32 +210,38 @@ const faqs =
   return (
     <div className="flex h-screen flex-col items-center py-20 md:pt-30 px-3 md:px-6 gap-6 bg-white">
       {/* Top Section */}
-      <div className="max-w-[1300px] w-full flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+      <div className="max-w-[1300px] w-full md:h-[60vh] flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
         {/* FAQ */}
-        <div className="w-full lg:w-[55%]">
-          <h1 className="uppercase font-roxter text-2xl md:text-4xl text-gray-300">
-            skyblue
-          </h1>
-          <p className="uppercase font-syne text-xs md:text-base text-gray-600 font-bold mt-1">
-            A BETTER WAY TO FLY
-          </p>
+        <div className="w-full lg:w-[55%] flex flex-col min-h-0">
+          {/* Header */}
+          <div>
+            <h1 className="uppercase font-roxter text-2xl md:text-4xl text-gray-300">
+              skyblue
+            </h1>
+            <p className="uppercase font-syne text-xs md:text-base text-gray-600 font-bold mt-1">
+              A BETTER WAY TO FLY
+            </p>
+          </div>
 
-          <div className="flex flex-col  gap-4 mt-6">
-            {/* {faqData.map((item, i) => (
-              <FAQCard item={item} i={i} isOpen={isOpen} setIsOpen={setIsOpen}/>
-            ))} */}
-            <ErrorLoading
-              error={error}
-              emptyMessage="No Faqs found"
-              loadingCard={FAQCardSkeleton}
-              loading={isLoading}
-              dataLength={faqs.length}
-              loadingCount={4}
-              loadingRows={4}
-              loadingCols={1}
-            >
-              {faqs.map((faq, i) => {
-                return (
+          {/* ✅ ONLY THIS SHOULD BE SCROLLABLE */}
+          <div
+            data-scrollable
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            className="flex-1 min-h-0 overflow-y-auto mt-6 pr-2 no-scrollbar"
+          >
+            <div className="flex flex-col gap-4">
+              <ErrorLoading
+                error={error}
+                emptyMessage="No Faqs found"
+                loadingCard={FAQCardSkeleton}
+                loading={isLoading}
+                dataLength={faqs.length}
+                loadingCount={4}
+                loadingRows={4}
+                loadingCols={1}
+              >
+                {faqs.map((faq, i) => (
                   <FAQCard
                     key={i}
                     isOpen={isOpen}
@@ -239,30 +249,26 @@ const faqs =
                     i={i}
                     item={faq}
                   />
-                );
-              })}
-            </ErrorLoading>
+                ))}
+              </ErrorLoading>
+            </div>
           </div>
         </div>
 
-        {/* Image - Simplified transition */}
+        {/* IMAGE */}
         <motion.div
           layout
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          style={{ transformOrigin: "center center" }}
-          exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
-          className="hidden md:flex flex-1 w-full md:w-[45%] md:max-h-[450px] relative overflow-hidden justify-center items-center rounded-2xl bg-gray-900/10 backdrop-blur-sm shadow-2xl"
+          exit={{ opacity: 0, y: -20 }}
+          className="hidden md:flex lg:w-[45%] h-full relative overflow-hidden justify-center items-center rounded-2xl bg-gray-900/10 backdrop-blur-sm shadow-2xl"
         >
-          <div className="w-full h-full">
-            <img
-              src="https://picsum.photos/1080/1080"
-              alt="FAQ illustration"
-              className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
-            />
-          </div>
+          <img
+            src="https://picsum.photos/1080/1080"
+            alt="FAQ illustration"
+            className="w-full h-full object-cover"
+          />
         </motion.div>
-
       </div>
 
       {/* Clients */}
@@ -271,47 +277,24 @@ const faqs =
           our clients
         </h1>
 
-        {/* <div className="overflow-hidden w-full max-w-[1300px]">
-          <motion.div
-            className="flex gap-4"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              ease: "linear",
-              duration: 20,
-              repeat: Infinity,
-            }}
-          >
-            {[...clients, ...clients].map((item, i) => (
+        <div className="overflow-hidden w-full max-w-[1300px]">
+          <motion.div style={{ x }} className="flex gap-4">
+            {[...clients, ...clients].map((item: any, i: number) => (
               <div
                 key={item.id + "-" + i}
                 className="min-w-[120px] h-20 flex items-center justify-center"
               >
                 <img
-                  src={typeof item.logo === "string" ? item.logo : item.logo.src}
+                  src={
+                    typeof item.logo === "string" ? item.logo : item.logo.src
+                  }
                   alt={item.name}
                   className="h-full w-full object-contain p-2"
                 />
               </div>
             ))}
           </motion.div>
-        </div> */}
-
-        <div className="overflow-hidden w-full max-w-[1300px]">
-      <motion.div style={{ x }} className="flex gap-4">
-        {[...clients, ...clients].map((item: any, i: number) => (
-          <div
-            key={item.id + "-" + i}
-            className="min-w-[120px] h-20 flex items-center justify-center"
-          >
-            <img
-              src={typeof item.logo === "string" ? item.logo : item.logo.src}
-              alt={item.name}
-              className="h-full w-full object-contain p-2"
-            />
-          </div>
-        ))}
-      </motion.div>
-    </div>
+        </div>
       </div>
     </div>
   );
