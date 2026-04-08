@@ -4,12 +4,16 @@ import LiquidGlass from "@/elements/LiquidGlass";
 import { motion } from "framer-motion";
 import { Plane, X } from "lucide-react";
 import { ExpandingFormModal } from "./CustomExpandingFormModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useMobile from "@/hooks/useMobile";
 import { Button as SButton } from "./ui/button";
-export default function CTAButton() {
+interface Props{
+  opened: boolean;
+  setOpened: any;
+}
+export default function CTAButton({opened,setOpened}:Props) {
   const [saved, setSaved] = useState(false);
-  const [opened, setOpened] = useState(false);
+
   const isMobile = useMobile();
   const handleNext = () => {
     if (!saved) {
@@ -96,7 +100,7 @@ export default function CTAButton() {
     //       </motion.div>
     //     </div>
     //   </div>
-    <div className="fixed z-[999] bottom-6 left-1/2 -translate-x-1/2 px-4 w-full flex justify-center">
+    <div className="fixed z-[99999] bottom-6 left-1/2 -translate-x-1/2 px-4 w-full flex justify-center">
       <motion.div
         layout
         transition={{ duration: 0.4, ease: "easeInOut" }}

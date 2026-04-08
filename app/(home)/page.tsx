@@ -240,27 +240,7 @@ const WHEEL_THRESHOLD = 250;
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
-
-  // useEffect(() => {
-  //   const loadAssets = async () => {
-  //     await Promise.all(
-  //       images.map(
-  //         (src) =>
-  //           new Promise<void>((resolve) => {
-  //             const img = new Image();
-  //             img.src = src;
-  //             img.onload = () => resolve();
-  //             img.onerror = () => resolve(); // resolve even on error so we don't hang
-  //           })
-  //       )
-  //     );
-  //     await new Promise((resolve) => setTimeout(resolve, 1000));
-  //     setLoaded(true);
-  //   };
-
-  //   loadAssets();
-  // }, []);
-
+  const [opened, setOpened] = useState(false);
   useEffect(() => {
   Promise.allSettled(
     images.map((src) => {
@@ -276,6 +256,7 @@ export default function Home() {
     wheelThreshold: WHEEL_THRESHOLD,
     animationMs: ANIMATION_MS,
     cooldownMs: 650,
+    disabled: opened
   });
 
   const isLastSection = section === backgrounds.length - 1;
@@ -285,7 +266,7 @@ export default function Home() {
 
   return (
     <>
-      {!isLastSection && <CTAButton />}
+      {!isLastSection && <CTAButton opened={opened} setOpened={setOpened} />}
       <Navbar section={section + 1} />
 
       <ScrollTriggerLayout
