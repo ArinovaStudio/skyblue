@@ -255,7 +255,7 @@ export default function Home() {
     totalSections: backgrounds.length,
     wheelThreshold: WHEEL_THRESHOLD,
     animationMs: ANIMATION_MS,
-    cooldownMs: 2000,
+    cooldownMs: 3000,
     disabled: opened
   });
 
