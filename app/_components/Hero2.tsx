@@ -264,17 +264,7 @@ const FALLBACK_FEATURES = [
       }
     ]
   },
-  {
-    gid: "6",
-    custom_fields: [
-      { name: "title", text_value: "Flight Operations" },
-      {
-        name: "feature_description",
-        text_value:
-          "End-to-end flight operations management including flight planning, routing optimization, weather analysis, and regulatory compliance—ensuring every mission is executed efficiently, safely, and on schedule."
-      }
-    ]
-  }
+  
 ];
 
 export function transformFeatures(tasks: any[]) {
